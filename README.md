@@ -50,3 +50,7 @@ class HelloRoute
   }
 }
 ```
+
+## What's in this repository
+
+This repository contains the official spec of the `just-func` language.
