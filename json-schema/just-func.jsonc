@@ -35,10 +35,10 @@
         {
           "type": "string",
           "enum": [
-            "!",
+            "not",
             "ret"
           ],
-          "description": "Basic unary functions:\n!: logical not\nret: retrieve value defined by `let`"
+          "description": "Basic unary functions:\nnot: logical not\nret: retrieve value defined by `let`"
         },
         {
           "$ref": "#/definitions/JustFunc"
@@ -54,7 +54,7 @@
           "enum": [
             "="
           ],
-          "description": "Basic binary functions: ="
+          "description": "Basic binary functions:\n=: equality comparison"
         },
         {
           "$ref": "#/definitions/JustFunc"
