@@ -4,7 +4,7 @@
   "definitions": {
     "JustFunc": {
       "description": "This is JustFunc, just a functional programming language",
-      "anyOf": [
+      "oneOf": [
         {
           "$ref": "#/definitions/JustFunctions"
         },
