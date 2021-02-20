@@ -29,7 +29,7 @@ Languages supporting `just-func` will provide a parser and other tools to enable
 For example, the following code uses the `Compiler` to handle the call in PHP:
 
 ```php
-using /JustLand/JustFunc/Compiler;
+use /JustLand/JustFunc/Compiler;
 
 class HelloRoute
 {
