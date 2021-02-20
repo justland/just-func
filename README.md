@@ -19,7 +19,8 @@ paths:
         - name:
           type: string,
           required: true
-      handler: [str, "welcome to just-func, ", [param/get, name]]
+      # handler is defined using `just-func`
+      handler: [str, "welcome to just-func, ", [param/get, name]] 
 ```
 
 ## Using just-func
