@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "Validation schema for just-func",
+  "definitions": {
+    "JustFunc": {
+      "description": "This is JustFunc, just a functional programming language",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/JustFunctions"
+        },
+        {
+          "$ref": "#/definitions/JustLiteral"
+        }
+      ]
+    },
+    "JustFunctions": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/JustUnaryFunctions"
+        },
+        {
+          "$ref": "#/definitions/JustBinaryFunctions"
+        },
+        {
+          "$ref": "#/definitions/JustTernaryFunctions"
+        },
+        {
+          "$ref": "#/definitions/JustVariadicFunctions"
+        }
+      ]
+    },
+    "JustUnaryFunctions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "not",
+            "ret"
+          ],
+          "description": "Basic unary functions:\nnot: logical not\nret: retrieve value defined by `let`"
+        },
+        {
+          "$ref": "#/definitions/JustFunc"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustBinaryFunctions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "="
+          ],
+          "description": "Basic binary functions:\n=: equality comparison"
+        },
+        {
+          "$ref": "#/definitions/JustFunc"
+        },
+        {
+          "$ref": "#/definitions/JustFunc"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustTernaryFunctions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "let",
+            "if"
+          ],
+          "description": "Basic ternary functions:\nlet: declare local variable\nif: if statement"
+        },
+        {
+          "$ref": "#/definitions/JustFunc"
+        },
+        {
+          "$ref": "#/definitions/JustFunc"
+        },
+        {
+          "$ref": "#/definitions/JustFunc"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustVariadicFunctions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "Basic variadic functions: and, or, str, list",
+          "enum": [
+            "or",
+            "and",
+            "str",
+            "list"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/JustFunc"
+      }
+    },
+    "JustLiteral": {
+      "type": [
+        "boolean",
+        "integer",
+        "number",
+        "string"
+      ]
+    }
+  }
+}
