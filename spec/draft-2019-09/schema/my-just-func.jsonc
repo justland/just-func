@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$recursiveAnchor": true,
+  "oneOf": [
+    {
+      "$ref": "#/definitions/JustParamGet"
+    },
+    {
+      "$ref": "../../../json-schema/draft-2019-09/just-func.jsonc"
+    }
+  ],
+  "definitions": {
+    "JustParamGet": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "const": "param/get"
+        },
+        {
+          "$recursiveRef": "#"
+        }
+      ],
+      "additionalItems": false
+    }
+  }
+}

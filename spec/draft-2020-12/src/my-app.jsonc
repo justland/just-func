@@ -1,0 +1,3 @@
+{
+  "test": ["=", "welcome to just-func, ", ["param/get", "name"]]
+}

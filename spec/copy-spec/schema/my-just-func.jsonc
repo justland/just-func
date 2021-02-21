@@ -1,8 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "This is JustFunc, just a functional programming language",
+  "description": "JustFunc extension for my-app",
   "$id": "JustFunc",
   "oneOf": [
+    {
+      "$ref": "#/definitions/JustParamGet"
+    },
     {
       "$ref": "#/definitions/JustFunctions"
     },
@@ -11,6 +14,21 @@
     }
   ],
   "definitions": {
+    "JustParamGet": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "param/get",
+          "description": "param.get(key)"
+        },
+        {
+          "type": "string",
+          "description": "name of the key"
+        }
+      ],
+      "additionalItems": false
+    },
     "JustFunctions": {
       "oneOf": [
         {

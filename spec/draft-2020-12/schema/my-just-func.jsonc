@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$dynamicAnchor": "JustFunc",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/JustParamGet"
+    },
+    {
+      "$ref": "../../../json-schema/draft-2020-12/just-func.jsonc"
+    }
+  ],
+  "definitions": {
+    "JustParamGet": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "param/get"
+        },
+        {
+          "$dynamicRef": "#JustFunc"
+        }
+      ],
+      "additionalItems": false
+    }
+  }
+}

@@ -1,18 +1,16 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "Validation schema for just-func",
-  "definitions": {
-    "JustFunc": {
-      "description": "This is JustFunc, just a functional programming language",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/JustFunctions"
-        },
-        {
-          "$ref": "#/definitions/JustLiteral"
-        }
-      ]
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$dynamicAnchor": "JustFunc",
+  "description": "This is JustFunc, just a functional programming language",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/JustFunctions"
     },
+    {
+      "$ref": "#/definitions/JustLiteral"
+    }
+  ],
+  "definitions": {
     "JustFunctions": {
       "oneOf": [
         {
@@ -41,7 +39,7 @@
           "description": "Basic unary functions:\nnot: logical not\nret: retrieve value defined by `let`"
         },
         {
-          "$ref": "#/definitions/JustFunc"
+          "$dynamicRef": "#JustFunc"
         }
       ],
       "additionalItems": false
@@ -57,10 +55,10 @@
           "description": "Basic binary functions:\n=: equality comparison"
         },
         {
-          "$ref": "#/definitions/JustFunc"
+          "$dynamicRef": "#JustFunc"
         },
         {
-          "$ref": "#/definitions/JustFunc"
+          "$dynamicRef": "#JustFunc"
         }
       ],
       "additionalItems": false
@@ -77,13 +75,13 @@
           "description": "Basic ternary functions:\nlet: declare local variable\nif: if statement"
         },
         {
-          "$ref": "#/definitions/JustFunc"
+          "$dynamicRef": "#JustFunc"
         },
         {
-          "$ref": "#/definitions/JustFunc"
+          "$dynamicRef": "#JustFunc"
         },
         {
-          "$ref": "#/definitions/JustFunc"
+          "$dynamicRef": "#JustFunc"
         }
       ],
       "additionalItems": false
@@ -103,7 +101,7 @@
         }
       ],
       "additionalItems": {
-        "$ref": "#/definitions/JustFunc"
+        "$dynamicRef": "#JustFunc"
       }
     },
     "JustLiteral": {

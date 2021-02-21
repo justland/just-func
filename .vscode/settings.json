@@ -1,0 +1,29 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "spec/cannot-extend/src/*.jsonc"
+      ],
+      "schema": true,
+      "url": "./spec/cannot-extend/schema/my-app-spec.jsonc"
+    },
+    {
+      "fileMatch": [
+        "copy-spec/src/*.jsonc"
+      ],
+      "url": "./spec/copy-spec/schema/my-app-spec.jsonc"
+    },
+    {
+      "fileMatch": [
+        "recurse-ref/src/*.jsonc"
+      ],
+      "url": "./spec/recurse-ref/schema/my-app-spec.jsonc"
+    },
+    {
+      "fileMatch": [
+        "spec/draft-2020-12/src/*.jsonc"
+      ],
+      "url": "./spec/draft-2020-12/schema/my-app-spec.jsonc"
+    }
+  ]
+}

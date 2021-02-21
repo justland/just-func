@@ -1,0 +1,4 @@
+{
+  // expected error:  `param/get` is not recognized.
+  "test": ["=", "welcome to just-func, ", ["param/get", "name"]]
+}

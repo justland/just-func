@@ -1,0 +1,12 @@
+{
+  "name": "just-func",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/justland/just-func.git",
+  "author": "unional <homawong@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ajv": "^7.1.1",
+    "jsonc": "^2.0.0"
+  }
+}
