@@ -5,6 +5,7 @@
 # GitHub Linguist Override
 .yarn/* linguist-vendored
 .pnp.js linguist-vendored
+/validate.js linguist-vendored
 
 # Exclude files in composer distribution
 /.*               export-ignore
