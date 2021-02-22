@@ -12,7 +12,7 @@
   "scripts": {
     "copy-schema": "justland\\JustFuncSchema\\Composer::copySchema"
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
       "justland\\JustFuncSchema\\": "php/"
@@ -22,6 +22,6 @@
     "composer/composer": "^2.0"
   },
   "require": {
-    "unional/jsonc": "dev-main"
+    "unional/jsonc": "^1.0"
   }
 }

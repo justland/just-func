@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94d78f7dbc08d9412fc3ab0a21fa370f",
+    "content-hash": "fdcb01a1aefc5268a2d4ed2ca457aae4",
     "packages": [
         {
             "name": "unional/jsonc",
-            "version": "dev-main",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unional/jsonc-php.git",
@@ -23,7 +23,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -46,7 +45,7 @@
             "description": "jsonc library",
             "support": {
                 "issues": "https://github.com/unional/jsonc-php/issues",
-                "source": "https://github.com/unional/jsonc-php/tree/v0.0.6"
+                "source": "https://github.com/unional/jsonc-php/tree/v1.0.0"
             },
             "time": "2021-02-22T00:44:52+00:00"
         }
@@ -1714,10 +1713,8 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "unional/jsonc": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
