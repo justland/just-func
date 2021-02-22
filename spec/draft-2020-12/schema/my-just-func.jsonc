@@ -1,18 +1,19 @@
 {
-  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/spec/draft-2020-12/schema/my-just-func.jsonc",
   "$dynamicAnchor": "JustFunc",
   "oneOf": [
     {
       "$ref": "#/definitions/JustParamGet"
     },
     {
-      "$ref": "../../../json-schema/draft-2020-12/just-func.jsonc"
+      "$ref": "https://github.com/justland/just-func/json-schema/just-func.jsonc"
     }
   ],
   "definitions": {
     "JustParamGet": {
       "type": "array",
-      "items": [
+      "prefixItems": [
         {
           "type": "string",
           "const": "param/get"
@@ -21,7 +22,7 @@
           "$dynamicRef": "#JustFunc"
         }
       ],
-      "additionalItems": false
+      "items": false
     }
   }
 }

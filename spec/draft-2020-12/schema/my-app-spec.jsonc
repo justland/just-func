@@ -1,10 +1,10 @@
 {
-  "$schema": "http://json-schema.org/draft/2020-12/schema",
-  "$id": "my-app",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/spec/draft-2020-12/schema/my-app-spec.jsonc",
   "type": "object",
   "properties": {
     "test": {
-      "$ref": "my-just-func.jsonc"
+      "$ref": "https://github.com/justland/just-func/json-schema/my-just-func.jsonc"
     }
   }
 }

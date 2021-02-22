@@ -1,5 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/json-schema/draft-2020-12/just-func.jsonc",
   "$dynamicAnchor": "JustFunc",
   "description": "This is JustFunc, just a functional programming language",
   "oneOf": [
@@ -29,7 +30,7 @@
     },
     "JustUnaryFunctions": {
       "type": "array",
-      "items": [
+      "prefixItems": [
         {
           "type": "string",
           "enum": [
@@ -42,11 +43,11 @@
           "$dynamicRef": "#JustFunc"
         }
       ],
-      "additionalItems": false
+      "items": false
     },
     "JustBinaryFunctions": {
       "type": "array",
-      "items": [
+      "prefixItems": [
         {
           "type": "string",
           "enum": [
@@ -61,11 +62,11 @@
           "$dynamicRef": "#JustFunc"
         }
       ],
-      "additionalItems": false
+      "items": false
     },
     "JustTernaryFunctions": {
       "type": "array",
-      "items": [
+      "prefixItems": [
         {
           "type": "string",
           "enum": [
@@ -84,11 +85,11 @@
           "$dynamicRef": "#JustFunc"
         }
       ],
-      "additionalItems": false
+      "items": false
     },
     "JustVariadicFunctions": {
       "type": "array",
-      "items": [
+      "prefixItems": [
         {
           "type": "string",
           "description": "Basic variadic functions: and, or, str, list",
@@ -100,7 +101,7 @@
           ]
         }
       ],
-      "additionalItems": {
+      "items": {
         "$dynamicRef": "#JustFunc"
       }
     },

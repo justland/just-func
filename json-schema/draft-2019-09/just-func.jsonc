@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$recursiveAnchor": true,
   "description": "This is JustFunc, just a functional programming language",
   "oneOf": [
