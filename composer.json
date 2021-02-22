@@ -1,0 +1,27 @@
+{
+  "name": "justland/just-func-schema",
+  "description": "just-func schema distribution",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "unional",
+      "email": "homawong@gmail.com"
+    }
+  ],
+  "scripts": {
+    "copy-schema": "justland\\JustFuncSchema\\Composer::copySchema"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "justland\\JustFuncSchema\\": "php/"
+    }
+  },
+  "require-dev": {
+    "composer/composer": "^2.0"
+  },
+  "require": {
+    "unional/jsonc": "dev-main"
+  }
+}

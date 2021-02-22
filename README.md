@@ -55,3 +55,22 @@ class HelloRoute
 ## What's in this repository
 
 This repository contains the official spec of the `just-func` language.
+
+## install - PHP
+
+This package is distributed as `justland/just-func-schema` on `composer`.
+
+```sh
+composer require justland/just-func-schema
+```
+
+It comes with some helper functions you can use to update the schema for your application (as currently the schema is not added to `schemastore.org` and requires json-schema 2020-12 to be fully functional).
+
+```jsonc
+// composer.json
+{
+  "scripts": {
+    "update-json-func-schema": "justland\\just-func-schema\\Composer::copySchema"
+  }
+}
+```
