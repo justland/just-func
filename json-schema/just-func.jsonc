@@ -14,7 +14,13 @@
     "JustFunctions": {
       "oneOf": [
         {
-          "$ref": "#/definitions/JustUnaryFunctions"
+          "$ref": "#/definitions/JustNot"
+        },
+        {
+          "$ref": "#/definitions/JustRetrieve"
+        },
+        {
+          "$ref": "#/definitions/JustEquality"
         },
         {
           "$ref": "#/definitions/JustBinaryFunctions"
@@ -27,16 +33,45 @@
         }
       ]
     },
-    "JustUnaryFunctions": {
+    "JustNot": {
       "type": "array",
       "items": [
         {
           "type": "string",
-          "enum": [
-            "not",
-            "ret"
-          ],
-          "description": "Basic unary functions:\nnot: logical not\nret: retrieve value defined by `let`"
+          "const": "not",
+          "description": "logical not function: not(true) -> false"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustRetrieve": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "ret",
+          "$comment": "todo: ret vs eval, when to return string vs variable value",
+          "description": "retrieve value defined by `let`: [let, x, 3, [ret, x]] -> 3"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustEquality": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "==",
+          "description": "equality comparison"
+        },
+        {
+          "$ref": "#"
         },
         {
           "$ref": "#"
@@ -50,13 +85,12 @@
         {
           "type": "string",
           "enum": [
-            "=",
             "<",
             ">",
             "<=",
             ">="
           ],
-          "description": "Basic binary functions:\n=: equality comparison"
+          "description": "Basic binary functions"
         },
         {
           "$ref": "#"
