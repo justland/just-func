@@ -1,0 +1,4 @@
+{
+  "$schema": "https://raw.githubusercontent.com/justland/just-func/main/json-schema-tests/draft-2020-12/schema/my-app-spec.jsonc",
+  "test": ["=", "welcome to just-func, ", ["param/get", "name"]]
+}

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/justland/just-func/main/spec/draft-2020-12/schema/my-just-func.jsonc",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/json-schema-tests/draft-2020-12/schema/my-just-func.jsonc",
   "$dynamicAnchor": "JustFunc",
   "oneOf": [
     {

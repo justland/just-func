@@ -2,27 +2,27 @@
   "json.schemas": [
     {
       "fileMatch": [
-        "spec/cannot-extend/src/*.jsonc"
+        "json-schema-tests/cannot-extend/src/*.jsonc"
       ],
-      "url": "./spec/cannot-extend/schema/my-app-spec.jsonc"
+      "url": "./json-schema-tests/cannot-extend/schema/my-app-spec.jsonc"
     },
     {
       "fileMatch": [
-        "spec/copy-spec/src/*.jsonc"
+        "json-schema-tests/copy-spec/src/*.jsonc"
       ],
-      "url": "./spec/copy-spec/schema/my-app-spec.jsonc"
+      "url": "./json-schema-tests/copy-spec/schema/my-app-spec.jsonc"
     },
     {
       "fileMatch": [
-        "spec/draft-2019-09/src/*.jsonc"
+        "json-schema-tests/draft-2019-09/src/*.jsonc"
       ],
-      "url": "./spec/draft-2019-09/schema/my-app-spec.jsonc"
+      "url": "./json-schema-tests/draft-2019-09/schema/my-app-spec.jsonc"
     },
     {
       "fileMatch": [
-        "spec/draft-2020-12/src/*.jsonc"
+        "json-schema-tests/draft-2020-12/src/*.jsonc"
       ],
-      "url": "./spec/draft-2020-12/schema/my-app-spec.jsonc"
+      "url": "./json-schema-tests/draft-2020-12/schema/my-app-spec.jsonc"
     }
   ]
 }
