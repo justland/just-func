@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "test": {
-      "$ref": "https://github.com/justland/just-func/json-schema/my-just-func.jsonc"
+      "$ref": "https://raw.githubusercontent.com/justland/just-func/main/spec/draft-2020-12/schema/my-just-func.jsonc"
     }
   }
 }

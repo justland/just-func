@@ -7,7 +7,7 @@
       "$ref": "#/definitions/JustParamGet"
     },
     {
-      "$ref": "https://github.com/justland/just-func/json-schema/just-func.jsonc"
+      "$ref": "https://raw.githubusercontent.com/justland/just-func/main/json-schema/draft-2020-12/just-func.jsonc"
     }
   ],
   "definitions": {
