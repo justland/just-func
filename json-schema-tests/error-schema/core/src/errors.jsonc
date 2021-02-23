@@ -2,5 +2,5 @@
   "type": "Arity",
   "fn": "==",
   "args": [],
-  "message": "Wrong number of args (0) passed to: =="
+  "msg": "Wrong number of args (0) passed to: =="
 }]
