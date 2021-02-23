@@ -39,7 +39,7 @@
           "type": "array",
           "description": "Argument Array"
         },
-        "message": {
+        "msg": {
           "type": "string",
           "description": "Human readable error message"
         }
