@@ -2,7 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "description": "Validation Schema for just-func errors",
   "$id": "https://raw.githubusercontent.com/justland/just-func/main/json-schema/error-schema.jsonc",
-  "oneOf": [
+  "$comment": "There is no generic or base error. No need of Error inheritance.",
+  "anyOf": [
     {
       "$ref": "#/definitions/ArityError"
     }
@@ -15,7 +16,8 @@
           "properties": {
             "type": {
               "type": "string",
-              "const": "Arity"
+              "const": "Arity",
+              "description": "Arity (number of arguments taken by a function) error"
             }
           }
         },
