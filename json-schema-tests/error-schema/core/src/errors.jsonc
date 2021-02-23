@@ -1,0 +1,6 @@
+[{
+  "type": "Arity",
+  "fn": "==",
+  "args": [],
+  "message": "Wrong number of args (0) passed to: =="
+}]
