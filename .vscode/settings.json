@@ -23,6 +23,15 @@
         "json-schema-tests/draft-2020-12/src/*.jsonc"
       ],
       "url": "./json-schema-tests/draft-2020-12/schema/my-app-spec.jsonc"
+    },
+    {
+      "fileMatch": [
+        "json-schema-tests/error-schema/**/src/*.jsonc"
+      ],
+      "url": "./json-schema-tests/error-schema/errors-schema.jsonc"
     }
+  ],
+  "cSpell.words": [
+    "Arity"
   ]
 }
