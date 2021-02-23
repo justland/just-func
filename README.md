@@ -7,7 +7,7 @@ It is homoiconic and implementation independent.
 This means it can be used to capture logic that shared across multiple programming languages.
 
 Its typical use case is to define the logic in data or some markup language,
-and then the logic can be used in runtime or for code generation in various programming languages.
+the logic can then be used in runtime or code generation in various programming languages.
 
 Here is an hello world example for REST API:
 
