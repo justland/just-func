@@ -23,6 +23,15 @@
           "$ref": "#/definitions/JustEquality"
         },
         {
+          "$ref": "#/definitions/JustAdd"
+        },
+        {
+          "$ref": "#/definitions/JustPartial"
+        },
+        {
+          "$ref": "#/definitions/JustMap"
+        },
+        {
           "$ref": "#/definitions/JustBinaryFunctions"
         },
         {
@@ -79,6 +88,40 @@
       ],
       "additionalItems": false
     },
+    "JustMap": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "map",
+          "description": "map(fn, list)"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustPartial": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "partial",
+          "description": "creates a partial application, [map, [partial, [add 1]], [list, 2, 3]] -> [3, 4]"
+        },
+        {
+          "description": "the function to partial against.",
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
     "JustBinaryFunctions": {
       "type": "array",
       "items": [
@@ -123,6 +166,19 @@
         }
       ],
       "additionalItems": false
+    },
+    "JustAdd": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "add(1, 2, 3, 4) -> 10",
+          "const": "add"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
     },
     "JustVariadicFunctions": {
       "type": "array",

@@ -2,6 +2,12 @@
   "json.schemas": [
     {
       "fileMatch": [
+        "json-schema-spec/specs/*.jsonc"
+      ],
+      "url": "./json-schema-spec/schema/just-func-spec.jsonc"
+    },
+    {
+      "fileMatch": [
         "json-schema-tests/cannot-extend/src/*.jsonc"
       ],
       "url": "./json-schema-tests/cannot-extend/schema/my-app-spec.jsonc"
