@@ -26,6 +26,15 @@
           "$ref": "#/definitions/JustAdd"
         },
         {
+          "$ref": "#/definitions/JustSubtract"
+        },
+        {
+          "$ref": "#/definitions/JustMultiply"
+        },
+        {
+          "$ref": "#/definitions/JustDivide"
+        },
+        {
           "$ref": "#/definitions/JustPartial"
         },
         {
@@ -172,8 +181,47 @@
       "items": [
         {
           "type": "string",
-          "description": "add(1, 2, 3, 4) -> 10",
-          "const": "add"
+          "description": "[+, 1, 2, 3, 4] -> 10",
+          "const": "+"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "JustSubtract": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "[-, 10, 1, 2, 3, 4] -> 0",
+          "const": "-"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "JustMultiply": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "[*, 1, 2, 3, 4] -> 24",
+          "const": "*"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "JustDivide": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "[/, 25, 3, 2] -> 4",
+          "const": "/"
         }
       ],
       "additionalItems": {

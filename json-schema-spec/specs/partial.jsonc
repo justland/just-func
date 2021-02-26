@@ -1,18 +1,24 @@
-{
-  "test": [
-    "map",
-    [
-      "partial",
+[
+  {
+    "description": "partial...",
+    "expression": [
+      "map",
       [
-        "add",
-        1
+        "partial",
+        [
+          "+",
+          1
+        ]
+      ],
+      [
+        "list",
+        1,
+        2
       ]
     ],
-    [
-      "list",
-      1,
-      2
+    "expected": [
+      2,
+      3
     ]
-  ],
-  "expected": [2, 3]
-}
+  }
+]
