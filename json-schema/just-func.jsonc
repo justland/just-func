@@ -82,6 +82,7 @@
     },
     "JustEquality": {
       "type": "array",
+      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -95,7 +96,9 @@
           "$ref": "#"
         }
       ],
-      "additionalItems": false
+      "additionalItems": {
+        "$ref": "#"
+      }
     },
     "JustMap": {
       "type": "array",
