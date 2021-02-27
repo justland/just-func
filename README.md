@@ -1,10 +1,12 @@
 # just-func
 
-`just-func` is just a functional programming language.
+`just-func` is just a functional programming language written in JSON.
 
 It is homoiconic and implementation independent.
 
-This means it can be used to capture logic that shared across multiple programming languages.
+This mean it can be written in `JSON`, `YAML`, or other media that can be translate to simple JSON.
+
+It can be used to capture logic that shared across multiple programming languages.
 
 Its typical use case is to define the logic in data or some markup language,
 the logic can then be used in runtime or code generation in various programming languages.
@@ -54,7 +56,7 @@ class HelloRoute
 
 ## What's in this repository
 
-This repository contains the official spec of the `just-func` language.
+This repository contains the specification of the `just-func` language.
 
 ## install - PHP
 
