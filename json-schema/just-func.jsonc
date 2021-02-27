@@ -228,6 +228,19 @@
         "$ref": "#"
       }
     },
+    "JustList": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "create a list of values",
+          "const": "list"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
     "JustVariadicFunctions": {
       "type": "array",
       "items": [
@@ -237,8 +250,7 @@
           "enum": [
             "or",
             "and",
-            "str",
-            "list"
+            "str"
           ]
         }
       ],
