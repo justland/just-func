@@ -2,10 +2,34 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/justland/just-func/main/json-schema-specs/draft-2020-12-specs.jsonc",
   "description": "spec schema for draft-2020-12 just-func app using dynamicRef",
-  "type": "object",
-  "properties": {
-    "test": {
-      "$ref": "https://raw.githubusercontent.com/justland/just-func/main/json-schema-specs/draft-2020-12.jsonc"
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "description": {
+        "type": "string",
+        "description": "Test description"
+      },
+      "mock": {
+        "description": "mocking func calls",
+        "type": "array"
+      },
+      "expression": {
+        "description": "expression to test against",
+        "$ref": "https://raw.githubusercontent.com/justland/just-func/main/json-schema-specs/draft-2020-12.jsonc"
+      },
+      "expected": {
+        "type": [
+          "array",
+          "boolean",
+          "integer",
+          "null",
+          "number",
+          "string",
+          "object"
+        ],
+        "description": "expected result"
+      }
     }
   }
 }

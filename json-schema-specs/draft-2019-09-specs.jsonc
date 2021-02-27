@@ -1,10 +1,30 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "spec schema for draft-2019-09 just-func app using recursiveRef",
-  "type": "object",
-  "properties": {
-    "test": {
-      "$ref": "draft-2019-09.jsonc"
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "description": {
+        "type": "string",
+        "description": "Test description"
+      },
+      "expression": {
+        "description": "expression to test against",
+        "$ref": "draft-2019-09.jsonc"
+      },
+      "expected": {
+        "type": [
+          "array",
+          "boolean",
+          "integer",
+          "null",
+          "number",
+          "string",
+          "object"
+        ],
+        "description": "expected result"
+      }
     }
   }
 }

@@ -1,3 +1,8 @@
-{
-  "test": ["=", "welcome to just-func, ", ["param/get", "name"]]
-}
+[{
+  "description": "using extended func in nested fn",
+  "mock": [
+    ["mock/all", ["param/get", "name"], "unional"]
+  ],
+  "expression": ["str", "welcome to just-func, ", ["param/get", "name"]],
+  "expected": "welcome to just-func, unional"
+}]

@@ -4,6 +4,28 @@
   "$id": "https://raw.githubusercontent.com/justland/just-func/main/json-schema-specs/draft-07-errors-schema.jsonc",
   "type": "array",
   "items": {
-    "$ref": "../json-schema/error-schema.jsonc"
+    "type": "object",
+    "properties": {
+      "description": {
+        "type": "string",
+        "description": "Test description"
+      },
+      "expression": {
+        "description": "expression to test against",
+        "$ref": "../json-schema/error-schema.jsonc"
+      },
+      "expected": {
+        "type": [
+          "array",
+          "boolean",
+          "integer",
+          "null",
+          "number",
+          "string",
+          "object"
+        ],
+        "description": "expected result"
+      }
+    }
   }
 }
