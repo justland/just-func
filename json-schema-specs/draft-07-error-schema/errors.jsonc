@@ -1,6 +1,8 @@
-[{
-  "type": "Arity",
-  "fn": "==",
-  "args": [],
-  "msg": "Wrong number of args (0) passed to: =="
-}]
+[
+  {
+    "type": "Arity",
+    "fn": "==",
+    "args": [],
+    "msg": "Wrong number of args (0) passed to: =="
+  }
+]

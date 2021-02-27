@@ -4,7 +4,7 @@
     "mock": [
       ["mock/all", ["param/get", "name"], "unional"]
     ],
-    "expression": ["=", "welcome to just-func, ", ["param/get", "name"]],
+    "expression": ["str", "welcome to just-func, ", ["param/get", "name"]],
     "expected": "welcome to just-func, unional"
   }
 ]

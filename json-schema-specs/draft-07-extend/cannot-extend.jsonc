@@ -1,9 +1,11 @@
-[{
-  "description": "using extended func in nested fn",
-  "mock": [
-    ["mock/all", ["param/get", "name"], "unional"]
-  ],
-  // expected error:  `param/get` is not recognized.
-  "expression": ["str", "welcome to just-func, ", ["param/get", "name"]],
-  "expected": "welcome to just-func, unional"
-}]
+[
+  {
+    "description": "using extended func in nested fn",
+    "mock": [
+      ["mock/all", ["param/get", "name"], "unional"]
+    ],
+    // expected error:  `param/get` is not recognized.
+    "expression": ["str", "welcome to just-func, ", ["param/get", "name"]],
+    "expected": "welcome to just-func, unional"
+  }
+]
