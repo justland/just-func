@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "Just Func for my app",
+  "description": "extend using draft-07 just-func",
   "oneOf": [
     {
       "$ref": "#/definitions/JustParamGet"
     },
     {
-      "$ref": "../../../json-schema/just-func.jsonc"
+      "$ref": "../json-schema/just-func.jsonc"
     }
   ],
   "definitions": {

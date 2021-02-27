@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "JustFunc extension for my-app",
+  "description": "'extending' draft-07 by copying the just-func schema",
   "$id": "JustFunc",
   "oneOf": [
     {

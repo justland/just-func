@@ -1,9 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "spec schema for draft-2019-09 just-func app using recursiveRef",
   "type": "object",
   "properties": {
     "test": {
-      "$ref": "my-just-func.jsonc"
+      "$ref": "draft-2019-09.jsonc"
     }
   }
 }

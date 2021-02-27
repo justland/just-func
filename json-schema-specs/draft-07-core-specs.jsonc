@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "spec schema for draft-07 of just-func",
   "type": "array",
   "items": {
     "type": "object",
@@ -10,7 +11,7 @@
       },
       "expression": {
         "description": "expression to test against",
-        "$ref": "../../json-schema/just-func.jsonc"
+        "$ref": "../json-schema/just-func.jsonc"
       },
       "expected": {
         "type": [
