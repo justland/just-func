@@ -32,6 +32,9 @@
           "$ref": "#/definitions/JustMap"
         },
         {
+          "$ref": "#/definitions/JustList"
+        },
+        {
           "$ref": "#/definitions/JustBinaryFunctions"
         },
         {
@@ -203,7 +206,9 @@
     "JustLiteral": {
       "type": [
         "boolean",
-        "string"
+        "string",
+        "number",
+        "integer"
       ]
     },
     // #region math
@@ -229,6 +234,9 @@
         },
         {
           "$ref": "#/definitions/JustDivide"
+        },
+        {
+          "$ref": "#/definitions/JustMod"
         }
       ]
     },
@@ -312,6 +320,25 @@
       "additionalItems": {
         "$ref": "#"
       }
+    },
+    "JustMod": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "description": "[mod, 5, 3] => 2",
+          "const": "mod"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
     }
     // #endregion math
   }

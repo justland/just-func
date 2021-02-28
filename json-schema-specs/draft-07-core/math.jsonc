@@ -1,0 +1,4 @@
+[{
+  "expression": ["mod", 5, 3],
+  "expected": 2
+}]
