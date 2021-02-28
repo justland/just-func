@@ -8,6 +8,9 @@
     },
     {
       "$ref": "#/definitions/JustLiteral"
+    },
+    {
+      "$ref": "#/definitions/JustMath"
     }
   ],
   "definitions": {
@@ -21,18 +24,6 @@
         },
         {
           "$ref": "#/definitions/JustEquality"
-        },
-        {
-          "$ref": "#/definitions/JustAdd"
-        },
-        {
-          "$ref": "#/definitions/JustSubtract"
-        },
-        {
-          "$ref": "#/definitions/JustMultiply"
-        },
-        {
-          "$ref": "#/definitions/JustDivide"
         },
         {
           "$ref": "#/definitions/JustPartial"
@@ -179,6 +170,93 @@
       ],
       "additionalItems": false
     },
+    "JustList": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "create a list of values",
+          "const": "list"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "JustVariadicFunctions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "Basic variadic functions: and, or, str, list",
+          "enum": [
+            "or",
+            "and",
+            "str"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "JustLiteral": {
+      "type": [
+        "boolean",
+        "string"
+      ]
+    },
+    // #region math
+    "JustMath": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/JustNumber"
+        },
+        {
+          "$ref": "#/definitions/JustInteger"
+        },
+        {
+          "$ref": "#/definitions/JustRatio"
+        },
+        {
+          "$ref": "#/definitions/JustAdd"
+        },
+        {
+          "$ref": "#/definitions/JustSubtract"
+        },
+        {
+          "$ref": "#/definitions/JustMultiply"
+        },
+        {
+          "$ref": "#/definitions/JustDivide"
+        }
+      ]
+    },
+    "JustNumber": {
+      "type": "number"
+    },
+    "JustInteger": {
+      "type": "integer"
+    },
+    "JustRatio": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "const": "ratio",
+          "description": "A ratio is a number representing the mathematical ratio of two integers"
+        },
+        {
+          "$ref": "#/definitions/JustInteger"
+        },
+        {
+          "ref": "#/definitions/JustInteger"
+        }
+      ],
+      "additionalItems": false
+    },
     "JustAdd": {
       "type": "array",
       "items": [
@@ -230,44 +308,7 @@
       "additionalItems": {
         "$ref": "#"
       }
-    },
-    "JustList": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "description": "create a list of values",
-          "const": "list"
-        }
-      ],
-      "additionalItems": {
-        "$ref": "#"
-      }
-    },
-    "JustVariadicFunctions": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "description": "Basic variadic functions: and, or, str, list",
-          "enum": [
-            "or",
-            "and",
-            "str"
-          ]
-        }
-      ],
-      "additionalItems": {
-        "$ref": "#"
-      }
-    },
-    "JustLiteral": {
-      "type": [
-        "boolean",
-        "integer",
-        "number",
-        "string"
-      ]
     }
+    // #endregion math
   }
 }
