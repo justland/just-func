@@ -5,19 +5,19 @@
   "$comment": "There is no generic or base error. No need of Error inheritance.",
   "anyOf": [
     {
-      "$ref": "#/definitions/ArityError"
+      "$ref": "#/definitions/ArityMismatch"
     }
   ],
   "definitions": {
-    "ArityError": {
+    "ArityMismatch": {
       "allOf": [
         {
           "type": "object",
           "properties": {
             "type": {
               "type": "string",
-              "const": "Arity",
-              "description": "Arity (number of arguments taken by a function) error"
+              "const": "ArityMismatch",
+              "description": "Arity (number of arguments taken by a function) does not match with what the function requires"
             }
           }
         },
@@ -29,10 +29,6 @@
     "ErrorBase": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string",
-          "const": "Arity"
-        },
         "fn": {
           "type": "string",
           "description": "Fully qualified function name"
