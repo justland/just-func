@@ -1,0 +1,18 @@
+[
+  {
+    "description": "single param",
+    "expression": [
+      "let",
+      "name",
+      "Homa",
+      [
+        "str",
+        "Hello",
+        [
+          "ret",
+          "name"
+        ]
+      ]
+    ]
+  }
+]

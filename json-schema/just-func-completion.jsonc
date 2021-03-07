@@ -1,11 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "This is JustFunc, just a functional programming language",
+  "$comment": "Completion schema do not have minItems/maxItems so that editor can list all operators",
+  "description": "Code completion schema or just-func. Just a functional programming language",
   "$id": "JustFunc",
-  "oneOf": [
-    {
-      "$ref": "#/definitions/JustKeywords"
-    },
+  "anyOf": [
     {
       "$ref": "#/definitions/JustFunctions"
     },
@@ -14,6 +12,9 @@
     },
     {
       "$ref": "#/definitions/JustLogical"
+    },
+    {
+      "$ref": "#/definitions/JustKeywords"
     },
     {
       "$ref": "#/definitions/JustString"
@@ -33,18 +34,12 @@
     },
     // #region Keywords
     "JustKeywords": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/JustFn"
         },
         {
           "$ref": "#/definitions/JustIf"
-        },
-        {
-          "$ref": "#/definitions/JustLet"
-        },
-        {
-          "$ref": "#/definitions/JustRet"
         }
       ]
     },
@@ -75,10 +70,23 @@
         }
       ]
     },
+    "JustParameter": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "description": "Name of the param"
+        },
+        {
+          "type": "string",
+          "description": "Type of the param."
+        }
+      ]
+    },
     "JustIf": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 4,
       "items": [
         {
           "type": "string",
@@ -97,79 +105,9 @@
       ],
       "additionalItems": false
     },
-    "JustLet": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "const": "let",
-          "description": "declare local variable: (let, name, value, block)"
-        },
-        {
-          "$ref": "#"
-        },
-        {
-          "$ref": "#"
-        },
-        {
-          "$ref": "#"
-        }
-      ],
-      "additionalItems": false
-    },
-    "JustRetrieve": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "const": "ret",
-          "$comment": "todo: ret vs eval, when to return string vs variable value",
-          "description": "retrieve value defined by `let`: [let, x, 3, [ret, x]] -> 3"
-        },
-        {
-          "$ref": "#"
-        }
-      ],
-      "additionalItems": false
-    },
-    "JustEquality": {
-      "type": "array",
-      "minItems": 2,
-      "items": [
-        {
-          "type": "string",
-          "const": "==",
-          "description": "equality comparison"
-        },
-        {
-          "$ref": "#"
-        },
-        {
-          "$ref": "#"
-        }
-      ],
-      "additionalItems": {
-        "$ref": "#"
-      }
-    },
-    "JustParameter": {
-      "type": "array",
-      "minItems": 2,
-      "maxItems": 2,
-      "items": [
-        {
-          "type": "string",
-          "description": "Name of the param"
-        },
-        {
-          "type": "string",
-          "description": "Type of the param."
-        }
-      ]
-    },
     // #endregion keywords
     "JustFunctions": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/JustRetrieve"
         },
@@ -198,7 +136,7 @@
     },
     // #region logical
     "JustLogical": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/JustNot"
         }
@@ -219,6 +157,40 @@
       "additionalItems": false
     },
     // #endregion logical
+    "JustRetrieve": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "ret",
+          "$comment": "todo: ret vs eval, when to return string vs variable value",
+          "description": "retrieve value defined by `let`: [let, x, 3, [ret, x]] -> 3"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustEquality": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "==",
+          "description": "equality comparison"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
     "JustMap": {
       "type": "array",
       "items": [
@@ -265,6 +237,28 @@
             ">="
           ],
           "description": "Basic binary functions"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "JustTernaryFunctions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "let"
+          ],
+          "description": "Basic ternary functions:\nlet: declare local variable\n"
+        },
+        {
+          "$ref": "#"
         },
         {
           "$ref": "#"
@@ -363,8 +357,6 @@
     },
     "JustRatio": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 3,
       "items": [
         {
           "type": "string",
@@ -382,7 +374,6 @@
     },
     "JustAdd": {
       "type": "array",
-      "minItems": 1,
       "items": [
         {
           "type": "string",
@@ -396,7 +387,6 @@
     },
     "JustSubtract": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -410,7 +400,6 @@
     },
     "JustMultiply": {
       "type": "array",
-      "minItems": 1,
       "items": [
         {
           "type": "string",
@@ -424,7 +413,6 @@
     },
     "JustDivide": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -438,8 +426,6 @@
     },
     "JustMod": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 3,
       "items": [
         {
           "type": "string",

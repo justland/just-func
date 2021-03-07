@@ -1,5 +1,15 @@
 # Design Decisions
 
+## Terminology
+
+`operator`:
+
+The operator of a function or the identifier of the type.
+It is always the first argument in the list: `+`, `not`, `list`, `let`, etc
+
+## Syntax
+
+
 ## Errors
 
 Topics remaining to be discuss and decide:
