@@ -1,0 +1,31 @@
+[
+  {
+    "description": "no param",
+    "expression": [
+      "fn",
+      "foo",
+      [],
+      ["not", true]
+    ]
+  },
+  {
+    "description": "single param with type",
+    "expression": [
+      "fn",
+      "hello-world",
+      [
+        ["name", "string"]
+      ],
+      [
+        "str",
+        "hello, ",
+        [
+          "ret",
+          "name"
+        ]
+      ]
+    ],
+    "input": ["Homa"],
+    "expected": ["hello, Homa"]
+  }
+]
