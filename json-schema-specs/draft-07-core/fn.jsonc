@@ -5,7 +5,10 @@
       "fn",
       "foo",
       [],
-      ["not", true]
+      [
+        "not",
+        true
+      ]
     ]
   },
   {
@@ -14,7 +17,10 @@
       "fn",
       "hello-world",
       [
-        ["name", "string"]
+        [
+          "name",
+          "string"
+        ]
       ],
       [
         "str",
@@ -25,7 +31,20 @@
         ]
       ]
     ],
-    "input": ["Homa"],
-    "expected": ["hello, Homa"]
+    "input": [
+      "Homa"
+    ],
+    "expected": [
+      "hello, Homa"
+    ]
+  },
+  {
+    "description": "with 0 or more params",
+    "expression": [
+      "fn",
+      "hello",
+      [],
+      []
+    ]
   }
 ]

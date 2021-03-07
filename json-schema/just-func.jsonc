@@ -4,57 +4,99 @@
   "$id": "JustFunc",
   "oneOf": [
     {
-      "$ref": "#/definitions/JustKeywords"
+      "$ref": "#/definitions/Literals"
     },
     {
-      "$ref": "#/definitions/JustFunctions"
+      "$ref": "#/definitions/Keywords"
     },
     {
-      "$ref": "#/definitions/JustLiteral"
+      "$ref": "#/definitions/CoreModule"
     },
     {
-      "$ref": "#/definitions/JustLogical"
+      "$ref": "#/definitions/LogicalModule"
     },
     {
-      "$ref": "#/definitions/JustString"
+      "$ref": "#/definitions/StringModule"
     },
     {
-      "$ref": "#/definitions/JustMath"
+      "$ref": "#/definitions/MathModule"
     }
   ],
   "definitions": {
-    "JustLiteral": {
-      "type": [
-        "boolean",
-        "string",
-        "number",
-        "integer"
-      ]
-    },
-    // #region Keywords
-    "JustKeywords": {
+    // #region Literals
+    "Literals": {
       "oneOf": [
         {
-          "$ref": "#/definitions/JustFn"
+          "$ref": "#/definitions/Boolean"
         },
         {
-          "$ref": "#/definitions/JustIf"
+          "$ref": "#/definitions/String"
         },
         {
-          "$ref": "#/definitions/JustLet"
+          "$ref": "#/definitions/Number"
         },
         {
-          "$ref": "#/definitions/JustRet"
+          "$ref": "#/definitions/Integer"
+        },
+        {
+          "$ref": "#/definitions/Null"
+        },
+        {
+          "$ref": "#/definitions/Object"
         }
       ]
     },
-    "JustFn": {
+    "Boolean": {
+      "type": "boolean"
+    },
+    "String": {
+      "type": "string"
+    },
+    "Number": {
+      "type": "number"
+    },
+    "Integer": {
+      "type": "integer"
+    },
+    "Null": {
+      "type": "null"
+    },
+    "Object": {
+      "type": "object"
+    },
+    // #endregion Literals
+    // #region keywords
+    "Keywords": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Fn"
+        },
+        {
+          "$ref": "#/definitions/If"
+        },
+        {
+          "$ref": "#/definitions/Let"
+        },
+        {
+          "$ref": "#/definitions/Ret"
+        },
+        {
+          "$ref": "#/definitions/Partial"
+        },
+        {
+          "$ref": "#/definitions/List"
+        }
+      ]
+    },
+    "Fn": {
       "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
       "items": [
         {
           "type": "string",
           "const": "fn",
-          "description": "(fn, name, params: list, body)"
+          "description": "[fn, name, params, body] => void"
         },
         {
           "type": "string",
@@ -62,20 +104,29 @@
           "description": "name of the function"
         },
         {
-          "description": "parameter list",
-          // TODO: may loosen parameter list to support macro
           "type": "array",
+          "description": "parameter list",
           "items": {
-            "$ref": "#/definitions/JustParameter"
+            // TODO: may loosen parameter list to support macro
+            "$ref": "#/definitions/Parameter"
           }
         },
         {
           "description": "function body",
-          "$ref": "#"
+          "oneOf": [
+            {
+              "$ref": "#"
+            },
+            {
+              "type": "array",
+              "maxItems": 0
+            }
+          ]
         }
-      ]
+      ],
+      "additionalItems": false
     },
-    "JustIf": {
+    "If": {
       "type": "array",
       "minItems": 3,
       "maxItems": 4,
@@ -83,7 +134,7 @@
         {
           "type": "string",
           "const": "if",
-          "description": "(if, condition, then, else)"
+          "description": "[if, condition, then, else] => Return<then | else>"
         },
         {
           "$ref": "#"
@@ -97,34 +148,21 @@
       ],
       "additionalItems": false
     },
-    "JustLet": {
+    "Let": {
       "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
       "items": [
         {
           "type": "string",
           "const": "let",
-          "description": "declare local variable: (let, name, value, block)"
+          "description": "[let, [name, value], block] => Return<block>"
         },
         {
-          "$ref": "#"
-        },
-        {
-          "$ref": "#"
-        },
-        {
-          "$ref": "#"
-        }
-      ],
-      "additionalItems": false
-    },
-    "JustRetrieve": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "const": "ret",
-          "$comment": "todo: ret vs eval, when to return string vs variable value",
-          "description": "retrieve value defined by `let`: [let, x, 3, [ret, x]] -> 3"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
         },
         {
           "$ref": "#"
@@ -132,19 +170,32 @@
       ],
       "additionalItems": false
     },
-    "JustEquality": {
+    "Ret": {
       "type": "array",
       "minItems": 2,
       "items": [
         {
           "type": "string",
-          "const": "==",
-          "description": "equality comparison"
+          "const": "ret",
+          "$comment": "todo: ret vs eval, when to return string vs variable value",
+          "description": "expression\nReturn value defined by `let`:\n  [ret,  [let, x, 3, [ret, x]] => 3"
         },
         {
           "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "Partial": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "partial",
+          "description": "creates a partial application: [map, [partial, [add 1]], [list, 2, 3]] -> [3, 4]"
         },
         {
+          "description": "the function to partial against.",
           "$ref": "#"
         }
       ],
@@ -152,7 +203,28 @@
         "$ref": "#"
       }
     },
-    "JustParameter": {
+    "List": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "list",
+          "description": "create a list of values"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "NameValuePair": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#"
+      }
+    },
+    "Parameter": {
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
@@ -168,64 +240,64 @@
       ]
     },
     // #endregion keywords
-    "JustFunctions": {
+    // #region core
+    "CoreModule": {
       "oneOf": [
         {
-          "$ref": "#/definitions/JustRetrieve"
+          "$ref": "#/definitions/Equivalent"
         },
         {
-          "$ref": "#/definitions/JustEquality"
-        },
-        {
-          "$ref": "#/definitions/JustPartial"
-        },
-        {
-          "$ref": "#/definitions/JustMap"
-        },
-        {
-          "$ref": "#/definitions/JustList"
-        },
-        {
-          "$ref": "#/definitions/JustBinaryFunctions"
-        },
-        {
-          "$ref": "#/definitions/JustTernaryFunctions"
-        },
-        {
-          "$ref": "#/definitions/JustVariadicFunctions"
+          "$ref": "#/definitions/Map"
         }
       ]
     },
-    // #region logical
-    "JustLogical": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/JustNot"
-        }
-      ]
-    },
-    "JustNot": {
+    "Equivalent": {
       "type": "array",
+      "minItems": 2,
       "items": [
         {
           "type": "string",
-          "const": "not",
-          "description": "logical not function: not(true) -> false"
+          "const": "===",
+          "description": "equivalent comparison"
+        },
+        {
+          "$ref": "#"
         },
         {
           "$ref": "#"
         }
       ],
-      "additionalItems": false
+      "additionalItems": {
+        "$ref": "#"
+      }
     },
-    // #endregion logical
-    "JustMap": {
+    "Equality": {
+      "type": "array",
+      "minItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "const": "==",
+          "description": "Equality comparison: [==, true, 1] => true"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "Map": {
       "type": "array",
       "items": [
         {
           "type": "string",
           "const": "map",
-          "description": "map(fn, list)"
+          "description": "[map, fn, list] => list"
         },
         {
           "$ref": "#"
@@ -236,89 +308,81 @@
       ],
       "additionalItems": false
     },
-    "JustPartial": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "const": "partial",
-          "description": "creates a partial application, [map, [partial, [add 1]], [list, 2, 3]] -> [3, 4]"
-        },
-        {
-          "description": "the function to partial against.",
-          "$ref": "#"
-        }
-      ],
-      "additionalItems": {
-        "$ref": "#"
-      }
-    },
-    "JustBinaryFunctions": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "enum": [
-            "<",
-            ">",
-            "<=",
-            ">="
-          ],
-          "description": "Basic binary functions"
-        },
-        {
-          "$ref": "#"
-        },
-        {
-          "$ref": "#"
-        }
-      ],
-      "additionalItems": false
-    },
-    "JustList": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "description": "create a list of values",
-          "const": "list"
-        }
-      ],
-      "additionalItems": {
-        "$ref": "#"
-      }
-    },
-    "JustVariadicFunctions": {
-      "type": "array",
-      "items": [
-        {
-          "type": "string",
-          "description": "Basic variadic functions: and, or, str, list",
-          "enum": [
-            "or",
-            "and"
-          ]
-        }
-      ],
-      "additionalItems": {
-        "$ref": "#"
-      }
-    },
-    // #region string
-    "JustString": {
+    // #endregion core
+    // #region logical
+    "LogicalModule": {
       "oneOf": [
         {
-          "$ref": "#/definitions/JustStr"
+          "$ref": "#/definitions/Not"
+        },
+        {
+          "$ref": "#/definitions/And"
+        },
+        {
+          "$ref": "#/definitions/Or"
         }
       ]
     },
-    "JustStr": {
+    "Not": {
       "type": "array",
       "items": [
         {
           "type": "string",
-          "description": "string concatenation: (str, a, b, c, ...) => abc...",
-          "const": "str"
+          "const": "not",
+          "description": "logical not: [not, boolean] => boolean"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "And": {
+      "type": "array",
+      // clojure (and) => true is weird
+      "minItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "const": "and",
+          "description": "logical and: [and, boolean...] => boolean"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "Or": {
+      "type": "array",
+      // clojure (or) => nil is weird
+      "minItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "const": "or",
+          "description": "logical or: [or, boolean...] => boolean"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    // #endregion logical
+    // #region string
+    "StringModule": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Str"
+        }
+      ]
+    },
+    "Str": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "str",
+          "description": "string concatenation: [str, a, b, c, ...] => abc..."
         }
       ],
       "additionalItems": {
@@ -327,41 +391,41 @@
     },
     // #endregion string
     // #region math
-    "JustMath": {
+    "MathModule": {
       "oneOf": [
         {
-          "$ref": "#/definitions/JustNumber"
+          "$ref": "#/definitions/Ratio"
         },
         {
-          "$ref": "#/definitions/JustInteger"
+          "$ref": "#/definitions/Add"
         },
         {
-          "$ref": "#/definitions/JustRatio"
+          "$ref": "#/definitions/Subtract"
         },
         {
-          "$ref": "#/definitions/JustAdd"
+          "$ref": "#/definitions/Multiply"
         },
         {
-          "$ref": "#/definitions/JustSubtract"
+          "$ref": "#/definitions/Divide"
         },
         {
-          "$ref": "#/definitions/JustMultiply"
+          "$ref": "#/definitions/Mod"
         },
         {
-          "$ref": "#/definitions/JustDivide"
+          "$ref": "#/definitions/GreaterThan"
         },
         {
-          "$ref": "#/definitions/JustMod"
+          "$ref": "#/definitions/LessThan"
+        },
+        {
+          "$ref": "#/definitions/GreaterThanOrEqual"
+        },
+        {
+          "$ref": "#/definitions/LessThanOrEqual"
         }
       ]
     },
-    "JustNumber": {
-      "type": "number"
-    },
-    "JustInteger": {
-      "type": "integer"
-    },
-    "JustRatio": {
+    "Ratio": {
       "type": "array",
       "minItems": 3,
       "maxItems": 3,
@@ -372,79 +436,148 @@
           "description": "A ratio is a number representing the mathematical ratio of two integers"
         },
         {
-          "$ref": "#/definitions/JustInteger"
+          "$ref": "#/definitions/Integer"
         },
         {
-          "ref": "#/definitions/JustInteger"
+          "ref": "#/definitions/Integer"
         }
       ],
       "additionalItems": false
     },
-    "JustAdd": {
+    "Add": {
       "type": "array",
       "minItems": 1,
       "items": [
         {
           "type": "string",
-          "description": "[+, 1, 2, 3, 4] -> 10",
-          "const": "+"
+          "const": "+",
+          "description": "[+, 1, 2, 3, 4] => 10"
         }
       ],
       "additionalItems": {
         "$ref": "#"
       }
     },
-    "JustSubtract": {
+    "Subtract": {
       "type": "array",
       "minItems": 2,
       "items": [
         {
           "type": "string",
-          "description": "[-, 10, 1, 2, 3, 4] -> 0",
-          "const": "-"
+          "const": "-",
+          "description": "[-, 10, 1, 2, 3, 4] => 0"
         }
       ],
       "additionalItems": {
         "$ref": "#"
       }
     },
-    "JustMultiply": {
+    "Multiply": {
       "type": "array",
       "minItems": 1,
       "items": [
         {
           "type": "string",
-          "description": "[*, 1, 2, 3, 4] -> 24",
-          "const": "*"
+          "const": "*",
+          "description": "[*, 1, 2, 3, 4] => 24"
         }
       ],
       "additionalItems": {
         "$ref": "#"
       }
     },
-    "JustDivide": {
+    "Divide": {
       "type": "array",
       "minItems": 2,
       "items": [
         {
           "type": "string",
-          "description": "[/, 25, 3, 2] -> 4",
-          "const": "/"
+          "const": "/",
+          "description": "[/, 25, 3, 2] => 4"
         }
       ],
       "additionalItems": {
         "$ref": "#"
       }
     },
-    "JustMod": {
+    "Mod": {
       "type": "array",
       "minItems": 3,
       "maxItems": 3,
       "items": [
         {
           "type": "string",
-          "description": "[mod, 5, 3] => 2",
-          "const": "mod"
+          "const": "mod",
+          "description": "[mod, 5, 3] => 2"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "GreaterThan": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": ">",
+          "description": "[>, 1, 2] => false"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "LessThan": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "<",
+          "description": "[<, 1, 2] => true"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "GreaterThanOrEqual": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": ">=",
+          "description": "[>=, 1, 2] => false"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": false
+    },
+    "LessThanOrEqual": {
+      "type": "array",
+      "minItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "const": "<=",
+          "description": "[<=, 1, 2] => true"
         },
         {
           "$ref": "#"

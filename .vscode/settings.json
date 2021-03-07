@@ -6,12 +6,12 @@
       ],
       "url": "./json-schema-specs/draft-07-copy-specs.jsonc"
     },
-    {
-      "fileMatch": [
-        "json-schema-specs/draft-07-core/*.jsonc"
-      ],
-      "url": "./json-schema-specs/draft-07-core-completion-specs.jsonc"
-    },
+    // {
+    //   "fileMatch": [
+    //     "json-schema-specs/draft-07-core/*.jsonc"
+    //   ],
+    //   "url": "./json-schema-specs/draft-07-core-completion-specs.jsonc"
+    // },
     {
       "fileMatch": [
         "json-schema-specs/draft-07-core/*.jsonc"
@@ -45,6 +45,8 @@
   ],
   "cSpell.words": [
     "Arity",
+    "EBNF",
+    "Naur",
     "endregion",
     "schemastore"
   ]
