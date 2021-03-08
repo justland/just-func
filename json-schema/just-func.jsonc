@@ -7,19 +7,7 @@
       "$ref": "#/definitions/Literals"
     },
     {
-      "$ref": "#/definitions/Keywords"
-    },
-    {
-      "$ref": "#/definitions/CoreModule"
-    },
-    {
-      "$ref": "#/definitions/LogicalModule"
-    },
-    {
-      "$ref": "#/definitions/StringModule"
-    },
-    {
-      "$ref": "#/definitions/MathModule"
+      "$ref": "#/definitions/Expressions"
     }
   ],
   "definitions": {
@@ -34,9 +22,6 @@
         },
         {
           "$ref": "#/definitions/Number"
-        },
-        {
-          "$ref": "#/definitions/Integer"
         },
         {
           "$ref": "#/definitions/Null"
@@ -65,6 +50,25 @@
       "type": "object"
     },
     // #endregion Literals
+    "Expressions": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Keywords"
+        },
+        {
+          "$ref": "#/definitions/CoreModule"
+        },
+        {
+          "$ref": "#/definitions/LogicalModule"
+        },
+        {
+          "$ref": "#/definitions/StringModule"
+        },
+        {
+          "$ref": "#/definitions/MathModule"
+        }
+      ]
+    },
     // #region keywords
     "Keywords": {
       "oneOf": [
@@ -160,8 +164,21 @@
         },
         {
           "type": "array",
+          "minItems": 1,
           "items": {
-            "$ref": "#/definitions/NameValuePair"
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Expressions"
+                },
+                {
+                  "$ref": "#/definitions/String"
+                }
+              ]
+            }
           }
         },
         {
@@ -221,7 +238,11 @@
       "minItems": 2,
       "maxItems": 2,
       "items": {
-        "$ref": "#"
+        "oneOf": [
+          {
+            "$ref": "#/definitions/String"
+          }
+        ]
       }
     },
     "Parameter": {
@@ -245,6 +266,9 @@
       "oneOf": [
         {
           "$ref": "#/definitions/Equivalent"
+        },
+        {
+          "$ref": "#/definitions/Equality"
         },
         {
           "$ref": "#/definitions/Map"
