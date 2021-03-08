@@ -4,12 +4,46 @@
     "expression": [
       "let",
       [
-        "name",
-        "Homa"
+        [
+          "name",
+          "Homa"
+        ]
+      ],
+      [
+        "str"
+      ]
+    ]
+  },
+  {
+    "description": "multiple static variables",
+    "expression": [
+      "let",
+      [
+        [
+          "name",
+          "Homa"
+        ],
+        [
+          "gender",
+          "male"
+        ]
       ],
       [
         "str",
         "Hello ",
+        [
+          "if",
+          [
+            "===",
+            "male",
+            [
+              "ret",
+              "gender"
+            ]
+          ],
+          "Mr. ",
+          "Mrs "
+        ],
         [
           "ret",
           "name"
@@ -18,32 +52,41 @@
     ]
   },
   {
-    "description": "multiple static variables",
-    "expression": [
-      "let",
-      [["name", "Homa"], ["gender", "male"]],
-      [
-        "str",
-        "Hello ",
-        ["if", ["===", "male", ["ret", "gender"]], "Mr. ", "Mrs "],
-        ["ret", "name"]
-      ]
-    ]
-  },
-  {
     "description": "single variable with expression",
     "expression": [
       "let",
-      ["name", ["str", "Ho", "ma"]],
-      []
+      [
+        [
+          "name",
+          [
+            "str",
+            "Ho",
+            "ma"
+          ]
+        ]
+      ],
+      [
+        "str"
+      ]
     ]
   },
   {
     "description": "dynamic variable name",
     "expression": [
       "let",
-      [["str", "na", "me"], "Homa"],
-      []
+      [
+        [
+          [
+            "str",
+            "na",
+            "me"
+          ],
+          "Homa"
+        ]
+      ],
+      [
+        "str"
+      ]
     ]
   }
 ]
