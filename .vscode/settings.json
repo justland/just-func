@@ -48,6 +48,8 @@
     "EBNF",
     "Naur",
     "endregion",
+    "eval",
+    "homoiconicity",
     "schemastore"
   ]
 }
