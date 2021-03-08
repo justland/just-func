@@ -16,8 +16,10 @@ We will use the basic format as in [wiki](https://en.wikipedia.org/wiki/Extended
 ### Literals
 
 ```bnf
-literal = string | number | integer | boolean | null | object ;
+literal = string | number | boolean | null | object ;
 ```
+
+using [`number`](#common-bnf)
 
 Literals are all JSON types except `array`,
 which we used as the construct of the language.
@@ -67,4 +69,5 @@ There are four kinds of elements in `just-func`:
 ```bnd
 letter = "A" ... "Z" | "a" ... "z" ;
 digit = "0" ... "9" ;
+number = integer | double
 ```
