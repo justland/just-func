@@ -10,21 +10,25 @@ Here is a quick summary of the key grammar rules:
 
 ```ebnf
 expression := literal | special | type | function | variable | dynamic;
-special := fn | let | ret | if | match | eval | partial ;
-type := [type identifier, expression*] ;
-function := [function identifier, expression*] ;
-variable := [variable identifier, expression*] ;
-dynamic := [string expression, expression*] ;
-fn* := ["fn", function identifier, [param declaration*], expression] ;
-let := ["let", [param assignment*], expression] ;
+special := fn | let | if | match | eval | partial ;
+type := [typeIdentifier, expression+] ;
+function := [functionIdentifier, expression+] ;
+variable := [variableIdentifier, expression?] ;
+dynamic := [stringExpression, expression+] ;
+fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
+let := ["let", [paramAssignment*], expression] ;
 if := ["if", expression, expression, expression?] ;
-match := ["match", [expression, expression]*] ;
-eval* := ["eval", list expression] ;
-partial* := ["partial", expression] ;
+match := ["match", [expression, expression]+, ["_", expression]?] ;
+eval := ["eval", listExpression] ;
+partial := ["partial", expression] ;
 ```
+
+Each identifier can be replaced by an expression that yields the same identifier.
+This is planned but not implemented at the moment.
 
 - [just-func syntax](#just-func-syntax)
   - [Notation](#notation)
+  - [Reserved keywords](#reserved-keywords)
   - [Grammar](#grammar)
     - [Expression](#expression)
     - [Literal](#literal)
@@ -47,6 +51,30 @@ as `just-func` is a strict subset of JSON.
 Any difference or clarification will be listed below:
 
 - `;`: rule termination
+- `E+`: Matches one or more occurrences of `E`. Also has a higher precedence over `|`
+- `???Expression`: `Expression` that produces `???`. E.g. `StringExpression` is an expression that produce string, `ParamIdentifierExpression` is an expression that produce `ParamIdentifier`.
+
+## Reserved keywords
+
+Here are a list of keywords reserved by the language and standard library:
+
+```ebnf
+reservedKeywords := specialKeywords | operatorKeywords |
+                    stdModuleKeywords | logModuleKeywords ;
+specialKeywords := "fn" | "let" | "if" | "match" | "eval" | "partial" |
+                   "lambda" | "type" | "mod" | "use" | "import" | "export" |
+                   "take" |
+                   "class" | "impl" | "interface" |
+                   "for" | "while" | "do" | "loop" |
+                   "ratio" ;
+operatorKeywords := "==" | "!=" | ">" | "<" | ">=" | "<=" |
+                    "&&" | "||" | "&" | "|" | "!" |
+                    "+" | "-" | "*" | "/" | "%" | "^" | "<<" | ">>" |
+                    "'" | """ | "?" | "??" ;
+stdModuleKeywords := "list" | "map" | "reduce" | "some" | "filter" | "find" |
+                     "doc" ;
+logModuleKeywords := "log" | "log/info" | "log/warn" | "log/error" | "log/debug" ;
+```
 
 ## Grammar
 
@@ -91,7 +119,7 @@ When you want to express an array, use [`list`](#list).
 
 ```ebnf
 number := integer | floating point ;
-floating point := ("+" | "-")?digit*.digit* ;
+floating point := ("+" | "-")? digit* . digit* ;
 ```
 
 Note that we do not differentiate between float vs double, and other expressions of numbers, because JSON does not differentiate them.
@@ -101,9 +129,12 @@ Note that we do not differentiate between float vs double, and other expressions
 `object` in `just-func` are used as data type, unlike `array`.
 This keep the syntax very simple as well as very flexible.
 
-For example, we could have use `object` to define function params,
+For example,
+we could have use `object` to define function params,
 but that create limitation as they key of `object` can only be `string` or `number`,
-thus the homoiconicity will suffer. If we use `object` for that purpose, then we have to use some kind of workaround when creating macros.
+thus the homoiconicity will suffer.
+If we use `object` for that purpose,
+then we have to use some kind of workaround when creating macros.
 
 ### Special
 
@@ -129,15 +160,24 @@ special := fn | let | ret | if | match | eval | partial ;
 
 `fn` is a special expression to define a function.
 
+```ebnf
+fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
+functionIdentifier := letter (letter | "-" | "_" | "/")* letter+ ;
+paramDeclaration := [paramIdentifier, typeIdentifier+] ;
+```
+
+`functionIdentifier` can be namespaced using `/`.
+e.g. `log/info`.
+
 Detail TBD:
 
-- `def` + `fn` vs `defn` in `clujure`
+- `def` + `fn` vs `defn` in `clojure`
 - `let` + `lambda` vs `defun` in `lisp`
 - `fn` vs `closure` in `rust`
 
 #### let
 
-```bnf
+```ebnf
 let = ["let", [[string expression, expression]...], expression]
 ```
 
