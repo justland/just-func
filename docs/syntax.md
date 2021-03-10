@@ -47,6 +47,7 @@ This is planned but not implemented at the moment.
     - [Type](#type)
       - [List](#list)
     - [Identifier](#identifier)
+    - [doc (WIP)](#doc-wip)
     - [Common BNF](#common-bnf)
 
 ## Notation
@@ -333,6 +334,11 @@ There are four kinds of elements in `just-func`:
 // `name` is a variable
 ["let", [["name", "Homa"]], ["ret", "name"]]
 ```
+
+### doc (WIP)
+
+`doc`  is used to document the code?
+It is overridden in REPL to display the documentation instead.
 
 ### Common BNF
 
