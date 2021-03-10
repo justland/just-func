@@ -47,6 +47,8 @@
     "Arity",
     "EBNF",
     "Naur",
+    "defn",
+    "defun",
     "endregion",
     "eval",
     "homoiconicity",
