@@ -30,7 +30,6 @@ For quick starts, you can jump straight to the [Grammar](#grammar) section for a
     - [lambda](#lambda)
   - [Type](#type)
     - [List](#list)
-  - [Identifier](#identifier)
   - [doc (WIP)](#doc-wip)
   - [Common BNF](#common-bnf)
 
@@ -110,12 +109,6 @@ This list is subject to change but should be stabilized as `just-func` mature.
 The grammar of `just-func` is extremely simple.
 You should be able to understand it within 5 minutes.
 
-`just-func` follows this simple structure: `[operator, operands*]`
-This is the same
-
-It is designed to be very expressive.
-One goal is to support meta-programming (e.g. `macro`) without additional syntax.
-
 Here is a quick summary of the key grammar rules:
 
 ```ebnf
@@ -134,7 +127,15 @@ partial := ["partial", expression] ;
 lambda := ["lambda", [paramDeclaration*], expression+] ;
 ```
 
-Each identifier can be replaced by an expression that yields the same identifier.
+`just-func` follows this simple structure: `[operator, operands*]`
+This is the same as most functional programming languages.
+The key difference is it is written in JSON.
+
+It uses the first element of an array (the `operator`) to determine what is the expression.
+Other than that, everything else are just data.
+
+The `operator` can also be an expression.
+In that case it will be evaluated to produce the `operator`.
 This is planned but not implemented at the moment.
 
 ### Expression
@@ -265,8 +266,6 @@ You can consider `fn` is `let` + `lambda`:
 ]
 ```
 
-
-
 WIP:
 
 Param declaration and types.
@@ -349,32 +348,6 @@ Note that it is the same if you want to use `array` inside an `object`.
 
 // produce: [{ "a": [1, 2, 3] }]
 ["list", { "a": ["list", 1, 2, 3] }]
-```
-
-### Identifier
-
-```bnf
-identifier = letter, { letter | digit | "_" } ;
-```
-
-using [`letter`](#common-bnf), [`digit`](#common-bnf).
-
-An identifier is the name of an element in the code.
-There are four kinds of elements in `just-func`:
-`keyword`, `type`, `function` and `variable`.
-
-```jsonc
-// `if` is a keyword
-["if", true, true]
-
-// `list` is a type
-["list", 1, 2, 3]
-
-// `not` is a function
-["not", false]
-
-// `name` is a variable
-["let", [["name", "Homa"]], ["ret", "name"]]
 ```
 
 ### doc (WIP)
