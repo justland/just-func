@@ -46,7 +46,7 @@ Each rule in the grammar defines one symbol, in the form
 symbol := expression ;
 ```
 
-The `symbol` is camelCased, and each rule it terminates with `;`.
+The `symbol` is camelCased, and each rule terminates with `;`.
 
 The `expression` uses:
 
