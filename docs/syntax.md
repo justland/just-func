@@ -1,4 +1,8 @@
-# just-func syntax
+# just-func syntax <!-- omit in toc -->
+
+`just-func` is a functional programming language written in JSON.
+This give it maximum interoperability in multiple languages,
+as JSON can be easily parsed and shared between languages and services.
 
 This document defines `just-func` using a formal grammar.
 The purpose is to create a clear specification of the language.
@@ -6,63 +10,73 @@ The purpose is to create a clear specification of the language.
 We understand that formal grammar can sometimes be hard to read and understand for someone who is not familiar with it.
 So we will provide ample explanation and examples to make sure this document can be used by typical programmers as well as programming language designers.
 
-Here is a quick summary of the key grammar rules:
+For quick starts, you can jump straight to the [Grammar](#grammar) section for a quick summary of the rules.
 
-```ebnf
-expression := literal | variable | special | type | function | invocation ;
-variable := [variableIdentifier, expression?];
-special := fn | let | if | match | eval | partial | lambda ;
-type := [typeIdentifier, expression+] ;
-function := [functionIdentifier, expression+] ;
-invocation := [stringExpression, expression*] ;
-fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
-let := ["let", [paramAssignment*], expression+] ;
-if := ["if", expression, expression, expression?] ;
-match := ["match", [expression, expression]+, ["_", expression]?] ;
-eval := ["eval", listExpression+] ;
-partial := ["partial", expression] ;
-lambda := ["lambda", [paramDeclaration*], expression+] ;
-```
-
-Each identifier can be replaced by an expression that yields the same identifier.
-This is planned but not implemented at the moment.
-
-- [just-func syntax](#just-func-syntax)
-  - [Notation](#notation)
-  - [Reserved keywords](#reserved-keywords)
-  - [Grammar](#grammar)
-    - [Expression](#expression)
-    - [Literal](#literal)
-      - [Number](#number)
-      - [Object](#object)
-    - [Variable](#variable)
-    - [Special](#special)
-      - [fn](#fn)
-      - [let](#let)
-      - [if](#if)
-      - [match](#match)
-      - [eval](#eval)
-      - [partial](#partial)
-      - [lambda](#lambda)
-    - [Type](#type)
-      - [List](#list)
-    - [Identifier](#identifier)
-    - [doc (WIP)](#doc-wip)
-    - [Common BNF](#common-bnf)
+- [Notation](#notation)
+- [Reserved keywords](#reserved-keywords)
+- [Grammar](#grammar)
+  - [Expression](#expression)
+  - [Literal](#literal)
+    - [Number](#number)
+    - [Object](#object)
+  - [Variable](#variable)
+  - [Special](#special)
+    - [fn](#fn)
+    - [let](#let)
+    - [if](#if)
+    - [match](#match)
+    - [eval](#eval)
+    - [partial](#partial)
+    - [lambda](#lambda)
+  - [Type](#type)
+    - [List](#list)
+  - [Identifier](#identifier)
+  - [doc (WIP)](#doc-wip)
+  - [Common BNF](#common-bnf)
 
 ## Notation
 
 The Formal Grammar in this document is given using a customized Extended Backus-Naur Form notation (EBNF) notation.
 The notation is similar to [`json-schema`](https://cswr.github.io/JsonSchema/spec/grammar/) for maximum familiarity,
-as `just-func` is a strict subset of JSON.
+with some minor changes to better fit this documentation and to better describe a programming language.
 
-Any difference or clarification will be listed below:
+Each rule in the grammar defines one symbol, in the form
 
-- `;`: rule termination
-- `E+`: Matches one or more occurrences of `E`. Also has a higher precedence over `|`
-- `???Expression`: `Expression` that produces `???`.\
-  E.g. `StringExpression` is an expression that produce `string`,\
-  `ParamIdentifierExpression` is an expression that produce `ParamIdentifier`.
+```ebnf
+symbol := expression ;
+```
+
+The `symbol` is camelCased, and each rule it terminated with `;`.
+
+The `expression` uses:
+
+- `[`, `,`, `]`, and `"abc"` are constants.\
+  This means they match that string precisely and do not carry any meaning.\
+  i.e. `["x", E]` matches `["x", 123]` when `E` is `123`.
+- `A | B`: `A` or `B`, matches either `A` or `B`
+- `E?`: optional element `E`. Has higher precedence over `|`.\
+  i.e. `[A, B?]` matches `[A]` and `[A, B]`.
+- `E*`: zero or more elements `E`. Has higher precedence over `|`.\
+  i.e. `[A, B*]` matches `[A]`, `[A, B1]`, `[A, B1, B2]` and so on.
+- `E+`: one or more elements `E`. Has higher precedence over `|`.\
+  i.e. `[A, B+]` matches `[A, B1]`, `[A, B1, B2]` and so on
+- `xExpression`: `Expression` that produces `x`.\
+  E.g. `stringExpression` is an expression that produce `string`,\
+  `variableIdentifierExpression` is an expression that produce `variableIdentifier`.
+
+The first rule (about `[`, `,`, `]`, and `"abc"`) is there to make the rule less verbose and easier to read.
+
+For example:
+
+```ebnf
+if := ["if", expression, expression, expression?] ;
+```
+
+has to be written as below without the first rule:
+
+```ebnf
+if := '[' '"if"' ',' expression ',' expression ',' expression? ']' ;
+```
 
 ## Reserved keywords
 
@@ -96,8 +110,32 @@ This list is subject to change but should be stabilized as `just-func` mature.
 The grammar of `just-func` is extremely simple.
 You should be able to understand it within 5 minutes.
 
+`just-func` follows this simple structure: `[operator, operands*]`
+This is the same
+
 It is designed to be very expressive.
 One goal is to support meta-programming (e.g. `macro`) without additional syntax.
+
+Here is a quick summary of the key grammar rules:
+
+```ebnf
+expression := literal | variable | special | type | function | invocation ;
+variable := [variableIdentifier, expression?];
+special := fn | let | if | match | eval | partial | lambda ;
+type := [typeIdentifier, expression+] ;
+function := [functionIdentifier, expression+] ;
+invocation := [stringExpression, expression*] ;
+fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
+let := ["let", [paramAssignment*], expression+] ;
+if := ["if", expression, expression, expression?] ;
+match := ["match", [expression, expression]+, ["_", expression]?] ;
+eval := ["eval", listExpression+] ;
+partial := ["partial", expression] ;
+lambda := ["lambda", [paramDeclaration*], expression+] ;
+```
+
+Each identifier can be replaced by an expression that yields the same identifier.
+This is planned but not implemented at the moment.
 
 ### Expression
 
@@ -200,8 +238,10 @@ special := fn | let | if | match | eval | partial | lambda ;
 ```ebnf
 fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
 functionIdentifier := letter (letter | digit | "-" | "_" | "/")* (letter | digit)+ ;
-paramDeclaration := [paramIdentifier, typeIdentifier+] ;
+paramDeclaration := [variableIdentifier, typeIdentifier+] ;
 ```
+
+using [`variableIdentifier`](#variable).
 
 `functionIdentifier` can be namespaced using `/`.
 e.g. `log/info`.
@@ -224,6 +264,8 @@ You can consider `fn` is `let` + `lambda`:
   ["foo"]
 ]
 ```
+
+
 
 WIP:
 
