@@ -127,7 +127,7 @@ partial := ["partial", expression] ;
 lambda := ["lambda", [paramDeclaration*], expression+] ;
 ```
 
-`just-func` follows this simple structure: `[operator, operands*]`
+`just-func` follows this simple structure: `[operator, operands*]`.
 This is the same as most functional programming languages.
 The key difference is it is written in JSON.
 
@@ -169,14 +169,15 @@ When you want to express an array, use [`list`](#list).
 
 #### Number
 
-`number` type is the sum-type of `integer` and `floating point`.
+`number` type is the sum-type of `integer` and `floatingPoint`.
 
 ```ebnf
-number := integer | floating point ;
-floating point := ("+" | "-")? digit* . digit* ;
+number := integer | floatingPoint ;
+floatingPoint := ("+" | "-")? digit* . digit* ;
 ```
 
-Note that we do not differentiate between float vs double, and other expressions of numbers, because JSON does not differentiate them.
+Note that we do not differentiate between `float` vs `double`,
+and other expressions of numbers, because JSON does not differentiate them.
 
 #### Object
 
@@ -201,10 +202,11 @@ variableIdentifier := letter (letter | digit | '-' | '_' )* (letter | digit) ;
 
 As with any language, the `variable` identifier cannot use any [reserved keywords](#reserved-keywords).
 
-`[variableIdentifier]` as in `["a"]` will return the value contained in the variable `a`
+`[variableIdentifier]` (as in `["a"]`) returns the value in the variable `a`
 
 If the optional `expression` is specified,
 the result of the expression will be assigned to the variable.
+i.e. it is variable assignment.
 
 Questions:
 
