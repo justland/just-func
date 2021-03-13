@@ -9,6 +9,7 @@
 - nominal typed
 - strongly typed
 - dynamically typed
+- type inference
 
 ## Terminology
 

@@ -114,7 +114,7 @@ Here is a quick summary of the key grammar rules:
 ```ebnf
 expression := literal | variable | special | type | function | invocation ;
 variable := [variableIdentifier, expression?];
-special := fn | let | if | match | eval | partial | lambda ;
+special := fn | let | if | match | unbox | eval | partial | lambda ;
 type := [typeIdentifier, expression+] ;
 function := [functionIdentifier, expression+] ;
 invocation := [stringExpression, expression*] ;
@@ -122,6 +122,7 @@ fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
 let := ["let", [paramAssignment*], expression+] ;
 if := ["if", expression, expression, expression?] ;
 match := ["match", [expression, expression]+, ["_", expression]?] ;
+unbox := ["unbox", type];
 eval := ["eval", listExpression+] ;
 partial := ["partial", expression] ;
 lambda := ["lambda", [paramDeclaration*], expression+] ;
@@ -202,11 +203,14 @@ variableIdentifier := letter (letter | digit | '-' | '_' )* (letter | digit) ;
 
 As with any language, the `variable` identifier cannot use any [reserved keywords](#reserved-keywords).
 
-`[variableIdentifier]` (as in `["a"]`) returns the value in the variable `a`
+`[variableIdentifier]` (as in `["a"]`) returns the value in the variable `a`.
 
 If the optional `expression` is specified,
 the result of the expression will be assigned to the variable.
 i.e. it is variable assignment.
+
+Function can be assigned by `["a", ["myFun"]]`
+...doesn't work
 
 Questions:
 
@@ -230,6 +234,7 @@ special := fn | let | if | match | eval | partial | lambda ;
 - [`let`](#let)
 - [`if`](#if)
 - [`match`](#match)
+- [`unbox`](#unbox)
 - [`eval`](#eval)
 - [`partial`](#partial)
 - [`lambda`](#lambda)
@@ -240,11 +245,15 @@ special := fn | let | if | match | eval | partial | lambda ;
 
 ```ebnf
 fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
-functionIdentifier := letter (letter | digit | "-" | "_" | "/")* (letter | digit)+ ;
+functionIdentifier := namespace* variableIdentifier ;
+namespace := letter (letter | '-' | '_' )* '/' ;
 paramDeclaration := [variableIdentifier, typeIdentifier+] ;
 ```
 
-using [`variableIdentifier`](#variable).
+using:
+
+- [`variableIdentifier`](#variable)
+- [`typeIdentifier`](#type)
 
 `functionIdentifier` can be namespaced using `/`.
 e.g. `log/info`.
@@ -254,17 +263,26 @@ You can consider `fn` is `let` + `lambda`:
 
 ```jsonc
 [
-  ["fn", "foo", [], []],
-  ["foo"]
+  [
+    "fn",
+    "greet",
+    [["name", "string"]],
+    ["str", "Hello, ", ["name"]]
+  ],
+  ["greet", "Homa"]
 ]
 
 // same as
 [
   "let",
   [
-    ["foo", ["lambda", [], []]]
+    ["greet", [
+      "lambda",
+      [["name", "string"]],
+      ["str", "Hello, ", ["name"]]
+    ]]
   ],
-  ["foo"]
+  ["greet", "Homa"]
 ]
 ```
 
@@ -304,6 +322,8 @@ Should `let` be generalized to just `scope`?
 It defines a `scope` and creates the variable/overrides within that scope.
 
 #### if
+
+`if` is a special expression which evaluate the then or else expression based on the result of the con
 
 #### match
 
