@@ -1,4 +1,4 @@
-# just-func syntax <!-- omit in toc -->
+# just-func grammar <!-- omit in toc -->
 
 `just-func` is a functional programming language written in JSON.
 This give it maximum interoperability in multiple languages,
@@ -107,8 +107,17 @@ This list is subject to change but should be stabilized as `just-func` mature.
 ## Grammar
 
 The grammar of `just-func` is extremely simple.
-You should be able to understand it within 5 minutes.
 
+All `just-func` code follows this simple structure: `[operator, operands*]`.
+This is the same as most functional programming languages.
+The key difference is it is written in JSON.
+
+It uses the first element of an array (the `operator`) to determine what is the expression.
+Other than that, everything else are just data.
+
+The `operator` can also be an expression.
+In that case it will be evaluated to produce the `operator`.
+This is planned but not implemented at the moment.
 Here is a quick summary of the key grammar rules:
 
 ```ebnf
@@ -127,17 +136,6 @@ eval := ["eval", listExpression+] ;
 partial := ["partial", expression] ;
 lambda := ["lambda", [paramDeclaration*], expression+] ;
 ```
-
-`just-func` follows this simple structure: `[operator, operands*]`.
-This is the same as most functional programming languages.
-The key difference is it is written in JSON.
-
-It uses the first element of an array (the `operator`) to determine what is the expression.
-Other than that, everything else are just data.
-
-The `operator` can also be an expression.
-In that case it will be evaluated to produce the `operator`.
-This is planned but not implemented at the moment.
 
 ### Expression
 
