@@ -9,6 +9,9 @@ To finalize:
 
 - identifier vs operator
 - arguments vs operands
-- variadic functions
 - partial application vs currying
 - union vs or
+
+## hosting language
+
+The language that is providing the implementation and tools to run `just-func` code.
