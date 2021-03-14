@@ -2,30 +2,18 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "description": "This is JustFunc, just a functional programming language",
   "$id": "JustFunc",
-  "oneOf": [
+  "anyOf": [
     {
       "$ref": "#/definitions/Literals"
     },
     {
-      "$ref": "#/definitions/Keywords"
-    },
-    {
-      "$ref": "#/definitions/CoreModule"
-    },
-    {
-      "$ref": "#/definitions/LogicalModule"
-    },
-    {
-      "$ref": "#/definitions/StringModule"
-    },
-    {
-      "$ref": "#/definitions/MathModule"
+      "$ref": "#/definitions/Expressions"
     }
   ],
   "definitions": {
     // #region Literals
     "Literals": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/Boolean"
         },
@@ -34,9 +22,6 @@
         },
         {
           "$ref": "#/definitions/Number"
-        },
-        {
-          "$ref": "#/definitions/Integer"
         },
         {
           "$ref": "#/definitions/Null"
@@ -65,9 +50,28 @@
       "type": "object"
     },
     // #endregion Literals
+    "Expressions": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Keywords"
+        },
+        {
+          "$ref": "#/definitions/CoreModule"
+        },
+        {
+          "$ref": "#/definitions/LogicalModule"
+        },
+        {
+          "$ref": "#/definitions/StringModule"
+        },
+        {
+          "$ref": "#/definitions/MathModule"
+        }
+      ]
+    },
     // #region keywords
     "Keywords": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/Fn"
         },
@@ -90,8 +94,6 @@
     },
     "Fn": {
       "type": "array",
-      "minItems": 4,
-      "maxItems": 4,
       "items": [
         {
           "type": "string",
@@ -113,7 +115,7 @@
         },
         {
           "description": "function body",
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#"
             },
@@ -128,8 +130,6 @@
     },
     "If": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 4,
       "items": [
         {
           "type": "string",
@@ -150,8 +150,6 @@
     },
     "Let": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 3,
       "items": [
         {
           "type": "string",
@@ -161,7 +159,18 @@
         {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NameValuePair"
+            "type": "array",
+            "maxItems": 2,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Expressions"
+                },
+                {
+                  "$ref": "#/definitions/String"
+                }
+              ]
+            }
           }
         },
         {
@@ -172,7 +181,6 @@
     },
     "Ret": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -218,15 +226,17 @@
     },
     "NameValuePair": {
       "type": "array",
-      "minItems": 2,
       "maxItems": 2,
       "items": {
-        "$ref": "#"
+        "anyOf": [
+          {
+            "$ref": "#/definitions/String"
+          }
+        ]
       }
     },
     "Parameter": {
       "type": "array",
-      "minItems": 2,
       "maxItems": 2,
       "items": [
         {
@@ -242,9 +252,12 @@
     // #endregion keywords
     // #region core
     "CoreModule": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/Equivalent"
+        },
+        {
+          "$ref": "#/definitions/Equality"
         },
         {
           "$ref": "#/definitions/Map"
@@ -253,7 +266,6 @@
     },
     "Equivalent": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -273,7 +285,6 @@
     },
     "Equality": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -311,7 +322,7 @@
     // #endregion core
     // #region logical
     "LogicalModule": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/Not"
         },
@@ -340,7 +351,6 @@
     "And": {
       "type": "array",
       // clojure (and) => true is weird
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -355,7 +365,6 @@
     "Or": {
       "type": "array",
       // clojure (or) => nil is weird
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -370,7 +379,7 @@
     // #endregion logical
     // #region string
     "StringModule": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/Str"
         }
@@ -392,7 +401,7 @@
     // #endregion string
     // #region math
     "MathModule": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/Ratio"
         },
@@ -427,8 +436,6 @@
     },
     "Ratio": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 3,
       "items": [
         {
           "type": "string",
@@ -446,7 +453,6 @@
     },
     "Add": {
       "type": "array",
-      "minItems": 1,
       "items": [
         {
           "type": "string",
@@ -460,7 +466,6 @@
     },
     "Subtract": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -474,7 +479,6 @@
     },
     "Multiply": {
       "type": "array",
-      "minItems": 1,
       "items": [
         {
           "type": "string",
@@ -488,7 +492,6 @@
     },
     "Divide": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",
@@ -502,8 +505,6 @@
     },
     "Mod": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 3,
       "items": [
         {
           "type": "string",
@@ -572,7 +573,6 @@
     },
     "LessThanOrEqual": {
       "type": "array",
-      "minItems": 2,
       "items": [
         {
           "type": "string",

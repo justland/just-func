@@ -10,7 +10,7 @@ Currently, here are the languages that support `just-func`:
 - ⌛️ [just-func-rust](https://github.com/justland/just-func-rust)
 
 If you want to support `just-func` in your favorite language,
-let's [open an issue](https://github.com/justland/just-func/issues) and talk about it.
+let's [open an issue 🎫](https://github.com/justland/just-func/issues) and talk about it.
 
 ## What's in this book
 

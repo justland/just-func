@@ -56,7 +56,16 @@ class HelloRoute
 
 ## What's in this repository
 
-This repository contains the specification of the `just-func` language.
+- `just-func` language schema
+- `just-func` handbook for programmers
+- `just-func` specification for language programmers
+- `just-func` specs that is used to validate implementations
+
+This repository is distributed in package manager of various languages so they can be used to provide:
+
+- IDE support by the use of language schema
+- Program validation by the use of language schema
+- Language implementation validation by the use of specs
 
 ## install - PHP
 

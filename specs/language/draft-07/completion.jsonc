@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "completion schema for draft-07 of just-func",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "description",
+      "run"
+    ],
+    "properties": {
+      "description": {
+        "type": "string",
+        "description": "Test description"
+      },
+      "ensure": {
+        "description": "Ensure the test environment is clean",
+        "$ref": "../../../schema/draft-07/completion.jsonc"
+      },
+      "setup": {
+        "description": "Setup the test environment",
+        "$ref": "../../../schema/draft-07/completion.jsonc"
+      },
+      "run": {
+        "description": "The `just-func` code to test",
+        "$ref": "../../../schema/draft-07/completion.jsonc"
+      },
+      "teardown": {
+        "description": "Teardown the test environment",
+        "$ref": "../../../schema/draft-07/completion.jsonc"
+      }
+    }
+  }
+}

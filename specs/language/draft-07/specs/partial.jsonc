@@ -1,0 +1,28 @@
+[
+  {
+    "description": "partial() creates partial application",
+    "run": [
+      "==",
+      [
+        "map",
+        [
+          "partial",
+          [
+            "+",
+            1
+          ]
+        ],
+        [
+          "list",
+          1,
+          2
+        ]
+      ],
+      [
+        "list",
+        2,
+        3
+      ]
+    ]
+  }
+]

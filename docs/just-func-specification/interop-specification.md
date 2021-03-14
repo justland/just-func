@@ -55,7 +55,7 @@ Different language has different convention (`Error` vs `Exception`, and some la
 Keeping the name of the property as `type` and devoid of this suffix convention so that we will not create unnecessary confusion in a particular language.
 (i.e. in some language where `Exception` is the norm and if we suffix with `Error`, it is unpleasant to the programmer).
 
-To be determine:
+⌛️ To be determine:
 
 - nested errors
 - stack trace / [CauseInfo](https://github.com/unional/google-cloud-api/blob/master/src/types.ts#L119)

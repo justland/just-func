@@ -3,7 +3,7 @@
   "description": "Validation Schema for just-func errors",
   "$id": "https://raw.githubusercontent.com/justland/just-func/main/json-schema/error-schema.jsonc",
   "$comment": "There is no generic or base error. No need of Error inheritance.",
-  "anyOf": [
+  "oneOf": [
     {
       "$ref": "#/definitions/ArityMismatch"
     }
@@ -29,9 +29,9 @@
     "ErrorBase": {
       "type": "object",
       "properties": {
-        "fn": {
+        "op": {
           "type": "string",
-          "description": "Fully qualified function name"
+          "description": "Fully qualified operator name"
         },
         "args": {
           "type": "array",

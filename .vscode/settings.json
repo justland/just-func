@@ -2,45 +2,15 @@
   "json.schemas": [
     {
       "fileMatch": [
-        "json-schema-specs/draft-07-copy/*.jsonc"
+        "specs/language/draft-07/specs/*.jsonc"
       ],
-      "url": "./json-schema-specs/draft-07-copy-specs.jsonc"
-    },
-    // {
-    //   "fileMatch": [
-    //     "json-schema-specs/draft-07-core/*.jsonc"
-    //   ],
-    //   "url": "./json-schema-specs/draft-07-core-completion-specs.jsonc"
-    // },
-    {
-      "fileMatch": [
-        "json-schema-specs/draft-07-core/*.jsonc"
-      ],
-      "url": "./json-schema-specs/draft-07-core-specs.jsonc"
+      "url": "./specs/language/draft-07/specs.jsonc"
     },
     {
       "fileMatch": [
-        "json-schema-specs/draft-07-error-schema/*.jsonc"
+        "specs/language/draft-07/specs/*.jsonc"
       ],
-      "url": "./json-schema-specs/draft-07-error-schema-specs.jsonc"
-    },
-    {
-      "fileMatch": [
-        "json-schema-specs/draft-07-extend/*.jsonc"
-      ],
-      "url": "./json-schema-specs/draft-07-extend-specs.jsonc"
-    },
-    {
-      "fileMatch": [
-        "json-schema-specs/draft-2019-09/*.jsonc"
-      ],
-      "url": "./json-schema-specs/draft-2019-09-specs.jsonc"
-    },
-    {
-      "fileMatch": [
-        "json-schema-specs/draft-2020-12/*.jsonc"
-      ],
-      "url": "./json-schema-specs/draft-2020-12-specs.jsonc"
+      "url": "./specs/language/draft-07/completion.jsonc"
     }
   ],
   "cSpell.words": [

@@ -1,0 +1,92 @@
+[
+  {
+    "description": "single static variable",
+    "run": [
+      "let",
+      [
+        [
+          "name",
+          "Homa"
+        ]
+      ],
+      [
+        "str"
+      ]
+    ]
+  },
+  {
+    "description": "multiple static variables",
+    "run": [
+      "let",
+      [
+        [
+          "name",
+          "Homa"
+        ],
+        [
+          "gender",
+          "male"
+        ]
+      ],
+      [
+        "str",
+        "Hello ",
+        [
+          "if",
+          [
+            "===",
+            "male",
+            [
+              "ret",
+              "gender"
+            ]
+          ],
+          "Mr. ",
+          "Mrs "
+        ],
+        [
+          "ret",
+          "name"
+        ]
+      ]
+    ]
+  },
+  {
+    "description": "single variable with run",
+    "run": [
+      "let",
+      [
+        [
+          "name",
+          [
+            "str",
+            "Ho",
+            "ma"
+          ]
+        ]
+      ],
+      [
+        "str"
+      ]
+    ]
+  },
+  {
+    "description": "dynamic variable name",
+    "run": [
+      "let",
+      [
+        [
+          [
+            "str",
+            "na",
+            "me"
+          ],
+          "Homa"
+        ]
+      ],
+      [
+        "str"
+      ]
+    ]
+  }
+]

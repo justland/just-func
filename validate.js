@@ -2,14 +2,13 @@ const fs = require('fs')
 const path = require('path')
 const jsonc = require('jsonc')
 const Ajv = require('ajv/dist/2019').default
-const { isContext } = require('vm')
 
 function loadSchema(filepath) {
   const content = fs.readFileSync(filepath, 'utf8')
 
   // adjust relative paths
   const adjusted = content.split('\n').map(l => {
-    const match = l.match(/"\$ref": "([\.a-z].+)[#"]/)
+    const match = l.match(/"\$ref": "([.a-z].+)[#"]/)
     if (!match) return l
     const relative = match[1]
     const adjustedPath = path.basename(relative)
@@ -41,6 +40,6 @@ const validate = createValidate(
   './spec/draft-2020-12/schema/my-just-func.jsonc'
 )
 
-console.log('validate result:', validate({
+console.info('validate result:', validate({
   "test": ["eq", "welcome to just-func, ", ["param/get", "name"]]
 }))

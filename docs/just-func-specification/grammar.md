@@ -1,19 +1,14 @@
 # just-func grammar <!-- omit in toc -->
 
-`just-func` is a functional programming language written in JSON.
-This give it maximum interoperability in multiple languages,
-as JSON can be easily parsed and shared between languages and services.
+`just-func` is not a programming language if it does not have a formal grammar.
 
-This document defines `just-func` using a formal grammar.
+So here is where you can find that formal grammar.
 The purpose is to create a clear specification of the language.
 
-We understand that formal grammar can sometimes be hard to read and understand for someone who is not familiar with it.
-So we will provide ample explanation and examples to make sure this document can be used by typical programmers as well as programming language designers.
-
-For quick starts, you can jump straight to the [Grammar](#grammar) section for a quick summary of the rules.
+We understand that formal grammar can sometimes be hard to read and can be very boring.
+We will try to bring it as close to humanly readable as possible and provide ample explanation and examples along the way.
 
 - [Notation](#notation)
-- [Reserved keywords](#reserved-keywords)
 - [Grammar](#grammar)
   - [Expression](#expression)
   - [Literal](#literal)
@@ -32,6 +27,7 @@ For quick starts, you can jump straight to the [Grammar](#grammar) section for a
     - [List](#list)
   - [doc (WIP)](#doc-wip)
   - [Common BNF](#common-bnf)
+- [Reserved keywords](#reserved-keywords)
 
 ## Notation
 
@@ -76,33 +72,6 @@ has to be written as below without the first rule:
 ```ebnf
 if := '[' '"if"' ',' expression ',' expression ',' expression? ']' ;
 ```
-
-## Reserved keywords
-
-Here are a list of keywords reserved by the language and standard library:
-
-```ebnf
-reservedKeywords := specialKeywords | operators ;
-specialKeywords := "fn" | "let" | "if" | "match" | "eval" | "partial" |
-                   "lambda" | "type" | "mod" | "use" | "import" |
-                   "export" | "class" | "impl" | "interface" |
-                   "string" | "integer" | "number" | "boolean" | "object" | "list" | "ratio" |
-                   "for" | "while" | "do" | "loop" | "take" ;
-operators := "==" | "!=" | ">" | "<" | ">=" | "<=" |
-                    "&&" | "||" | "&" | "|" | "!" |
-                    "+" | "-" | "*" | "/" | "%" | "^" | "<<" | ">>" |
-                    "'" | """ | "?" | "??" | "//";
-```
-
-While not reserved, it is recommended to avoid using the words used in the standard library.
-
-```ebnf
-stdModuleKeywords := "map" | "reduce" | "some" | "filter" | "find" |
-                     "doc" ;
-logModuleKeywords := "log" | "log/info" | "log/warn" | "log/error" | "log/debug" ;
-```
-
-This list is subject to change but should be stabilized as `just-func` mature.
 
 ## Grammar
 
@@ -381,3 +350,30 @@ It is overridden in REPL to display the documentation instead.
 letter := "A" ... "Z" | "a" ... "z" ;
 digit := "0" ... "9" ;
 ```
+
+## Reserved keywords
+
+Here are a list of keywords reserved by the language and standard library:
+
+```ebnf
+reservedKeywords := specialKeywords | operators ;
+specialKeywords := "fn" | "let" | "if" | "match" | "eval" | "partial" |
+                   "lambda" | "type" | "mod" | "use" | "import" |
+                   "export" | "class" | "impl" | "interface" |
+                   "string" | "integer" | "number" | "boolean" | "object" | "list" | "ratio" |
+                   "for" | "while" | "do" | "loop" | "take" ;
+operators := "==" | "!=" | ">" | "<" | ">=" | "<=" |
+                    "&&" | "||" | "&" | "|" | "!" |
+                    "+" | "-" | "*" | "/" | "%" | "^" | "<<" | ">>" |
+                    "'" | """ | "?" | "??" | "//";
+```
+
+While not reserved, it is recommended to avoid using the words used in the standard library.
+
+```ebnf
+stdModuleKeywords := "map" | "reduce" | "some" | "filter" | "find" |
+                     "doc" ;
+logModuleKeywords := "log" | "log/info" | "log/warn" | "log/error" | "log/debug" ;
+```
+
+This list is subject to change but should be stabilized as `just-func` mature.

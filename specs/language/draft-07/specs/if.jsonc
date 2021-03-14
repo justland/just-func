@@ -1,0 +1,19 @@
+[
+  {
+    "description": "only then",
+    "run": [
+      "if",
+      true,
+      true
+    ]
+  },
+  {
+    "description": "with else",
+    "run": [
+      "if",
+      true,
+      true,
+      false
+    ]
+  }
+]
