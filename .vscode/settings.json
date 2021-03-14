@@ -2,15 +2,15 @@
   "json.schemas": [
     {
       "fileMatch": [
-        "specs/language/specs/*.jsonc"
+        "schema-specs/language/specs/*.jsonc"
       ],
-      "url": "./specs/language/draft-07/specs.jsonc"
+      "url": "./schema-specs/language/draft-07/specs.jsonc"
     },
     {
       "fileMatch": [
-        "specs/language/specs/*.jsonc"
+        "schema-specs/language/specs/*.jsonc"
       ],
-      "url": "./specs/language/draft-07/completion.jsonc"
+      "url": "./schema-specs/language/draft-07/completion.jsonc"
     }
   ],
   "cSpell.words": [

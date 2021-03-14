@@ -490,7 +490,7 @@
           "$ref": "#/definitions/Integer"
         },
         {
-          "ref": "#/definitions/Integer"
+          "$ref": "#/definitions/Integer"
         }
       ],
       "additionalItems": false

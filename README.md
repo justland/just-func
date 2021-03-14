@@ -85,3 +85,14 @@ It comes with some helper functions you can use to update the schema for your ap
   }
 }
 ```
+
+## Contribute
+
+```sh
+# install TypeScript dependencies
+# TypeScript code are used for testing
+yarn
+
+# validate specs in the `schema-specs` folder
+yarn validate:specs
+```

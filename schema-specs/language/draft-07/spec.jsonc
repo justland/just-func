@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/schema-specs/language/draft-07/spec.jsonc",
+  "description": "spec definition",
+  "type": "object",
+  "required": [
+    "description",
+    "run"
+  ],
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Test description"
+    },
+    "stage": {
+      "description": "maturity stage of the behavior",
+      "type": "string",
+      "enum": [
+        "stage-0",
+        "stage-1",
+        "stage-2",
+        "stage-3"
+      ]
+    },
+    "version": {
+      "description": "which version this behavior is finalized",
+      "type": "string"
+    },
+    "ensure": {
+      "description": "Ensure the test environment is clean",
+      "$ref": "../../../schema/draft-07/schema.jsonc"
+    },
+    "setup": {
+      "description": "Setup the test environment",
+      "$ref": "../../../schema/draft-07/schema.jsonc"
+    },
+    "run": {
+      "description": "The `just-func` code to test",
+      "$ref": "../../../schema/draft-07/schema.jsonc"
+    },
+    "teardown": {
+      "description": "Teardown the test environment",
+      "$ref": "../../../schema/draft-07/schema.jsonc"
+    }
+  }
+}

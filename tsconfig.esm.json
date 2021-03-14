@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "esm",
+    "target": "ES2019",
+    "tsBuildInfoFile": ".ts/esm.tsbuildinfo"
+  }
+}

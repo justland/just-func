@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "validation schema for draft-07 of just-func",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/schema-specs/language/draft-07/completion.jsonc",
+  "description": "completion schema for draft-07 of just-func",
   "type": "array",
   "items": {
     "type": "object",
@@ -13,30 +14,21 @@
         "type": "string",
         "description": "Test description"
       },
-      "stage": {
-        "description": "maturity stage of the behavior",
-        "type": "string",
-        "enum": ["stage-0", "stage-1", "stage-2", "stage-3"]
-      },
-      "version": {
-        "description": "which version this behavior is finalized",
-        "type": "string"
-      },
       "ensure": {
         "description": "Ensure the test environment is clean",
-        "$ref": "../../../schema/draft-07/schema.jsonc"
+        "$ref": "../../../schema/draft-07/completion.jsonc"
       },
       "setup": {
         "description": "Setup the test environment",
-        "$ref": "../../../schema/draft-07/schema.jsonc"
+        "$ref": "../../../schema/draft-07/completion.jsonc"
       },
       "run": {
         "description": "The `just-func` code to test",
-        "$ref": "../../../schema/draft-07/schema.jsonc"
+        "$ref": "../../../schema/draft-07/completion.jsonc"
       },
       "teardown": {
         "description": "Teardown the test environment",
-        "$ref": "../../../schema/draft-07/schema.jsonc"
+        "$ref": "../../../schema/draft-07/completion.jsonc"
       }
     }
   }

@@ -1,4 +1,5 @@
 import { cli } from 'clibuilder'
+import { validateSpecsCommand } from './commands'
 
 export default cli({ name: 'jf' }).command({
   name: 'test',
@@ -12,4 +13,4 @@ export default cli({ name: 'jf' }).command({
   run() {
     console.info('working on it...')
   }
-})
+}).command(validateSpecsCommand)

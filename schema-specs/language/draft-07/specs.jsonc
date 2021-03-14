@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/schema-specs/language/draft-07/specs.jsonc",
+  "description": "validation schema for draft-07 of just-func",
+  "type": "array",
+  "items": {
+    "$ref": "spec.jsonc"
+  }
+}
