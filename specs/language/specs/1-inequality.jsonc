@@ -1,0 +1,42 @@
+[
+  {
+    "description": "numeric inequality",
+    "run": ["!=", 1, 2]
+  },
+  {
+    "description": "string inequality",
+    "run": ["!=", "a", "b"]
+  },
+  {
+    "description": "boolean inequality",
+    "run": ["!=", true, false]
+  },
+  {
+    "description": "1 != false",
+    "run": ["!=", 1, false]
+  },
+  {
+    "description": "0 != true",
+    "run": ["!=", 0, true]
+  },
+  {
+    "description": "empty string != true",
+    "run": ["!=", "", true]
+  },
+  {
+    "description": "non-empty string != false",
+    "run": ["!=", "a", false]
+  },
+  {
+    "description": "null != 1",
+    "run": ["!=", null, 1]
+  },
+  {
+    "description": "null != true",
+    "run": ["!=", null, true]
+  },
+  {
+    "description": "false != 0",
+    "run": ["!=", false, 0]
+  }
+]

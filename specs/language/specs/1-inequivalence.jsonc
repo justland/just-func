@@ -1,0 +1,66 @@
+[
+  {
+    "description": "numeric inequivalence",
+    "run": ["!==", 1, 2]
+  },
+  {
+    "description": "string inequivalence",
+    "run": ["!==", "a", "b"]
+  },
+  {
+    "description": "boolean inequivalence",
+    "run": ["!==", true, false]
+  },
+  {
+    "description": "0 !== false",
+    "run": ["!==", 0, false]
+  },
+  {
+    "description": "1 !== true",
+    "run": ["!==", 1, true]
+  },
+  {
+    "description": "1 !== false",
+    "run": ["!==", 1, false]
+  },
+  {
+    "description": "0 !== true",
+    "run": ["!==", 0, true]
+  },
+  {
+    "description": "empty string !== false",
+    "run": ["!==", "", false]
+  },
+  {
+    "description": "non-empty string !== true",
+    "run": ["!==", "a", true]
+  },
+  {
+    "description": "empty string !== true",
+    "run": ["!==", "", true]
+  },
+  {
+    "description": "non-empty string !== false",
+    "run": ["!==", "a", false]
+  },
+  {
+    "description": "null !== 0",
+    "run": ["!==", null, 0]
+  },
+  {
+    "description": "null !== false",
+    "run": ["!==", null, 0]
+  },
+  {
+    "description": "null !== 1",
+    "run": ["!==", null, 1]
+  },
+  {
+    "description": "null !== true",
+    "run": ["!==", null, true]
+  },
+  {
+    "description": "false !== 0",
+    "run": ["!==", false, 0]
+  }
+]

@@ -13,6 +13,15 @@
         "type": "string",
         "description": "Test description"
       },
+      "stage": {
+        "description": "maturity stage of the behavior",
+        "type": "string",
+        "enum": ["stage-0", "stage-1", "stage-2", "stage-3"]
+      },
+      "version": {
+        "description": "which version this behavior is finalized",
+        "type": "string"
+      },
       "ensure": {
         "description": "Ensure the test environment is clean",
         "$ref": "../../../schema/draft-07/schema.jsonc"

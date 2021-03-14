@@ -1,0 +1,18 @@
+[
+  {
+    "description": "number equivalence",
+    "run": ["===", 1, 1]
+  },
+  {
+    "description": "string equivalence",
+    "run": ["===", "a", "a"]
+  },
+  {
+    "description": "boolean equivalence",
+    "run": ["===", true, true]
+  },
+  {
+    "description": "null equivalence",
+    "run": ["===", null, null]
+  }
+]

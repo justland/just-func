@@ -2,13 +2,13 @@
   "json.schemas": [
     {
       "fileMatch": [
-        "specs/language/draft-07/specs/*.jsonc"
+        "specs/language/specs/*.jsonc"
       ],
       "url": "./specs/language/draft-07/specs.jsonc"
     },
     {
       "fileMatch": [
-        "specs/language/draft-07/specs/*.jsonc"
+        "specs/language/specs/*.jsonc"
       ],
       "url": "./specs/language/draft-07/completion.jsonc"
     }
@@ -22,6 +22,7 @@
     "endregion",
     "eval",
     "homoiconicity",
+    "inequivalence",
     "schemastore"
   ]
 }

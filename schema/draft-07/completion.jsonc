@@ -254,23 +254,48 @@
     "CoreModule": {
       "anyOf": [
         {
-          "$ref": "#/definitions/Equivalent"
+          "$ref": "#/definitions/Equivalence"
+        },
+        {
+          "$ref": "#/definitions/Inequivalence"
         },
         {
           "$ref": "#/definitions/Equality"
+        },
+        {
+          "$ref": "#/definitions/Inequality"
         },
         {
           "$ref": "#/definitions/Map"
         }
       ]
     },
-    "Equivalent": {
+    "Equivalence": {
       "type": "array",
       "items": [
         {
           "type": "string",
           "const": "===",
-          "description": "equivalent comparison"
+          "description": "equivalence comparison"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "Inequivalence": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "!==",
+          "description": "inequivalence comparison"
         },
         {
           "$ref": "#"
@@ -290,6 +315,25 @@
           "type": "string",
           "const": "==",
           "description": "Equality comparison: [==, true, 1] => true"
+        },
+        {
+          "$ref": "#"
+        },
+        {
+          "$ref": "#"
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#"
+      }
+    },
+    "Inequality": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "const": "!=",
+          "description": "Inequality comparison: [!=, true, 1] => false"
         },
         {
           "$ref": "#"

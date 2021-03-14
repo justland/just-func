@@ -47,16 +47,16 @@ The `expression` uses:
 
 - `[`, `,`, `]`, and `"abc"` are constants.\
   This means they match that string precisely and do not carry any meaning.\
-  i.e. `["x", E]` matches `["x", 123]` when `E` is `123`.
+  e.g. `["x", E]` matches `["x", "hello"]` where `E` is `"hello"`.
 - `A | B`: `A` or `B`, matches either `A` or `B`
 - `E?`: optional element `E`. Has higher precedence over `|`.\
-  i.e. `[A, B?]` matches `[A]` and `[A, B]`.
+  e.g. `[A, B?]` matches `[A]` and `[A, B]`.
 - `E*`: zero or more elements `E`. Has higher precedence over `|`.\
-  i.e. `[A, B*]` matches `[A]`, `[A, B1]`, `[A, B1, B2]` and so on.
+  e.g. `[A, B*]` matches `[A]`, `[A, B]`, `[A, B, B]` and so on.
 - `E+`: one or more elements `E`. Has higher precedence over `|`.\
-  i.e. `[A, B+]` matches `[A, B1]`, `[A, B1, B2]` and so on
-- `xExpression`: `Expression` that produces `x`.\
-  E.g. `stringExpression` is an expression that produce `string`,\
+  e.g. `[A, B+]` matches `[A, B]`, `[A, B, B]` and so on
+- `xExpression`: and expression that produces `x`.\
+  e.g. `stringExpression` is an expression that produce `string`,\
   `variableIdentifierExpression` is an expression that produce `variableIdentifier`.
 
 The first rule (about `[`, `,`, `]`, and `"abc"`) is there to make the rule less verbose and easier to read.
@@ -75,22 +75,10 @@ if := '[' '"if"' ',' expression ',' expression ',' expression? ']' ;
 
 ## Grammar
 
-The grammar of `just-func` is extremely simple.
-
-All `just-func` code follows this simple structure: `[operator, operands*]`.
-This is the same as most functional programming languages.
-The key difference is it is written in JSON.
-
-It uses the first element of an array (the `operator`) to determine what is the expression.
-Other than that, everything else are just data.
-
-The `operator` can also be an expression.
-In that case it will be evaluated to produce the `operator`.
-This is planned but not implemented at the moment.
 Here is a quick summary of the key grammar rules:
 
 ```ebnf
-expression := literal | variable | special | type | function | invocation ;
+expression := literal | variable | special | type | function | invocation | multiple ;
 variable := [variableIdentifier, expression?];
 special := fn | let | if | match | unbox | eval | partial | lambda ;
 type := [typeIdentifier, expression+] ;
@@ -105,6 +93,15 @@ eval := ["eval", listExpression+] ;
 partial := ["partial", expression] ;
 lambda := ["lambda", [paramDeclaration*], expression+] ;
 ```
+
+Every expression in `just-func` except `literal` has the form of `[identifier, expression*]`.
+The `identifier` determines what kind of expression it is.
+
+It is a `string`.
+It will be resolved to either a `functionIdentifier`, `typeIdentifier`, or `variableIdentifier`.
+If it cannot resolved to any identifier, t will result in an error.
+
+It can also be an expression. In which it will be evaluated to produce the `identifier`.
 
 ### Expression
 

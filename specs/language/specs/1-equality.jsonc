@@ -1,0 +1,47 @@
+[
+  {
+    "description": "number equality",
+    "run": ["==", 1, 1]
+  },
+  {
+    "description": "string equality",
+    "run": ["==", "a", "a"]
+  },
+  {
+    "description": "boolean equality",
+    "run": ["==", true, true]
+  },
+  {
+    "description": "null equality",
+    "run": ["==", null, null]
+  },
+  {
+    "description": "0 == false",
+    "run": ["==", 0, false]
+  },
+  {
+    "description": "1 == true",
+    "run": ["==", 1, true]
+  },
+  {
+    "description": "empty string == false",
+    "run": ["==", "", false]
+  },
+  {
+    "description": "non-empty string == true",
+    "run": ["==", "a", true]
+  },
+  {
+    "description": "null == 0",
+    "run": ["==", null, 0]
+  },
+  {
+    "description": "null == false",
+    "run": ["==", null, 0]
+  },
+  {
+    "description": "'1' == 1",
+    "stage": "stage-1",
+    "run": ["==", "1", 1]
+  }
+]
