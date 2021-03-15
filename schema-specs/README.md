@@ -4,6 +4,9 @@ The specifications in this folder provides a consistent specification to the def
 
 This ensures the `just-func` programs will behaves the same in multiple hosting languages.
 
+- [language](./language/README.md)
+- [error](./error/README.md)
+
 ## How the specs are structured
 
 You will find various folders underneath this folder each contains specifications of the language or a particular common module.
