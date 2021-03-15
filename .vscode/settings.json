@@ -12,6 +12,7 @@
     "EBNF",
     "Naur",
     "assertable",
+    "cond",
     "defn",
     "defun",
     "endregion",

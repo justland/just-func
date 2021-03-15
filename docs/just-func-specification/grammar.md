@@ -19,10 +19,11 @@ We will try to bring it as close to humanly readable as possible and provide amp
     - [fn](#fn)
     - [let](#let)
     - [if](#if)
-    - [match](#match)
+    - [cond](#cond)
     - [eval](#eval)
     - [partial](#partial)
     - [lambda](#lambda)
+    - [mod](#mod)
   - [Type](#type)
     - [List](#list)
   - [doc (WIP)](#doc-wip)
@@ -55,9 +56,9 @@ The `expression` uses:
   e.g. `[A, B*]` matches `[A]`, `[A, B]`, `[A, B, B]` and so on.
 - `E+`: one or more elements `E`. Has higher precedence over `|`.\
   e.g. `[A, B+]` matches `[A, B]`, `[A, B, B]` and so on
-- `xExpression`: and expression that produces `x`.\
-  e.g. `stringExpression` is an expression that produce `string`,\
-  `variableIdentifierExpression` is an expression that produce `variableIdentifier`.
+- `x-expression`: and expression that produces `x`.\
+  e.g. `string-expression` is an expression that produce `string`,\
+  `variable-identifier-expression` is an expression that produce `variable-identifier`.
 
 The first rule (about `[`, `,`, `]`, and `"abc"`) is there to make the rule less verbose and easier to read.
 
@@ -78,21 +79,22 @@ if := '[' '"if"' ',' expression ',' expression ',' expression? ']' ;
 Here is a quick summary of the key grammar rules:
 
 ```ebnf
-expression := literal | variable | special | type | function | invocation | multiple ;
+expression := literal | variable | special | type | function | invocation ;
 literal := string | number | boolean | null | object ;
 variable := [variable-identifier, expression?];
-special := fn | let | if | match | unbox | eval | partial | lambda ;
+special := fn | let | if | cond | unbox | eval | partial | lambda | mod ;
 type := [type-identifier, expression+] ;
 function := [function-identifier, expression+] ;
 invocation := [string-expression, expression*] ;
 fn := ["fn", function-identifier, [param-declaration*], expression+] ;
 let := ["let", [param-assignment*], expression+] ;
 if := ["if", expression, expression, expression?] ;
-match := ["match", [expression, expression]+, ["_", expression]?] ;
+cond := ["cond", [expression, expression+]+] ;
 unbox := ["unbox", type];
 eval := ["eval", list-expression+] ;
 partial := ["partial", expression] ;
 lambda := ["lambda", [param-declaration*], expression+] ;
+mod := ["mod", expression+] ;
 ```
 
 ### Expression
@@ -186,90 +188,81 @@ Questions:
 
 `special` are special expressions that have specific syntactic form.
 
-
 The expressions within these `special` form are not evaluated automatically.
-The particular `special` expression will handles the evaluation themselves.
+The particular `special` expression will handle the evaluation themselves.
 
 This is why they are `special` comparing to [`functions`](#function).
 
 ```ebnf
-special := fn | let | if | match | eval | partial | lambda ;
+special := fn | let | if | cond | eval | partial | lambda | mod ;
 ```
 
 - [`fn`](#fn)
 - [`let`](#let)
 - [`if`](#if)
-- [`match`](#match)
+- [`cond`](#cond)
 - [`unbox`](#unbox)
 - [`eval`](#eval)
 - [`partial`](#partial)
 - [`lambda`](#lambda)
+- [`mod`](#mod)
 
 #### fn
 
 `fn` is a special expression to define a function.
 
 ```ebnf
-fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
-functionIdentifier := namespace* variableIdentifier ;
-namespace := letter (letter | '-' | '_' )* '/' ;
-paramDeclaration := [variableIdentifier, typeIdentifier+] ;
+fn := ["fn", function-identifier, [param-declaration*], expression+] ;
+function-identifier := namespace* variable-identifier ;
+namespace := variable-identifier '/' ;
+param-declaration := [variable-identifier, type-definition] ;
 ```
 
 using:
 
-- [`variableIdentifier`](#variable)
-- [`typeIdentifier`](#type)
+- [`variable-identifier`](#variable)
+- [`type-definition`](#type)
 
-`functionIdentifier` can be namespaced using `/`.
+`function-identifier` can be namespaced using `/`.
 e.g. `log/info`.
 
 `fn` will create the function in the current scope.
-You can consider `fn` is `let` + `lambda`:
 
 ```jsonc
 [
-  [
-    "fn",
-    "greet",
-    [["name", "string"]],
-    ["str", "Hello, ", ["name"]]
-  ],
-  ["greet", "Homa"]
-]
-
-// same as
-[
-  "let",
-  [
-    ["greet", [
-      "lambda",
-      [["name", "string"]],
-      ["str", "Hello, ", ["name"]]
-    ]]
-  ],
-  ["greet", "Homa"]
+  "fn", "greet", [["name", "string"]],
+  ["str", "Hello, ", ["name"]]
 ]
 ```
 
-WIP:
+🚧 in progress:
 
-Param declaration and types.
-
-Questions:
-
-Other naming convention consideration:
+Should it be named differently?
 
 - `def` + `fn` vs `defn` in `clojure`
 - `let` + `lambda` vs `defun` in `lisp`
-- `fn` vs `closure` in `rust`
 
-Function documentation:
+examples:
 
-We can use `doc` (or `//@something`) to add comments or documentation inside the function body.
-But how can we define documentation for the function itself?
-Also, `fn` is defining a particular signature.
-Is there a way to add documentation for the overall function?
+```jsonc
+// let + anonymous function
+["let", [["greet", ["fn", [["name", "string"]], ["str", "Hello, ", ["name"]]]]]]
+// export + let + anonymous function
+["pub", ["let", [["greet", ["fn", [["name", "string"]], ["str", "Hello, ", ["name"]]]]]]]
+// export declared variable if `let` add variable to current scope
+// similar to named export
+["pub", "greet"]
+// export as let/define
+["pub", "greet", ["fn", [["name", "string"]], ["str", "Hello, ", ["name"]]]]
+```
+
+How to handle closure?
+
+How to document function itself?
+
+We can use `doc` to add documentation inside the function body.
+But we are defining a specific function signature at a time.
+So the `doc` only applies to a specific signature.
 
 #### let
 
@@ -289,15 +282,59 @@ It defines a `scope` and creates the variable/overrides within that scope.
 
 #### if
 
-`if` is a special expression which evaluate the then or else expression based on the result of the con
+`if` is ... an if expression.
 
-#### match
+```ebnf
+if := ["if", condition, then, else?]
+condition := expression ;
+then := expression ;
+else := expression ;
+```
+
+It is an expression, meaning it will return the value in the `then` or `else` clause.
+
+#### cond
+
+The `cond` expression allows you to branch and execute certain actions based on the test expression(s).
+
+```ebnf
+cond := ["cond", [test, action+]+] ;
+test := expression ;
+action := expression ;
+```
 
 #### eval
 
 #### partial
 
 #### lambda
+
+#### mod
+
+The `mod` expression creates a module.
+
+```ebnf
+mod := ["mod", use*, expression+] ;
+use := ["use", module-identifier, variable-identifier?] ;
+module-identifier := tbd | url | module-name | relative-path ;
+```
+
+using:
+
+- [variable-identifier](#variable)
+
+🚧 to discuss:
+
+alternative syntax:
+
+```ebnf
+mod := ["mod", [[variable-identifier, module-identifier]*], expression+] ;
+```
+
+This syntax is similar to `let` so the language is more consistent.
+It does not need the additional `use` expression.
+Putting `variable-identifier` first make auto-importing the last part of `module-identifier` not possible.
+Auto completion on `variable-identifier` is not possible as it comes before `module-identifier`.
 
 ### Type
 
@@ -307,7 +344,7 @@ They will be unboxed to the final representation in JSON so that the result can 
 Just like `special`, the expression within `type` are not evaluated automatically.
 
 ```ebnf
-type := [type identifier, expression*] ;
+type := [type-identifier, expression*] ;
 ```
 
 `just-func` comes with the following build-in types:
