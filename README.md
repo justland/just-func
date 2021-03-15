@@ -56,10 +56,10 @@ class HelloRoute
 
 ## What's in this repository
 
-- `just-func` language schema
-- `just-func` handbook for programmers
-- `just-func` specification for language programmers
-- `just-func` specs that is used to validate implementations
+- [`just-func` language schema](schema/draft-07/schema.jsonc)
+- [`just-func` handbook](docs/just-func-handbook/README.md) for programmers
+- [`just-func` specification](docs/just-func-specification/README.md) for language programmers
+- [`just-func` specs](schema-specs/README.md) that is used to validate implementations
 
 This repository is distributed in package manager of various languages so they can be used to provide:
 
