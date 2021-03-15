@@ -5,6 +5,12 @@ These document might help.
 
 If it doesn't, [open an issue 🎫](https://github.com/justland/just-func/issues) and we can see if it is our problem or yours.
 
+## Applicative Order Evaluation
+
+> Applicative-order evaluation means that a function’s arguments are evaluated before the function is applied.
+
+- <https://sookocheff.com/post/fp/evaluating-lambda-expressions/>
+
 ## Identifier
 
 Every expression in `just-func` except `literal` has the form of `[identifier, expression*]`.

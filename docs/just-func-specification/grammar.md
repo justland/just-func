@@ -26,8 +26,9 @@ We will try to bring it as close to humanly readable as possible and provide amp
     - [mod](#mod)
   - [Type](#type)
     - [List](#list)
+  - [function](#function)
   - [doc (WIP)](#doc-wip)
-  - [Common BNF](#common-bnf)
+  - [Common Symbol](#common-symbol)
 - [Reserved keywords](#reserved-keywords)
 
 ## Notation
@@ -83,8 +84,8 @@ expression := literal | variable | special | type | function | invocation ;
 literal := string | number | boolean | null | object ;
 variable := [variable-identifier, expression?];
 special := fn | let | if | cond | unbox | eval | partial | lambda | mod ;
-type := [type-identifier, expression+] ;
-function := [function-identifier, expression+] ;
+type := [type-identifier, data+] ;
+function := [function-identifier, argument*] ;
 invocation := [string-expression, expression*] ;
 fn := ["fn", function-identifier, [param-declaration*], expression+] ;
 let := ["let", [param-assignment*], expression+] ;
@@ -108,10 +109,10 @@ expression := literal | variable | special | type | function | invocation ;
 Every expression in `just-func` except `literal` has the form of `[identifier, expression*]`.
 
 The `identifier` determines what kind of expression it is.
-It is a string and must be resolved to either a `function-identifier`, `type-identifier`, or `variable-identifier`.
+It must be a string and must be resolved to either a `function-identifier`, `type-identifier`, or `variable-identifier`.
 
 An expression can be place at the `identifier` position,
-which it will be evaluated to produce the `identifier` and perform the same resolution.
+which will be evaluated to produce the `identifier` and perform the same resolution.
 
 - [`literal`](#literal)
 - [`variable`](#variable)
@@ -140,7 +141,7 @@ When you want to describe an array, use [`list`](#list).
 
 ```ebnf
 number := integer | floating-point ;
-floating-point := ("+" | "-")? digit* . digit* ;
+floating-point := integer . digit* ;
 ```
 
 Note that we do not differentiate between `float` vs `double`,
@@ -149,7 +150,7 @@ and other expressions of numbers, because JSON does not differentiate them.
 #### Object
 
 `object` in `just-func` are used as data type, unlike `array`.
-This keep the syntax very simple as well as very flexible.
+This keep the syntax simple as well as very flexible.
 
 For example,
 we could have use `object` to define function parameters,
@@ -160,29 +161,54 @@ then we have to use some kind of workaround when doing meta-programming.
 
 ### Variable
 
-The `variable` rule in the grammar describes how to interact with variables defined by [`let`](#let).
+The `variable` rule in the grammar describes how to interact with variables created by [`let`](#let).
 
 ```ebnf
 variable := [variable-identifer, expression?] ;
-variable-identifier := lower-case-letter (lower-case-letter | digit | '-')* (lower-case-letter | digit) ;
+variable-identifier := identifier ;
 ```
 
-As with any language, the `variable` identifier cannot use any [reserved keywords](#reserved-keywords).
+using:
 
-`[variable-identifier]` (as in `["a"]`) returns the value in the variable `a`.
+- [`identifier`](#common-symbol)
+
+When defining your variable,
+the `variable-identifier` cannot be any of the [reserved keywords](#reserved-keywords).
 
 If the optional `expression` is specified,
 the result of the expression will be assigned to the variable.
 i.e. it is variable assignment.
 
-Function can be assigned by `["a", ["myFun"]]`
-...doesn't work
+examples:
 
-Questions:
+```jsonc
+[
+  "mod",
+  ["let", "x", 1], // create variable "x"
+  ["x"], // returns 1
+  ["x", 2] // x = 2, and return 2
+]
+```
 
-- function assignment: how to assign an already defined function to a variable?\
-  What is the use case for this?\
-  Do we support closure and function override?
+🚧 in discussion:
+
+> Assign function to variable?
+
+What is the need to assign a function to a variable?
+It should behave the same as passing into another function as a parameter.
+Or adding the function to an object.
+
+F# only allow assigning partial application to variable,
+thus avoiding this problem.
+
+> Do we support closure, and how?
+
+Closure should probably supported,
+And maybe enabled by default.
+
+> Will variable shadow [`type`](#type) and [`function`](#function)?
+
+It probably will. Any security concern?
 
 ### Special
 
@@ -213,14 +239,14 @@ special := fn | let | if | cond | eval | partial | lambda | mod ;
 
 ```ebnf
 fn := ["fn", function-identifier, [param-declaration*], expression+] ;
-function-identifier := namespace* variable-identifier ;
-namespace := variable-identifier '/' ;
-param-declaration := [variable-identifier, type-definition] ;
+function-identifier := namespace* identifier ;
+namespace := identifier '/' ;
+param-declaration := [identifier, type-definition] ;
 ```
 
 using:
 
-- [`variable-identifier`](#variable)
+- [`identifier`](#common-symbol)
 - [`type-definition`](#type)
 
 `function-identifier` can be namespaced using `/`.
@@ -237,7 +263,7 @@ e.g. `log/info`.
 
 🚧 in progress:
 
-Should it be named differently?
+> Should it be named differently?
 
 - `def` + `fn` vs `defn` in `clojure`
 - `let` + `lambda` vs `defun` in `lisp`
@@ -256,13 +282,26 @@ examples:
 ["pub", "greet", ["fn", [["name", "string"]], ["str", "Hello, ", ["name"]]]]
 ```
 
-How to handle closure?
+> How to handle closure?
 
-How to document function itself?
+Closure is needed but the question is how to handle it.
+We can create a `fn`/`callable`/`func` type which the native implementation have access to the resolver/scope.
+
+> How to document function itself?
 
 We can use `doc` to add documentation inside the function body.
 But we are defining a specific function signature at a time.
 So the `doc` only applies to a specific signature.
+
+> Do we support function override?
+
+Function override means replacing the behavior of a particular function signature within certain scope.
+The scope can be local, or it can be global.
+What's the syntax for each?
+What's the use case?
+
+Is there a use case to override the whole function, not just one function signature?
+What is the syntax for that?
 
 #### let
 
@@ -344,8 +383,14 @@ They will be unboxed to the final representation in JSON so that the result can 
 Just like `special`, the expression within `type` are not evaluated automatically.
 
 ```ebnf
-type := [type-identifier, expression*] ;
+type := [type-identifier, data+] ;
+type-identifier := identifier ;
+data := expression ;
 ```
+
+using:
+
+- [`identifier`](#common-symbol)
 
 `just-func` comes with the following build-in types:
 
@@ -375,18 +420,36 @@ Note that it is the same if you want to use `array` inside an `object`.
 ["list", { "a": ["list", 1, 2, 3] }]
 ```
 
+### function
+
+The `function` expression is function invocation.
+
+```ebnf
+function := [function-identifier, argument*] ;
+argument := expression ;
+```
+
+using:
+
+- [`function-identifier`](#fn)
+
+The `function` expression will be evaluated in [applicative-order](./terminology.md#applicative-order-evaluation).
+
+🚧 in discussion:
+
 ### doc (WIP)
 
 `doc`  is used to document the code?
 It is overridden in REPL to display the documentation instead.
 
-### Common BNF
+### Common Symbol
 
 ```ebnf
 letter := upper-case-letter | lower-case-letter ;
 upper-case-letter := "A" ... "Z" ;
 lower-case-letter := "a" ... "z" ;
 digit := "0" ... "9" ;
+identifier := lower-case-letter (lower-case-letter | digit | '-')* (lower-case-letter | digit) ;
 ```
 
 ## Reserved keywords
@@ -394,8 +457,8 @@ digit := "0" ... "9" ;
 Here are a list of keywords reserved by the language and standard library:
 
 ```ebnf
-reservedKeywords := specialKeywords | operators ;
-specialKeywords := "fn" | "let" | "if" | "match" | "eval" | "partial" |
+reserved-keywords := special-keywords | operators ;
+special-keywords := "fn" | "let" | "if" | "match" | "eval" | "partial" |
                    "lambda" | "type" | "mod" | "use" | "import" |
                    "export" | "class" | "impl" | "interface" |
                    "string" | "integer" | "number" | "boolean" | "object" | "list" | "ratio" |
