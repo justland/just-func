@@ -1,34 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/justland/just-func/main/schema-specs/error/draft-07/specs.jsonc",
   "description": "validation schema for draft-07 of just-func",
   "type": "array",
   "items": {
-    "type": "object",
-    "required": [
-      "description",
-      "run"
-    ],
-    "properties": {
-      "description": {
-        "type": "string",
-        "description": "Test description"
-      },
-      "ensure": {
-        "description": "Ensure the test environment is clean",
-        "$ref": "../../../schema/draft-07/error-schema.jsonc"
-      },
-      "setup": {
-        "description": "Setup the test environment",
-        "$ref": "../../../schema/draft-07/error-schema.jsonc"
-      },
-      "run": {
-        "description": "The `just-func` code to test",
-        "$ref": "../../../schema/draft-07/error-schema.jsonc"
-      },
-      "teardown": {
-        "description": "Teardown the test environment",
-        "$ref": "../../../schema/draft-07/error-schema.jsonc"
-      }
-    }
+    "$ref": "spec.jsonc"
   }
 }
