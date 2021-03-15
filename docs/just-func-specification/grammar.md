@@ -41,7 +41,7 @@ Each rule in the grammar defines one symbol, in the form
 symbol := expression ;
 ```
 
-The `symbol` is camelCased, and each rule terminates with `;`.
+All `symbol` are lower-kebab-cased, and each rule terminates with `;`.
 
 The `expression` uses:
 
@@ -79,29 +79,21 @@ Here is a quick summary of the key grammar rules:
 
 ```ebnf
 expression := literal | variable | special | type | function | invocation | multiple ;
-variable := [variableIdentifier, expression?];
+literal := string | number | boolean | null | object ;
+variable := [variable-identifier, expression?];
 special := fn | let | if | match | unbox | eval | partial | lambda ;
-type := [typeIdentifier, expression+] ;
-function := [functionIdentifier, expression+] ;
-invocation := [stringExpression, expression*] ;
-fn := ["fn", functionIdentifier, [paramDeclaration*], expression+] ;
-let := ["let", [paramAssignment*], expression+] ;
+type := [type-identifier, expression+] ;
+function := [function-identifier, expression+] ;
+invocation := [string-expression, expression*] ;
+fn := ["fn", function-identifier, [param-declaration*], expression+] ;
+let := ["let", [param-assignment*], expression+] ;
 if := ["if", expression, expression, expression?] ;
 match := ["match", [expression, expression]+, ["_", expression]?] ;
 unbox := ["unbox", type];
-eval := ["eval", listExpression+] ;
+eval := ["eval", list-expression+] ;
 partial := ["partial", expression] ;
-lambda := ["lambda", [paramDeclaration*], expression+] ;
+lambda := ["lambda", [param-declaration*], expression+] ;
 ```
-
-Every expression in `just-func` except `literal` has the form of `[identifier, expression*]`.
-The `identifier` determines what kind of expression it is.
-
-It is a `string`.
-It will be resolved to either a `functionIdentifier`, `typeIdentifier`, or `variableIdentifier`.
-If it cannot resolved to any identifier, t will result in an error.
-
-It can also be an expression. In which it will be evaluated to produce the `identifier`.
 
 ### Expression
 
@@ -110,6 +102,14 @@ It can also be an expression. In which it will be evaluated to produce the `iden
 ```ebnf
 expression := literal | variable | special | type | function | invocation ;
 ```
+
+Every expression in `just-func` except `literal` has the form of `[identifier, expression*]`.
+
+The `identifier` determines what kind of expression it is.
+It is a string and must be resolved to either a `function-identifier`, `type-identifier`, or `variable-identifier`.
+
+An expression can be place at the `identifier` position,
+which it will be evaluated to produce the `identifier` and perform the same resolution.
 
 - [`literal`](#literal)
 - [`variable`](#variable)
@@ -120,25 +120,25 @@ expression := literal | variable | special | type | function | invocation ;
 
 ### Literal
 
-Literals are all JSON types except `array`,
-which we used as the construct of the language.
+Literals refer to all JSON types except `array`,
+which we used insert `just-func` syntax in to JSON.
 
 ```ebnf
 literal := string | number | boolean | null | object ;
 ```
 
-When you want to express an array, use [`list`](#list).
+When you want to describe an array, use [`list`](#list).
 
 - [`number`](#number)
 - [`object`](#object)
 
 #### Number
 
-`number` type is the sum-type of `integer` and `floatingPoint`.
+`number` type is the sum-type of `integer` and `floating-point`.
 
 ```ebnf
-number := integer | floatingPoint ;
-floatingPoint := ("+" | "-")? digit* . digit* ;
+number := integer | floating-point ;
+floating-point := ("+" | "-")? digit* . digit* ;
 ```
 
 Note that we do not differentiate between `float` vs `double`,
@@ -150,24 +150,24 @@ and other expressions of numbers, because JSON does not differentiate them.
 This keep the syntax very simple as well as very flexible.
 
 For example,
-we could have use `object` to define function params,
+we could have use `object` to define function parameters,
 but that creates limitation as the key of `object` can only be `string` or `number`,
 thus the homoiconicity will suffer.
 If we use `object` for that purpose,
-then we have to use some kind of workaround when working on meta-programming.
+then we have to use some kind of workaround when doing meta-programming.
 
 ### Variable
 
-The `variable` rule in the grammar describe how to interact with variables defined by [`let`](#let).
+The `variable` rule in the grammar describes how to interact with variables defined by [`let`](#let).
 
 ```ebnf
-variable := [variableIdentifer, expression?] ;
-variableIdentifier := letter (letter | digit | '-' | '_' )* (letter | digit) ;
+variable := [variable-identifer, expression?] ;
+variable-identifier := lower-case-letter (lower-case-letter | digit | '-')* (lower-case-letter | digit) ;
 ```
 
 As with any language, the `variable` identifier cannot use any [reserved keywords](#reserved-keywords).
 
-`[variableIdentifier]` (as in `["a"]`) returns the value in the variable `a`.
+`[variable-identifier]` (as in `["a"]`) returns the value in the variable `a`.
 
 If the optional `expression` is specified,
 the result of the expression will be assigned to the variable.
@@ -185,6 +185,8 @@ Questions:
 ### Special
 
 `special` are special expressions that have specific syntactic form.
+
+
 The expressions within these `special` form are not evaluated automatically.
 The particular `special` expression will handles the evaluation themselves.
 
@@ -344,7 +346,9 @@ It is overridden in REPL to display the documentation instead.
 ### Common BNF
 
 ```ebnf
-letter := "A" ... "Z" | "a" ... "z" ;
+letter := upper-case-letter | lower-case-letter ;
+upper-case-letter := "A" ... "Z" ;
+lower-case-letter := "a" ... "z" ;
 digit := "0" ... "9" ;
 ```
 

@@ -1,0 +1,12 @@
+[
+  {
+    "description": "upper case identifier is invalid",
+    "invalid": ["Upper"],
+    "error": { "type": "invalid-identifier" }
+  },
+  {
+    "description": "_ is not valid",
+    "invalid": ["a_b"],
+    "error": { "type": "invalid-identifier" }
+  }
+]

@@ -102,6 +102,9 @@ Each test has the following structure:
   // When the test module is available,
   // it can also fail the test.
   "run": [],
+  // Optional expected error during `run`.
+  // This is used to capture invalid program or not assertable error.
+  "error": [],
   // Optional step after `run`.
   // This will always execute if specified,
   // regardless if the test passes or not.

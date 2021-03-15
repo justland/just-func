@@ -1,88 +1,86 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "This is JustFunc, just a functional programming language",
   "$id": "https://raw.githubusercontent.com/justland/just-func/main/schema/draft-07/schema.jsonc",
+  "description": "This is JustFunc, just a functional programming language",
   "oneOf": [
     {
-      "$ref": "#/definitions/Literals"
+      "$ref": "#/definitions/literal"
     },
     {
-      "$ref": "#/definitions/Expressions"
+      "$ref": "#/definitions/variable"
+    },
+    {
+      "$ref": "#/definitions/Specials"
+    },
+    {
+      "$ref": "#/definitions/CoreModule"
+    },
+    {
+      "$ref": "#/definitions/LogicalModule"
+    },
+    {
+      "$ref": "#/definitions/StringModule"
+    },
+    {
+      "$ref": "#/definitions/MathModule"
     }
   ],
   "definitions": {
-    // #region Literals
-    "Literals": {
+    // #region literal
+    "literal": {
       "oneOf": [
         {
-          "$ref": "#/definitions/Boolean"
+          "$ref": "#/definitions/boolean"
         },
         {
-          "$ref": "#/definitions/String"
+          "$ref": "#/definitions/string"
         },
         {
-          "$ref": "#/definitions/Number"
+          "$ref": "#/definitions/number"
         },
         {
-          "$ref": "#/definitions/Null"
+          "$ref": "#/definitions/null"
         },
         {
-          "$ref": "#/definitions/Object"
+          "$ref": "#/definitions/object"
         }
       ]
     },
-    "Boolean": {
+    "boolean": {
       "type": "boolean"
     },
-    "String": {
+    "string": {
       "type": "string"
     },
-    "Number": {
+    "number": {
       "type": "number"
     },
     "Integer": {
       "type": "integer"
     },
-    "Null": {
+    "null": {
       "type": "null"
     },
-    "Object": {
+    "object": {
       "type": "object"
     },
-    // #endregion Literals
-    "Expressions": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/Variable"
-        },
-        {
-          "$ref": "#/definitions/Specials"
-        },
-        {
-          "$ref": "#/definitions/CoreModule"
-        },
-        {
-          "$ref": "#/definitions/LogicalModule"
-        },
-        {
-          "$ref": "#/definitions/StringModule"
-        },
-        {
-          "$ref": "#/definitions/MathModule"
-        }
-      ]
-    },
+    // #endregion literal
     // #region variable
-    "Variable": {
+    "variable": {
       "type": "array",
       "minItems": 1,
       "maxItems": 2,
-      "items": [{
-        "type": "string"
-      }, {
+      "items": [
+        {
+          "type": "string",
+          "description": "variable identifier",
+          "pattern": "[a-z]([a-z-])*[a-z]"
+        }
+      ],
+      "additionalItems": {
         "description": "optional assign value: x = y",
         "$ref": "#"
-      }]
+      }
     },
     // #endregion variable
     // #region specials
@@ -186,14 +184,7 @@
             "minItems": 2,
             "maxItems": 2,
             "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Expressions"
-                },
-                {
-                  "$ref": "#/definitions/String"
-                }
-              ]
+              "$ref": "#"
             }
           }
         },
@@ -256,7 +247,7 @@
       "items": {
         "oneOf": [
           {
-            "$ref": "#/definitions/String"
+            "$ref": "#/definitions/string"
           }
         ]
       }

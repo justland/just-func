@@ -741,9 +741,9 @@ cli-table@^0.3.5:
     colors "1.0.3"
 
 clibuilder@^7.0.5:
-  version "7.0.6"
-  resolved "https://registry.yarnpkg.com/clibuilder/-/clibuilder-7.0.6.tgz#e42d53426e038f9bc8d9a83ff6e5110ffc32bd5a"
-  integrity sha512-dCEyG+f/ihDbYzoB7marzkD85fDPtoSvBiOmYWt2Lzkvaf/HzwvR3RNdY38o9Esy0ApHsEaLwOlNuKtxnqtNQQ==
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/clibuilder/-/clibuilder-7.0.7.tgz#029a7ee1e49acc5503734d6deeabd3ab423d23cc"
+  integrity sha512-vgEhGF0NC/81mD4L6wlusze2V6OoBvGHBd2qTEXXZixAyPsLx7uLfFh8ccXRXxN+v6OQFeWvhWhOdISkVL9ETA==
   dependencies:
     "@types/node" "^14"
     chalk "^4.1.0"

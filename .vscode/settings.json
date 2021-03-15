@@ -5,18 +5,13 @@
         "schema-specs/language/specs/*.jsonc"
       ],
       "url": "./schema-specs/language/draft-07/specs.jsonc"
-    },
-    {
-      "fileMatch": [
-        "schema-specs/language/specs/*.jsonc"
-      ],
-      "url": "./schema-specs/language/draft-07/completion.jsonc"
     }
   ],
   "cSpell.words": [
     "Arity",
     "EBNF",
     "Naur",
+    "assertable",
     "defn",
     "defun",
     "endregion",
