@@ -14,7 +14,7 @@ Let's being lazy and get it over with, alright?
 
 To write hello world, you need three things:
 
-- string concatenation,
+- string concatenation
 - function declaration
 - function invocation
 
