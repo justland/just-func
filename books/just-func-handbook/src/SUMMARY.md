@@ -1,4 +1,4 @@
-# The just-func Handbook
+# The `just-func` Handbook
 
 [Introduction](./introduction.md)
 
