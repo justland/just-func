@@ -17,6 +17,14 @@ Is it controversial? You bet.
 Does people hate it? You better believe.
 Can it do better? Hell yeah.
 
+## Distributed Function Signature Addition
+
+Modules can add function signatures to existing types or functions.
+This is similar to function overloads,
+but actually more similar to Rust `impl` and Lua method declaration.
+
+## support meta-programming without additional syntax
+
 ---
 
 [prev](./design-goals.md) [next](./grammar.md)

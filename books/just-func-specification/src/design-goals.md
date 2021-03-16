@@ -4,38 +4,38 @@
 
 ## Linear Learning Curve
 
+The syntax and complexity of the code should grow linearly.
+Or else it won't be consistent and easy to read.
+
+Otherwise it will violates the language goal of [being the communication language](./language-goals.md#as-the-communication-language-between-teams).
+
+To achieve this goal, we need:
+
+- [](./design-choices.md#support-meta-programming-without-additional-syntax)
+
 ## Focus on Tooling
 
-## functional programming and data oriented
+## Structural Type
 
-Encapsulation is a hoax.
+Definitely supports structural type first instead of restricting the whole system with nominal type.
 
-Among functional programming languages,
-there are pure functional programming languages,
-and functional programing language with OO support.
+No question asked.
 
-Yes, functional programing and object oriented programing paradigm can co-exist.
-And it CAN be a good thing.
+🚧 to discuss:
 
-However, in reality these OO support are added not because it makes the code cleaner and more coherent,
-but because of technical limitation or as a marketing tool to lure programmers into the language.
+The type syntax is still not defined.
 
-The bottom line is, there are many ways to get the benefits provided by object oriented paradigm,
-or class based object oriented paradigm to be precise,
-and do a better job at it while keeping your code more efficient and clean.
+## Strongly Type with type inference
 
-⏳
+Use type inference to infer types whenever possible.
 
-## support meta-programming without additional syntax
+## dynamically typed
 
-## function Signature based resolution
+Dynamically typed means the type of the variable is checked during runtime.
 
-The
-
-- nominal typed
-- strongly typed
-- dynamically typed
-- type inference
+`just-func` is dynamically typed because it can be executed by the `hosting language` at runtime.
+Even thou some `hosting language` might able to JIT compile `just-func` code making it possible to be statically typed,
+most other `hosting language` would interpret it meaning `just-func` code must support runtime type checking.
 
 ---
 
