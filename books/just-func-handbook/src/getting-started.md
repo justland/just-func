@@ -29,3 +29,7 @@ composer require JustLand/JustFunc
 
 Supports in other languages are coming.
 Trust me, they are coming. 🚀
+
+---
+
+[prev](introduction.md) [next](hello-just-func.md)

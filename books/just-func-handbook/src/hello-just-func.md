@@ -49,3 +49,7 @@ I guess you already know how to use it, so no explanation needed, right?
 ```json
 ["hello-world", "genius"]
 ```
+
+---
+
+[prev](getting-started.md)

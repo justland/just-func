@@ -9,3 +9,7 @@ and execute in various platforms.
 
 If you are learning or just start writing `just-func` code,
 this is the right book for you.
+
+---
+
+[prev](SUMMARY.md) [next](getting-started.md)
