@@ -26,3 +26,6 @@ composer require JustLand/JustFunc
 ```
 
 - [just-func-php](https://github.com/justland/just-func-php)
+
+Supports in other languages are coming.
+Trust me, they are coming. 🚀
