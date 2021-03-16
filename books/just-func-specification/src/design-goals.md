@@ -1,5 +1,11 @@
 # Design Goals
 
+## Simple and consistent syntax
+
+## Linear Learning Curve
+
+## Focus on Tooling
+
 ## functional programming and data oriented
 
 Encapsulation is a hoax.

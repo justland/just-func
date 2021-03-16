@@ -1,6 +1,6 @@
 # The `just-func` Specification
 
-This book is intended for programmers who wants to contribute to the language or adding `just-func` support in other programming language.
+This book is intended for programmers who wants to contribute to the language or adding `just-func` support in other programming languages.
 
 Currently, these languages support `just-func`:
 
@@ -9,7 +9,7 @@ Currently, these languages support `just-func`:
 - ⌛️ [just-func-typescript](https://github.com/justland/just-func-typescript)
 - ⌛️ [just-func-rust](https://github.com/justland/just-func-rust)
 
-If you want to support `just-func` in your favorite language,
+If you want `just-func` support in your favorite language,
 let's [open an issue 🎫](https://github.com/justland/just-func/issues) and talk about it.
 
 ## What's in this book
