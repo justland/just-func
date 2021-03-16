@@ -52,4 +52,4 @@ I guess you already know how to use it, so no explanation needed, right?
 
 ---
 
-[prev](getting-started.md)
+[prev](./getting-started.md)

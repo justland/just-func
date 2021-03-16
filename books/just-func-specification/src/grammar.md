@@ -503,3 +503,7 @@ logModuleKeywords := "log" | "log/info" | "log/warn" | "log/error" | "log/debug"
 ```
 
 This list is subject to change but should be stabilized as `just-func` mature.
+
+---
+
+[prev](./design-choices.md) [next](./interop-specification.md)

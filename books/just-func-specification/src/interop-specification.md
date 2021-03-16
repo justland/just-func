@@ -58,3 +58,7 @@ Keeping the name of the property as `type` and devoid of this suffix convention 
 
 - nested errors
 - stack trace / [cause-info](https://github.com/unional/google-cloud-api/blob/master/src/types.ts#L119)
+
+---
+
+[prev](./grammar.md) [next](./terminology.md)

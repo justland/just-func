@@ -1,4 +1,4 @@
-# The just-func Handbook
+# The `just-func` Handbook
 
 `just-func` is a functional programming language written in JSON.
 
@@ -12,4 +12,4 @@ this is the right book for you.
 
 ---
 
-[prev](SUMMARY.md) [next](getting-started.md)
+[next](./getting-started.md)

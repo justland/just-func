@@ -30,3 +30,7 @@ The
 - strongly typed
 - dynamically typed
 - type inference
+
+---
+
+[prev](./introduction.md) [next](./design-choices.md)

@@ -31,4 +31,8 @@ The language that is providing the implementation and tools to run `just-func` c
 🚧 To finalize:
 
 - partial application vs currying
-- union vs or
+- `union` vs `or`
+
+---
+
+[prev](./interop-specification.md)

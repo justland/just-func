@@ -32,4 +32,4 @@ Trust me, they are coming. 🚀
 
 ---
 
-[prev](introduction.md) [next](hello-just-func.md)
+[prev](./introduction.md) [next](./hello-just-func.md)
