@@ -1,0 +1,6 @@
+[book]
+authors = ["Homa Wong"]
+language = "en"
+multilingual = false
+src = "src"
+title = "just-func Handbook"

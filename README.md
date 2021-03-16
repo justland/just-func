@@ -95,4 +95,17 @@ yarn
 
 # validate specs in the `schema-specs` folder
 yarn validate:specs
+
+# install mdbook for book development
+# you need to first install Rust (https://www.rust-lang.org/tools/install)
+cargo install mdbook
+
+# build books
+mdbook build [path/to/book]
+
+# watch build books
+mdbook watch [path/to/book]
+
+# serve books
+mdbook serve [path/to/book]
 ```

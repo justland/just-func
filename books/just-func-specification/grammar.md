@@ -24,10 +24,10 @@ We will try to bring it as close to humanly readable as possible and provide amp
     - [partial](#partial)
     - [lambda](#lambda)
     - [mod](#mod)
+    - [doc](#doc)
   - [Type](#type)
     - [List](#list)
   - [function](#function)
-  - [doc (WIP)](#doc-wip)
   - [Common Symbol](#common-symbol)
 - [Reserved keywords](#reserved-keywords)
 
@@ -83,7 +83,7 @@ Here is a quick summary of the key grammar rules:
 expression := literal | variable | special | type | function | invocation ;
 literal := string | number | boolean | null | object ;
 variable := [variable-identifier, expression?];
-special := fn | let | if | cond | unbox | eval | partial | lambda | mod ;
+special := fn | let | if | cond | unbox | eval | partial | lambda | mod | doc;
 type := [type-identifier, data+] ;
 function := [function-identifier, argument*] ;
 invocation := [string-expression, expression*] ;
@@ -240,13 +240,13 @@ special := fn | let | if | cond | eval | partial | lambda | mod ;
 ```ebnf
 fn := ["fn", function-identifier, [param-declaration*], expression+] ;
 function-identifier := namespace* identifier ;
-namespace := identifier '/' ;
 param-declaration := [identifier, type-definition] ;
 ```
 
 using:
 
 - [`identifier`](#common-symbol)
+- [`namespace`](#common-symbol)
 - [`type-definition`](#type)
 
 `function-identifier` can be namespaced using `/`.
@@ -289,7 +289,7 @@ We can create a `fn`/`callable`/`func` type which the native implementation have
 
 > How to document function itself?
 
-We can use `doc` to add documentation inside the function body.
+We can use [`doc`](#doc) to add documentation inside the function body.
 But we are defining a specific function signature at a time.
 So the `doc` only applies to a specific signature.
 
@@ -321,26 +321,31 @@ It defines a `scope` and creates the variable/overrides within that scope.
 
 #### if
 
-`if` is ... an if expression.
+The `if` expression is... an if expression.
 
 ```ebnf
-if := ["if", condition, then, else?]
-condition := expression ;
+if := ["if", predicate, then, else?]
 then := expression ;
 else := expression ;
 ```
+
+using:
+
+- [`predicate`](#common-symbol)
 
 It is an expression, meaning it will return the value in the `then` or `else` clause.
 
 #### cond
 
-The `cond` expression allows you to branch and execute certain actions based on the test expression(s).
+The `cond` expression allows you to branch and execute certain actions based on the test expression.
 
 ```ebnf
 cond := ["cond", [test, action+]+] ;
 test := expression ;
 action := expression ;
 ```
+
+The `test` expression considered passing if it returns a truthy value.
 
 #### eval
 
@@ -367,13 +372,33 @@ using:
 alternative syntax:
 
 ```ebnf
-mod := ["mod", [[variable-identifier, module-identifier]*], expression+] ;
+mod := ["mod", [use*], expression+] ;
+use := [variable-identifier, module-identifier] ;
 ```
 
 This syntax is similar to `let` so the language is more consistent.
 It does not need the additional `use` expression.
 Putting `variable-identifier` first make auto-importing the last part of `module-identifier` not possible.
 Auto completion on `variable-identifier` is not possible as it comes before `module-identifier`.
+
+#### doc
+
+The `doc` expression is used to document the program, module, or function.
+In REPL, it is overridden to show the document.
+
+```ebnf
+// in code
+doc := ["doc", documentation+] ;
+documentation := string ;
+
+// in REPL
+doc := ["doc", module-identifier | function-identifier] ;
+```
+
+using:
+
+- [`module-identifier`](#mod)
+- [`function-identifier`](#fn)
 
 ### Type
 
@@ -437,11 +462,6 @@ The `function` expression will be evaluated in [applicative-order](./terminology
 
 🚧 in discussion:
 
-### doc (WIP)
-
-`doc`  is used to document the code?
-It is overridden in REPL to display the documentation instead.
-
 ### Common Symbol
 
 ```ebnf
@@ -450,30 +470,35 @@ upper-case-letter := "A" ... "Z" ;
 lower-case-letter := "a" ... "z" ;
 digit := "0" ... "9" ;
 identifier := lower-case-letter (lower-case-letter | digit | '-')* (lower-case-letter | digit) ;
+namespace := identifier '/' ;
+predicate := expression ;
 ```
+
+`predicate` is considered truthy if the value is:
+
+- `true`
+- non-zero number
+- non-empty string
+- object
+- list
+- function
 
 ## Reserved keywords
 
 Here are a list of keywords reserved by the language and standard library:
 
 ```ebnf
-reserved-keywords := special-keywords | operators ;
-special-keywords := "fn" | "let" | "if" | "match" | "eval" | "partial" |
-                   "lambda" | "type" | "mod" | "use" | "import" |
-                   "export" | "class" | "impl" | "interface" |
-                   "string" | "integer" | "number" | "boolean" | "object" | "list" | "ratio" |
-                   "for" | "while" | "do" | "loop" | "take" ;
-operators := "==" | "!=" | ">" | "<" | ">=" | "<=" |
-                    "&&" | "||" | "&" | "|" | "!" |
-                    "+" | "-" | "*" | "/" | "%" | "^" | "<<" | ">>" |
-                    "'" | """ | "?" | "??" | "//";
+reserved-keywords := special-keywords ;
+special-keywords := "fn" | "let" | "if" | "match" | "eval" | "partial" | "lambda" |
+  "type" | "mod" | "use" | "import" | "export" | "class" | "impl" | "interface" |
+  "string" | "integer" | "number" | "boolean" | "object" | "list" | "ratio" | "doc" |
+  "for" | "while" | "do" | "loop" | "take" ;
 ```
 
 While not reserved, it is recommended to avoid using the words used in the standard library.
 
 ```ebnf
-stdModuleKeywords := "map" | "reduce" | "some" | "filter" | "find" |
-                     "doc" ;
+stdModuleKeywords := "map" | "reduce" | "some" | "filter" | "find" ;
 logModuleKeywords := "log" | "log/info" | "log/warn" | "log/error" | "log/debug" ;
 ```
 
