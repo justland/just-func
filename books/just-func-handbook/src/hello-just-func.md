@@ -42,7 +42,7 @@ To declare a function, we use the `fn` expression:
 This defines a function `hello-world`,
 which takes one parameter `name` which is a `string`.
 
-It then call the `str` function to concatenate the string `"say hello world to "` and the value stored in `name` by doing `["name"]`.
+When invoked, it calls the `str` function to concatenate the string `"say hello world to "` and the value stored in `name` by doing `["name"]`.
 
 I guess you already know how to use it, so no explanation needed, right?
 
