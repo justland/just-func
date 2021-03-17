@@ -39,4 +39,4 @@ most other `hosting language` would interpret it meaning `just-func` code must s
 
 ---
 
-[prev](./introduction.md) [next](./design-choices.md)
+[prev](./language-goals.md) [next](./design-choices.md)

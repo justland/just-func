@@ -16,12 +16,14 @@ let's [open an issue 🎫](https://github.com/justland/just-func/issues) and tal
 
 In another words, table of content:
 
-- [design goals and non-goals](./design-goals.md)
-- [design choices made and to be made](./design-choices.md)
+- [Why `just-func`?](./why-just-func.md)
+  - [language goals](./language-goals.md)
+  - [design goals and non-goals](./design-goals.md)
+  - [Why `just-func`, why?](./design-choices.md)
 - [grammar](./grammar.md)
 - [interop specification](./interop-specification.md)
 - [terminology](./terminology.md)
 
 ---
 
-[next](./design-goals.md)
+[next: Why `just-func`?](./why-just-func.md)

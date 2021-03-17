@@ -31,3 +31,7 @@ and able to read and write it without much training.
 ## become part of open standard
 
 Compliment open standard such as OpenAPI to describe behavior.
+
+---
+
+[prev: Why `just-func`?](./why-just-func.md) | [next: Design Goals](./design-goals.md)

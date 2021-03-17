@@ -1,4 +1,4 @@
-# Design Choices
+# Why just-func, why?
 
 Here we describe the design choices we made,
 why we made them, and what are the implications and limitations they impose.
