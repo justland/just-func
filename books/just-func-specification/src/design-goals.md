@@ -2,6 +2,16 @@
 
 ## Simple and consistent syntax
 
+## Standardized packages
+
+One primary goals of `just-func` is to share logic across different `hosting languages`.
+That means the dependencies used by the logic must behave the same everywhere.
+
+This means both naming and behavior of those packages must be the same.
+
+To achieve that, the schema and specs of the packages should be uploaded to the `just-func` repository,
+so that they can be centralized and used by implementations to test their behavior.
+
 ## Linear Learning Curve
 
 The syntax and complexity of the code should grow linearly.
