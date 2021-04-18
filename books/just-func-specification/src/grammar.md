@@ -43,13 +43,17 @@ Each rule in the grammar defines one symbol, in the form
 symbol := expression ;
 ```
 
-All `symbol` are lower-kebab-cased, and each rule terminates with `;`.
+All `symbols` are lower-snake-cased, and each rule terminates with `;`.
 
 The `expression` uses:
 
 - `[`, `,`, `]`, and `"abc"` are constants.\
   This means they match that string precisely and do not carry any meaning.\
-  e.g. `["x", E]` matches `["x", "hello"]` where `E` is `"hello"`.
+  e.g. `["miku/sing", E]` matches `["miku/sing", "'a song'"]` where `E` is `"'a song'"`.
+  This makes the rule less verbose and easier to read. If not, a rule like this:\
+  `if := ["if", expression, expression, expression?] ;`\
+   has to be written as:\
+  `if := '[' '"if"' ',' expression ',' expression ',' expression? ']' ;`
 - `A | B`: `A` or `B`, matches either `A` or `B`
 - `E?`: optional element `E`. Has higher precedence over `|`.\
   e.g. `[A, B?]` matches `[A]` and `[A, B]`.
@@ -61,36 +65,22 @@ The `expression` uses:
   e.g. `string-expression` is an expression that produce `string`,\
   `variable-identifier-expression` is an expression that produce `variable-identifier`.
 
-The first rule (about `[`, `,`, `]`, and `"abc"`) is there to make the rule less verbose and easier to read.
-
-For example:
-
-```ebnf
-if := ["if", expression, expression, expression?] ;
-```
-
-has to be written as below without the first rule:
-
-```ebnf
-if := '[' '"if"' ',' expression ',' expression ',' expression? ']' ;
-```
-
 ## Grammar
 
 Here is a quick summary of the key grammar rules:
 
 ```ebnf
-expression := literal | object | variable | special | type | function | invocation ;
+expression := literal | special | variable | type | function | invocation ;
 literal := string | number | boolean | null | object ;
+string := "'" letter* "'" ;
+special := fn | let | if | match | unbox | eval | partial | lambda | mod | doc;
 variable := [variable-identifier, expression?];
-special := fn | let | if | cond | unbox | eval | partial | lambda | mod | doc;
 type := [type-identifier, data+] ;
-function := [function-identifier, argument*] ;
-invocation := [string-expression, expression*] ;
+invocation := [identifier-expression, expression*] ;
 fn := ["fn", function-identifier, [param-declaration*], expression+] ;
 let := ["let", [param-assignment*], expression+] ;
 if := ["if", expression, expression, expression?] ;
-cond := ["cond", [expression, expression+]+] ;
+match := ["match", [expression, expression+]+] ;
 unbox := ["unbox", type];
 eval := ["eval", list-expression] ;
 partial := ["partial", expression] ;
@@ -468,9 +458,12 @@ The `function` expression will be evaluated in [applicative-order](./terminology
 letter := upper-case-letter | lower-case-letter ;
 upper-case-letter := "A" ... "Z" ;
 lower-case-letter := "a" ... "z" ;
+number := ("+" | "-")digit+ ;
 digit := "0" ... "9" ;
-identifier := lower-case-letter (lower-case-letter | digit | '-')* (lower-case-letter | digit) ;
-namespace := identifier '/' ;
+boolean := "true" | "false" ;
+null := "null" ;
+identifier := lower-case-letter (lower-case-letter | digit | "-")* (lower-case-letter | digit) ;
+namespace := identifier "/" ;
 predicate := expression ;
 ```
 

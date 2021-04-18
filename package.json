@@ -13,7 +13,7 @@
   "scripts": {
     "build": "yarn build:ts",
     "build:ts": "tsc -p tsconfig.cjs.json",
-    "lint": "eslint --ext=js,ts .",
+    "lint": "eslint .",
     "validate:specs": "ts-node ts/bin.ts validate-specs"
   },
   "devDependencies": {

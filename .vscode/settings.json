@@ -20,6 +20,7 @@
     "homoiconicity",
     "inequivalence",
     "mdbook",
-    "schemastore"
+    "monoid",
+    "schemastore",
   ]
 }

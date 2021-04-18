@@ -1,0 +1,6 @@
+[
+  ["export", "hello-world", ["fn", [["name", "string"]], ["+", "'Hello, '", "name"]]],
+
+  ["export", "hello-world", ["fn", "name: string", ["str", "Hello, ", ["name"]]]],
+  ["export", "+", ["fn<A>", "..a: A[]", "a: A", []]]
+]
