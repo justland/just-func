@@ -25,6 +25,24 @@ but actually more similar to Rust `impl` and Lua method declaration.
 
 ## support meta-programming without additional syntax
 
+## object as data type
+
+In `just-func`, we are using the first element of an `array` to inject syntax to otherwise just a JSON.
+For `object`, it is use as simple data structure, except the array inside an object also consider as a `just-func` expression.
+
+This is a design choice to [make the language simple](design-goals.md#simple-and-consistent-syntax).
+
+Also, this keep the language flexible.
+
+For example,
+we could have use `object` to define function parameters,
+but that creates limitation as the key of `object` can only be `string` or `number`,
+thus the homoiconicity will suffer (we will have a hard time to build the parameter with meta-programming).
+
+## [monoid-identifier] -> identity
+
+Calling `type-identifier` without data will returns the identity for that type.
+
 ---
 
 [prev](./design-goals.md) [next](./grammar.md)

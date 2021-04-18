@@ -1,0 +1,10 @@
+[
+  // export fn helloWorld(name: string) { return str('Hello, ', name) }
+  // export def helloWorld = (name: string) => str('Hello, ', name)
+  // export helloWorld = fn(name: string) str('Hello, ', name)
+  // quote string syntax
+  ["export", "hello-world", ["fn", "name: string", ["str", "'Hello, '", "name"]]],
+
+  ["export", "hello-world", ["fn", "name: string", ["str", "Hello, ", ["name"]]]],
+  ["export", "+", ["fn<A>", "..a: A[]", "a: A", []]]
+]

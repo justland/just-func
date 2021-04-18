@@ -1,0 +1,43 @@
++ :: ..a -> a
++ :: -> ..a, a
+["type", "+", ["fn", "..a", "a"]]
+
+ratio :: [a: number, b: number]
+["type", "ratio", [["a", "number"], ["b", "number"]]]
+
+["let", "x", ["fn", [], ["number"]]]
+
+greet :: name: string -> ()
+greet :: name: string -> void
+greet :: -> name: string, ()
+["type", "greet", ["fn", ["name", "string"], "string"]]
+["define", "greet", ["fn", ["name", "string"]], ["str", "greeting, ", ["name"]]]
+["fn", "greet, [["name", "string"]], ["str", "greeting, ", ["name"]]]
+
+odd-number :: a: number && a % 2 == 1
+odd-number :: () -> a = 0: number && a % 2 == 1
+odd-number x :: x -> a: number && a % 2 == 1
+["type", "odd-number", ["a", "number", [==, 1, [%, ["a", 2]]]]]
+["type", "odd-number", "a: number && a % 2 == 1",
+  ["iter", ]]
+// impl iterable
+["fn" ,"odd-number", ["n", "number", 0], [
+  "take/while",
+  ["fn", ["a"], ["==", 1, ["%", ["a"], 2]]],
+  ["iter", ["number"]]
+]]
+
+string-list :: [..a: string]
+["type", "string-list", [["..a", "string"]]]
+
+concat :: [..a] -> [..b] -> [..a, ..b]
+["type", "concat", ["fn", ["..a"], ["..b"], [["..a"], ["..b"]]]]
+
+concat :: ..a: [..b] -> [...a]
+
+concat :: [..a] -> [..b] -> .. -> [..a, ..b, ..]
+
+concat :: [..a] -> [..b] -> [..a, ..b]
+concat :: [..a] -> [..b] -> [..c] -> concat(concat([..a], [..b]), [..c])
+["type", "concat", ["fn", ["..a", ["..b"]], ["...a"]]]
+["type", "concat", ["fn", "..a: [..b]", ["...a"]]]

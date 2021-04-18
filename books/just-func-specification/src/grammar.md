@@ -13,7 +13,7 @@ We will try to bring it as close to humanly readable as possible and provide amp
   - [Expression](#expression)
   - [Literal](#literal)
     - [Number](#number)
-    - [Object](#object)
+  - [Object](#object)
   - [Variable](#variable)
   - [Special](#special)
     - [fn](#fn)
@@ -80,7 +80,7 @@ if := '[' '"if"' ',' expression ',' expression ',' expression? ']' ;
 Here is a quick summary of the key grammar rules:
 
 ```ebnf
-expression := literal | variable | special | type | function | invocation ;
+expression := literal | object | variable | special | type | function | invocation ;
 literal := string | number | boolean | null | object ;
 variable := [variable-identifier, expression?];
 special := fn | let | if | cond | unbox | eval | partial | lambda | mod | doc;
@@ -92,7 +92,7 @@ let := ["let", [param-assignment*], expression+] ;
 if := ["if", expression, expression, expression?] ;
 cond := ["cond", [expression, expression+]+] ;
 unbox := ["unbox", type];
-eval := ["eval", list-expression+] ;
+eval := ["eval", list-expression] ;
 partial := ["partial", expression] ;
 lambda := ["lambda", [param-declaration*], expression+] ;
 mod := ["mod", expression+] ;
@@ -115,6 +115,7 @@ An expression can be place at the `identifier` position,
 which will be evaluated to produce the `identifier` and perform the same resolution.
 
 - [`literal`](#literal)
+- [`object`](#object)
 - [`variable`](#variable)
 - [`special`](#special)
 - [`type`](#type)
@@ -124,16 +125,15 @@ which will be evaluated to produce the `identifier` and perform the same resolut
 ### Literal
 
 Literals refer to all JSON types except `array`,
-which we used insert `just-func` syntax in to JSON.
+which we used insert `just-func` syntax into JSON.
 
 ```ebnf
-literal := string | number | boolean | null | object ;
+literal := string | number | boolean | null ;
 ```
 
 When you want to describe an array, use [`list`](#list).
 
 - [`number`](#number)
-- [`object`](#object)
 
 #### Number
 
@@ -147,17 +147,18 @@ floating-point := integer . digit* ;
 Note that we do not differentiate between `float` vs `double`,
 and other expressions of numbers, because JSON does not differentiate them.
 
-#### Object
+### Object
 
-`object` in `just-func` are used as data type, unlike `array`.
-This keep the syntax simple as well as very flexible.
+`object` in `just-func` are one of the data types.
+Any array inside an object is treated as `just-func` expression.
+This allow us to programmatically build the object data.
 
-For example,
-we could have use `object` to define function parameters,
-but that creates limitation as the key of `object` can only be `string` or `number`,
-thus the homoiconicity will suffer.
-If we use `object` for that purpose,
-then we have to use some kind of workaround when doing meta-programming.
+```jsonc
+{
+  // "a": "banana"
+  "a": ["if", ["==", 1, 2], "apple", "banana"]
+}
+```
 
 ### Variable
 
@@ -182,8 +183,7 @@ i.e. it is variable assignment.
 examples:
 
 ```jsonc
-[
-  "mod",
+[  "mod",
   ["let", "x", 1], // create variable "x"
   ["x"], // returns 1
   ["x", 2] // x = 2, and return 2
