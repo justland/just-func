@@ -12,6 +12,7 @@
     "EBNF",
     "Naur",
     "assertable",
+    "concat",
     "cond",
     "defn",
     "defun",
@@ -21,6 +22,7 @@
     "inequivalence",
     "mdbook",
     "monoid",
-    "schemastore",
+    "readonly",
+    "schemastore"
   ]
 }
