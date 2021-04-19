@@ -1,0 +1,26 @@
+[
+  # Type parameter A is automatically inferred
+  # type Pair<A> = [A, A]
+  [declare, pair, type, [tuple, A, A]],
+  # Declare tuple with named indices
+  # type Pair<A> = [first: A, second: A]
+  [declare, pair, type, [tuple, [first, A], [second, A]]],
+  # Restrict type parameter A
+  # type LiteralPair<A extends number | string | boolean> = [A, A]
+  [
+    declare,
+    literal_pair,
+    type,
+    [tuple, A, A],
+    [A, ["|", number, string, boolean]],
+  ],
+  # Declare LiteralPair using Pair
+  # type LiteralPair<A extends number | string | boolean> = Pair<A>
+  [declare, literal_pair, type, [pair, A], [A, ["|", number, string, boolean]]],
+  # Declare NumberPair directly
+  [declare, number_pair, type, [tuple, [first, number], [second, number]]],
+  # Declare NumberPair using Pair
+  [declare, number_pair, type, [pair, A], [A, number]],
+  # Declare NumberPair using LiteralPair
+  [declare, number_pair, type, [literal_pair, A], [A, number]],
+]
