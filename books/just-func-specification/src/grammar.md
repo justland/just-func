@@ -73,14 +73,14 @@ Here is a quick summary of the key grammar rules:
 expression := literal | special | variable | type | function | invocation ;
 literal := string | number | boolean | null | object ;
 string := "'" letter* "'" ;
-special := fn | let | if | match | unbox | eval | partial | lambda | mod | doc;
+special := fn | let | if | cond | unbox | eval | partial | lambda | mod | doc;
 variable := [variable-identifier, expression?];
 type := [type-identifier, data+] ;
 invocation := [identifier-expression, expression*] ;
 fn := ["fn", function-identifier, [param-declaration*], expression+] ;
 let := ["let", [param-assignment*], expression+] ;
 if := ["if", expression, expression, expression?] ;
-match := ["match", [expression, expression+]+] ;
+cond := ["cond", [expression, expression+]+] ;
 unbox := ["unbox", type];
 eval := ["eval", list-expression] ;
 partial := ["partial", expression] ;

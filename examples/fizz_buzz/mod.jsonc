@@ -3,7 +3,7 @@
     ["map", "fizz_buzz_word", ["range", 1, "n"]]
   ]],
   ["declare", "fizz_buzz_word", ["fn", [["n", "number"]],
-    ["match",
+    ["cond",
       [["===", 0, ["%", "n", 15]], "'FizzBuzz'"],
       [["===", 0, ["%", "n", 3]], "'Fizz'"],
       [["===", 0, ["%", "n", 5]], "'Buzz'"],
