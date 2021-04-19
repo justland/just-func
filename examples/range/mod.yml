@@ -1,0 +1,32 @@
+[
+  [declare, iterator, type, [], [export, next, [fn, [], [maybe, T]]]],
+  [
+    declare,
+    range,
+    type,
+    [tuple, [start, A], [end, A]],
+    [impl, iterator, A],
+    # implement using named parameter:  `T := A`
+    [impl, iterator, [T, A]],
+    [declare, i, start],
+  ],
+  [
+    impl,
+    range,
+    number,
+    [
+      export,
+      next,
+      [
+        fn,
+        [],
+        [
+          if,
+          [">", self/i, self/end],
+          [maybe/none],
+          [[declare, r, [maybe, self/i]], [mut, self/i, [+, 1, self/i]], r],
+        ],
+      ],
+    ],
+  ],
+]

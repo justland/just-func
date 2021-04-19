@@ -1,0 +1,28 @@
+[
+  [
+    export,
+    path_equal,
+    [
+      fn,
+      [[expected, string], [actual, string]],
+      [
+        or,
+        [===, expected, actual],
+        [===, [normalize_path, expected], [normalize_path, actual]],
+      ],
+    ],
+  ],
+  [
+    declare,
+    normalize_path,
+    [
+      fn,
+      [[path, string]],
+      [
+        let,
+        [[replace, [list]]],
+        [list/foreach, [fn, [[array]], [...]], replace],
+      ],
+    ],
+  ],
+]
