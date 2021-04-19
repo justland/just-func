@@ -1,6 +1,6 @@
 [
   ["export", "fizz_buzz", ["fn", [["n", "number"]],
-    ["map", "fizz_buzz_word", ["range", 1, "n"]]
+    ["map", "fizz_buzz_word", ["number/range", 1, "n"]]
   ]],
   ["declare", "fizz_buzz_word", ["fn", [["n", "number"]],
     ["cond",
