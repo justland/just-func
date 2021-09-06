@@ -499,4 +499,4 @@ This list is subject to change but should be stabilized as `just-func` mature.
 
 ---
 
-[prev](./design-choices.md) [next](./interop-specification.md)
+[prev](./1.3.0-design-choices.md) [next](./interop-specification.md)
