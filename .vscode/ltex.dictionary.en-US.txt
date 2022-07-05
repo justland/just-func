@@ -2,3 +2,11 @@ homoiconic
 homoiconicity
 interop
 OpenAPI
+
+Backus-Naur
+EBNF
+fn
+cond
+eval
+namespaced
+applicative

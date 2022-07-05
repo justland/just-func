@@ -2,7 +2,7 @@
 
 The specifications in this folder provides a consistent specification to the definitions of the language and common modules across implementations in various programming language.
 
-This ensures the `just-func` programs will behaves the same in multiple hosting languages.
+This ensures the `just-func` programs will behave the same in multiple hosting languages.
 
 - [language](./language/README.md)
 - [error](./error/README.md)
@@ -22,7 +22,7 @@ For example,
 ```
 
 In each folder, you will find a `specs` folder containing spec files for various tests,
-as well as folders for different json schema versions.
+as well as folders for different JSON schema versions.
 
 For example,
 
@@ -34,7 +34,7 @@ For example,
     - specs
 ```
 
-There are schema for different json-schema versions because the support of json-schema versions differs depending on the hosting language.
+There are schemas for different `json-schema` versions because the support of `json-schema` versions differs depending on the hosting language.
 
 Inside each schema folder, you will find a `specs.jsonc`,
 and optionally other files such as `completion.jsonc` and `schema.jsonc`.
@@ -49,15 +49,15 @@ and optionally other files such as `completion.jsonc` and `schema.jsonc`.
 ```
 
 The `specs.jsonc` contains the schema of the tests.
-If your IDE supports json-schema, such as Visual Studio Code,
+If your IDE supports `json-schema`, such as Visual Studio Code,
 you can use it to validate the tests,
 making sure the tests are written correctly.
 
-The `completion.jsonc` is a loosen version of `specs.jsonc`.
+The `completion.jsonc` is a loose version of `specs.jsonc`.
 It is used to aid writing tests.
 In some IDE, such as Visual Studio Code,
-it does not show a particular `identifier` in the auto completion if the data does not satisfy all constraints such as `minItems`.
-This `completion.jsonc` removes those constraint so that the IDE will show the complete list of `identifier` so that it is easier to write tests.
+it does not show a particular `identifier` in the auto-completion if the data does not satisfy all constraints such as `minItems`.
+This `completion.jsonc` removes those constraints so that the IDE will show the complete list of `identifier` so that it is easier to write tests.
 
 The `schema.jsonc` contains the schema extension for that particular module.
 For `draft-07`, it contains the base schema as well as the schema extension because it does not support dynamic extension.
@@ -80,7 +80,7 @@ For example,
 The spec files are numbered based on increasing complexity.
 These numbers are also served as the recommended order when implementing `just-func` in a hosting language.
 
-When a tests might fit into multiple spec files as they contain overlapping features, these numbers will also serve as a guidance to determine which spec file the test case should be added to.
+When a test might fit into multiple spec files as they contain overlapping features, these numbers will also serve as a guidance to determine which spec file the test case should be added to.
 
 Each test has the following structure:
 

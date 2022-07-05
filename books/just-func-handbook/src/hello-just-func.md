@@ -1,16 +1,13 @@
 # Hello `just-func`
 
-No introductory book can live without a hello world example,
+No introductory book can call itself introductory without a hello world example,
 so here it is.
 
 To write a `just-func` program,
-you can write it in a JSON file, a YAML, a `.jf` file, or even just a object literal in your language.
+you can write it in a JSON file, a YAML, a `.jf` file, or even just a nested array in your language.
 
 For examples throughout the book,
 we will be writing them in JSON.
-
-But for a hello world example?
-Let's being lazy and get it over with, alright?
 
 To write hello world, you need three things:
 
@@ -20,7 +17,7 @@ To write hello world, you need three things:
 
 The function to do string concatenation in `just-func` is `str`:
 
-```json
+```jsonc
 ["str", "hello ", "world"] // -> hello world
 ```
 

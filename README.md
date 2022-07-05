@@ -32,7 +32,7 @@ Languages supporting `just-func` will provide a parser and other tools to enable
 For example, the following code uses the `Interpreter` to handle the call in PHP:
 
 ```php
-use /JustLand/JustFunc/Interpreter;
+use JustLand/JustFunc/Interpreter;
 
 class HelloRoute
 {

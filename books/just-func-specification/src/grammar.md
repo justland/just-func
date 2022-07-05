@@ -1,4 +1,4 @@
-# just-func grammar <!-- omit in toc -->
+# `just-func` grammar <!-- omit in toc -->
 
 `just-func` is not a programming language if it does not have a formal grammar.
 
@@ -6,7 +6,7 @@ So here is where you can find that formal grammar.
 The purpose is to create a clear specification of the language.
 
 We understand that formal grammar can sometimes be hard to read and can be very boring.
-We will try to bring it as close to humanly readable as possible and provide ample explanation and examples along the way.
+We will try to bring it as close to humanly readable as possible and provide ample explanations and examples along the way.
 
 - [Notation](#notation)
 - [Grammar](#grammar)
@@ -37,19 +37,19 @@ The Formal Grammar in this document is given using a customized Extended Backus-
 The notation is similar to [`json-schema`](https://cswr.github.io/JsonSchema/spec/grammar/) for maximum familiarity,
 with some minor changes to better fit this documentation and to better describe a programming language.
 
-Each rule in the grammar defines one symbol, in the form
+Each rule in the grammar defines one symbol, in the form:
 
 ```ebnf
 symbol := expression ;
 ```
 
-All `symbols` are lower-snake-cased, and each rule terminates with `;`.
+All `symbols` are `lower-snake-cased`, and each rule terminates with `;`.
 
 The `expression` uses:
 
-- `[`, `,`, `]`, and `"abc"` are constants.\
-  This means they match that string precisely and do not carry any meaning.\
-  e.g. `["miku/sing", E]` matches `["miku/sing", "'a song'"]` where `E` is `"'a song'"`.
+- The characters `[`, `,`, `]`, and strings in double quotes (`"abc"`) are constants.\
+  They match that string precisely and do not carry any meaning.\
+  e.g. `["miku/sing", E]` matches `["miku/sing", "a song"]` where `E` is `"a song"`.\
   This makes the rule less verbose and easier to read. If not, a rule like this:\
   `if := ["if", expression, expression, expression?] ;`\
    has to be written as:\
@@ -57,10 +57,10 @@ The `expression` uses:
 - `A | B`: `A` or `B`, matches either `A` or `B`
 - `E?`: optional element `E`. Has higher precedence over `|`.\
   e.g. `[A, B?]` matches `[A]` and `[A, B]`.
-- `E*`: zero or more elements `E`. Has higher precedence over `|`.\
-  e.g. `[A, B*]` matches `[A]`, `[A, B]`, `[A, B, B]` and so on.
 - `E+`: one or more elements `E`. Has higher precedence over `|`.\
   e.g. `[A, B+]` matches `[A, B]`, `[A, B, B]` and so on
+- `E*`: zero or more elements `E`. Has higher precedence over `|`.\
+  e.g. `[A, B*]` matches `[A]`, `[A, B]`, `[A, B, B]` and so on.
 - `x-expression`: and expression that produces `x`.\
   e.g. `string-expression` is an expression that produce `string`,\
   `variable-identifier-expression` is an expression that produce `variable-identifier`.
@@ -78,7 +78,10 @@ variable := [variable-identifier, expression?];
 type := [type-identifier, data+] ;
 invocation := [identifier-expression, expression*] ;
 fn := ["fn", function-identifier, [param-declaration*], expression+] ;
+ref := ["&", function-identifier] ;
+const := ["const", [param-assignment*], expression+] ;
 let := ["let", [param-assignment*], expression+] ;
+set := ["set", variable-identifier, expression+] ;
 if := ["if", expression, expression, expression?] ;
 cond := ["cond", [expression, expression+]+] ;
 unbox := ["unbox", type];
@@ -90,8 +93,6 @@ mod := ["mod", expression+] ;
 
 ### Expression
 
-`expression` refers to all expressions can be used within a `just-func` program.
-
 ```ebnf
 expression := literal | variable | special | type | function | invocation ;
 ```
@@ -101,33 +102,20 @@ Every expression in `just-func` except `literal` has the form of `[identifier, e
 The `identifier` determines what kind of expression it is.
 It must be a string and must be resolved to either a `function-identifier`, `type-identifier`, or `variable-identifier`.
 
-An expression can be place at the `identifier` position,
-which will be evaluated to produce the `identifier` and perform the same resolution.
-
-- [`literal`](#literal)
-- [`object`](#object)
-- [`variable`](#variable)
-- [`special`](#special)
-- [`type`](#type)
-- [`function`](#function)
-- [`invocation`](#invocation)
+The `identifier` can be a [`expression`]. i.e. `identifier-expression`,
+which will be evaluated to produce the `identifier` and then continue the evaluation.
 
 ### Literal
 
-Literals refer to all JSON types except `array`,
-which we used insert `just-func` syntax into JSON.
+The [`literal`] in `just-func` is the same as JSON primitive types:
 
 ```ebnf
 literal := string | number | boolean | null ;
 ```
 
-When you want to describe an array, use [`list`](#list).
-
-- [`number`](#number)
-
 #### Number
 
-`number` type is the sum-type of `integer` and `floating-point`.
+The [`number`] type is the sum type of `integer` and `floating-point`.
 
 ```ebnf
 number := integer | floating-point ;
@@ -137,11 +125,13 @@ floating-point := integer . digit* ;
 Note that we do not differentiate between `float` vs `double`,
 and other expressions of numbers, because JSON does not differentiate them.
 
+Also, `floating-point` do not support `.123` nor `123.` because JSON does not support it.
+
 ### Object
 
 `object` in `just-func` are one of the data types.
 Any array inside an object is treated as `just-func` expression.
-This allow us to programmatically build the object data.
+This allows us to programmatically build the object data.
 
 ```jsonc
 {
@@ -152,7 +142,10 @@ This allow us to programmatically build the object data.
 
 ### Variable
 
-The `variable` rule in the grammar describes how to interact with variables created by [`let`](#let).
+🚧 May not need. The variable created by [`let`] can be a syntactic sugar for `fn: () => x`.
+i.e., each variable is a function that returns the value.
+
+The [`variable`] rule in the grammar describes how to interact with variables created by [`let`](#let).
 
 ```ebnf
 variable := [variable-identifer, expression?] ;
@@ -166,23 +159,22 @@ using:
 When defining your variable,
 the `variable-identifier` cannot be any of the [reserved keywords](#reserved-keywords).
 
-If the optional `expression` is specified,
-the result of the expression will be assigned to the variable.
-i.e. it is variable assignment.
 
 examples:
 
 ```jsonc
-[  "mod",
+[
+  "mod",
   ["let", "x", 1], // create variable "x"
   ["x"], // returns 1
-  ["x", 2] // x = 2, and return 2
 ]
 ```
 
 🚧 in discussion:
 
 > Assign function to variable?
+
+To achieve this, we need to be able to reference
 
 What is the need to assign a function to a variable?
 It should behave the same as passing into another function as a parameter.
@@ -193,8 +185,8 @@ thus avoiding this problem.
 
 > Do we support closure, and how?
 
-Closure should probably supported,
-And maybe enabled by default.
+Closure should probably be supported,
+and maybe enabled by default.
 
 > Will variable shadow [`type`](#type) and [`function`](#function)?
 
@@ -366,10 +358,10 @@ mod := ["mod", [use*], expression+] ;
 use := [variable-identifier, module-identifier] ;
 ```
 
-This syntax is similar to `let` so the language is more consistent.
+This syntax is similar to `let`, so the language is more consistent.
 It does not need the additional `use` expression.
 Putting `variable-identifier` first make auto-importing the last part of `module-identifier` not possible.
-Auto completion on `variable-identifier` is not possible as it comes before `module-identifier`.
+Auto-completion on `variable-identifier` is not possible as it comes before `module-identifier`.
 
 #### doc
 
@@ -448,7 +440,7 @@ using:
 
 - [`function-identifier`](#fn)
 
-The `function` expression will be evaluated in [applicative-order](./terminology.md#applicative-order-evaluation).
+The `function` expression will be evaluated in [applicative order](./terminology.md#applicative-order-evaluation).
 
 🚧 in discussion:
 
@@ -500,3 +492,14 @@ This list is subject to change but should be stabilized as `just-func` mature.
 ---
 
 [prev](./1.3.0-design-choices.md) [next](./interop-specification.md)
+
+
+[`expression`]: #expression
+[`literal`]: #literal
+[`object`]: #object
+[`variable`]: #variable
+[`special`]: #special
+[`number`]: #number
+[`type`]: #type
+[`function`]: #function
+[`invocation`]: #invocation

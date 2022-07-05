@@ -15,7 +15,7 @@ You can find the terminologies [here](./terminology.md).
 
 ## Logs
 
-✔️ All logs should can be transformed to a common format.
+✔️ All logs should be transformed to a common format.
 
 > Why?
 
@@ -39,7 +39,7 @@ Some standard format such as syslog might be nice.
 }
 ```
 
-The json-schema for error can be found [here](https://github.com/justland/just-func/blob/main/schema/draft-07/error-schema.jsonc).
+The `json-schema` for error can be found [here](https://github.com/justland/just-func/blob/main/schema/draft-07/error-schema.jsonc).
 
 ✔️ `type` should be clear what is the error and also indicate that it is an error.
 
@@ -54,7 +54,7 @@ Different language has different convention (`error` vs `exception`, and some la
 Keeping the name of the property as `type` and devoid of this suffix convention so that we will not create unnecessary confusion in a particular language.
 (i.e. in some language where `exception` is the norm and if we suffix with `error`, it is unpleasant and confusing to the programmer).
 
-⌛️ To be determine:
+⌛️ To be determined:
 
 - nested errors
 - stack trace / [cause-info](https://github.com/unional/google-cloud-api/blob/master/src/types.ts#L119)
