@@ -1,0 +1,50 @@
+// https://doc.rust-lang.org/rust-by-example/primitives/tuples.html
+[
+  // typing `reverse` function
+  ["type", "reverse", [
+    "fn",
+    [
+      "tuple",
+      ["tuple", "number", "boolean"]
+    ],
+    // or, skipping `tuple` as function params is always a `tuple`
+    [
+      ["tuple", "number", "boolean"]
+    ],
+    // or, named `pair`
+    [
+      ["type", "pair", ["tuple", "number", "boolean"]]
+    ],
+    // return type
+    ["tuple", "boolean", "number"]]
+  ],
+  // implementation
+  ["let", "reverse", ["fn", ["pair"],
+    ["let", ["integer", "boolean"], ["pair"]],
+    ["tuple", ["boolean"], ["integer"]]
+  ]],
+
+  ["type", "Matrix", ["tuple", "number", "number", "number", "number"]],
+
+  ["let", "main", ["fn", [],
+    ["let", "long_tuple", ["tuple", 1, 2, 3, -1, -2, -3, -4, 0.1, 0.2, "a", true]],
+    ["print", "long tuple first value: {}", ["long_tuple", 0]],
+    ["print", "long tuple second value: {}", ["long_tuple", 1]],
+    ["let", "tuple_of_tuples", ["tuple", ["tuple", 1, 2, 2], ["tuple", 4, -1], -2]],
+    ["print", "tuple of tuples: {:?}", ["tuple_of_tuples"]],
+    ["let", "pair", ["tuple", 1, true]],
+    ["print", "pair is {:?}", ["pair"]],
+    ["print", "the reversed pair is {:?}", ["reverse", ["pair"]]],
+    // no need for the special `(5u32,)` workaround
+    ["print", "one element tuple: {:?}", ["tuple", [5]]],
+    // naming the variable `tuple` will shadow the `tuple` function
+    // TODO: 💡 should `tuple`, `array`, `list`, etc be shorten?
+    ["let", "tuple_x", ["tuple", 1, "hello", 4.5, true]],
+    ["let", ["a", "b", "c", "d"], ["tuple_x"]],
+    ["print", "{:?} {:?} {:?} {:?}", ["a"], ["b"], ["c"], ["d"]],
+    // TODO: ❓ type `Matrix` is a function?
+    // It is a type-alias of `[number, number, number, number]`
+    ["let", "matrix", ["Matrix", 1.1, 1.2, 2.1, 2.2]],
+    ["print", "{:?}", ["matrix"]]
+  ]]
+]

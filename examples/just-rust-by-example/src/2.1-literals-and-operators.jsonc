@@ -1,0 +1,14 @@
+// https://doc.rust-lang.org/rust-by-example/primitives/literals.html
+[
+  ["let", "main", ["fn", [],
+    ["print", "1 + 2 = {}", ["+", 1, 2]],
+    ["print", "1 - 2 = {}", ["-", 1, 2]],
+    ["print", "true AND false is {}", ["&&", true, false]],
+    ["print", "true OR false is {}", ["||", true, false]],
+    ["print", "NOT true is {}", ["!", true]],
+    ["print", "0011 AND 0101 is {:04b}", ["&", 3, 5]],
+    ["print", "0011 OR 0101 is {:04b}", ["|", 3, 5]],
+    ["print", "1 << 5 is {}", ["<<", 1, 5]],
+    ["print", "0x80 >> 2 is 0x{:x}", [">>", 128, 2]]
+  ]]
+]

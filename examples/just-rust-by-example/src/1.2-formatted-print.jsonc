@@ -1,0 +1,42 @@
+[
+  // PHP sprintf: https://www.php.net/manual/en/function.sprintf.php
+  // 'The %s contains %d monkeys'
+  //
+  // Rust print: https://doc.rust-lang.org/rust-by-example/hello/print.html
+  // println!("{subject} {verb} {object}",
+  //  object="the lazy dog",
+  //  subject="the quick brown fox",
+  //  verb="jumps over")
+  //
+  // NodeJS console: https://nodejs.org/api/console.html
+  // TODO: 💡 Should `just-func` implement NodeJS `console` style logging?
+  // This requires global state during execution.
+  //
+  // JavaScript template literal and tagged template: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+  // Since JavaScript template literal is more of an inline/infix mechanism,
+  // and it requires special string parsing,
+  // deviating from typical JSON.
+  // So it is out of scope at the moment.
+  ["let", "main", ["fn", [],
+    // `print` internally uses `str/fmt` (❓`str/format`),
+    // then emit the output to stdout
+    ["print", "{} days", 31],
+    ["print", "{0}, this is {1}, {1}, this is {0}", "Alice", "Bob"],
+    ["print", "{subject} {verb} {object}", {
+      "object": "the lazy dog",
+      "subject": "the quick brown fox",
+      "verb": "jumps over"
+    }],
+    ["print", "Base 10 repr:               {}", 69420],
+    ["print", "Base 2 (binary) repr:       {:b}", 69420],
+    ["print", "Base 8 (octal) repr:        {:o}", 69420],
+    ["print", "Base 16 (hexadecimal) repr: {:x}", 69420],
+    ["print", "Base 16 (hexadecimal) repr: {:X}", 69420],
+    ["print", "{number:>5}", { "number": 1 }],
+    ["print", "{number:0>5}", { "number": 1 }],
+    ["print", "{number:>width$}", { "number": 1, "width": 5 }],
+    ["let", "number", 1.0],
+    ["let", "width", 6],
+    ["print", "{number:>width$}"]
+  ]]
+]

@@ -1,0 +1,31 @@
+// https://doc.rust-lang.org/rust-by-example/hello.html
+// Comments like this is not natively supported in `just-func`.
+// You can add comments to your code if you write it in:
+// - jsonc
+// - json5
+// - yaml
+// - jf
+// but they will be discarded if transfer using JSON.
+// On the other hand,
+// you can add documentation to your code using `//` block.
+[
+  ["//", "This is a comment, and is ignored by the interpreter"],
+  [
+    "//",
+    "Each comment can take one to many params.",
+    "Each params will be treated as a new line."
+  ],
+  [
+    "//",
+    "Each comment will be attached to the next symbol.",
+    "In this case, this comment is attached to the `main` function below:"
+  ],
+  ["let", "main", ["fn", [], ["print", "Hello World!"]]],
+  [
+    "//",
+    "if you want to write some comment but don't want to attach it to the next symbol,",
+    "add a empty 'line' like this:"
+  ],
+  [],
+  ["let", "var_with_no_comment", 0]
+]

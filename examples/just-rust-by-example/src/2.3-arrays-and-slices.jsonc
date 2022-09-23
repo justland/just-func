@@ -1,0 +1,39 @@
+// https://doc.rust-lang.org/rust-by-example/primitives/array.html
+[
+  // `use std::mem`
+  // TODO: 💡 design import syntax
+  ["let", "mem", ["import", "std/mem"]],
+
+  ["let", "analyze_slice", ["fn", ["slice"],
+    ["print", "first element of the slice: {}", ["slice", 0]],
+    // TODO: ❓ `slice.len` or `slice/len`?
+    // `slice.len`: object reference
+    // `slice/len`: namespace reference
+    ["print", "the slice has {} elements", ["slice.len"]]
+  ]],
+
+  ["let", "main", [],
+    ["let", "xs", ["array", 1, 2, 3, 4, 5]],
+    // 🚧 The type of `array` can't really be described as it is circular.
+    // Also, it involves `rest operator`, which is one thing we want to avoid.
+    // This also means that we need an internal interpretation of the types,
+    // as some native types like this can't be represented in `just-func`.
+    // `array: <T>(...args: T) => Array<T>`
+    ["type/generic", [["T", "any"]], ["fn", [["rest", "T"]], ["array", ["T"]]]],
+    ["let", "array", ["type", [["T", "infer"]], ["fn", ["array/type", ["T"]], ["array/type", ["T"]]]]],
+    ["type", "array", ["fn", [["rest", "T"]], ["native", "array"]]],
+    ["let", "Array", ["generic", ["T"], "array"]],
+
+    ["let", "ys", ["array/new_fill", 0, 500]],
+    // type of `array/new_fill`
+    ["type", "array/new_fill", ["fn",
+      [
+        // 💡 `let` feels quite extra here.
+        // We are describing a single element in the tuple.
+        ["let", "value", ["number"]],
+        ["let", "size", ["number"]]
+      ],
+      ["array", "number"]
+    ]]
+  ]
+]

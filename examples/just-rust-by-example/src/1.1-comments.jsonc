@@ -1,0 +1,9 @@
+// https://doc.rust-lang.org/rust-by-example/hello/comment.html
+[
+  ["let", "main", ["fn", [],
+    ["//", "This is an example of a comment"],
+    ["//", "`just-func` does not support block comment /* ... */."],
+    ["let", "x", ["+", 5, 5]],
+    ["print", "Is `x` 10 or 100? x = {}", ["x"]]
+  ]]
+]
