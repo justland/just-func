@@ -91,10 +91,13 @@ It comes with some helper functions you can use to update the schema for your ap
 ```sh
 # install TypeScript dependencies
 # TypeScript code are used for testing
-yarn
+pnpm install
+
+# run everything CI runs: lint, typecheck, build, tests and spec validation
+pnpm verify
 
 # validate specs in the `schema-specs` folder
-yarn validate:specs
+pnpm build && pnpm validate:specs
 
 # install mdbook for book development
 # you need to first install Rust (https://www.rust-lang.org/tools/install)
