@@ -1,29 +1,27 @@
 {
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "schema-specs/language/specs/*.jsonc"
-      ],
-      "url": "./schema-specs/language/draft-07/specs.jsonc"
-    }
-  ],
-  "cSpell.words": [
-    "Arity",
-    "EBNF",
-    "Naur",
-    "assertable",
-    "concat",
-    "cond",
-    "defn",
-    "defun",
-    "endregion",
-    "eval",
-    "homoiconicity",
-    "inequivalence",
-    "mdbook",
-    "monoid",
-    "protobuf",
-    "readonly",
-    "schemastore"
-  ]
+	"json.schemas": [
+		{
+			"fileMatch": ["schema-specs/language/specs/*.jsonc"],
+			"url": "./schema-specs/language/draft-07/specs.jsonc"
+		}
+	],
+	"cSpell.words": [
+		"Arity",
+		"EBNF",
+		"Naur",
+		"assertable",
+		"concat",
+		"cond",
+		"defn",
+		"defun",
+		"endregion",
+		"eval",
+		"homoiconicity",
+		"inequivalence",
+		"mdbook",
+		"monoid",
+		"protobuf",
+		"readonly",
+		"schemastore"
+	]
 }

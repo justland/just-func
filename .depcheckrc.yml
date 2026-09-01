@@ -1,0 +1,13 @@
+ignores:
+  # biome config is resolved by name from biome.json's `extends`
+  - '@repobuddy/biome'
+  # commit hooks, invoked by husky, not imported
+  - '@commitlint/cli'
+  - '@commitlint/config-conventional'
+  - husky
+  # bin-only tools used from package scripts
+  - depcheck
+  - npm-run-all2
+  - rimraf
+  # vitest coverage provider, loaded by vitest.config.ts by name
+  - '@vitest/coverage-v8'
