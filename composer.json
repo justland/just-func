@@ -19,7 +19,7 @@
 		}
 	},
 	"require-dev": {
-		"composer/composer": "^2.0"
+		"composer/composer": "^2.10"
 	},
 	"require": {
 		"unional/jsonc": "^1.0"
