@@ -1,0 +1,9 @@
+name: pull-request
+
+on:
+  pull_request:
+  merge_group:
+
+jobs:
+  code:
+    uses: justland/.github/.github/workflows/pnpm-verify.yml@main

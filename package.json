@@ -1,32 +1,51 @@
 {
-  "name": "just-func-schema",
-  "version": "1.0.0",
-  "repository": "https://github.com/justland/just-func.git",
-  "license": "MIT",
-  "author": "unional <homawong@gmail.com>",
-  "bin": "cjs/bin.js",
-  "files": [
-    "cjs",
-    "schema",
-    "specs"
-  ],
-  "scripts": {
-    "build": "yarn build:ts",
-    "build:ts": "tsc -p tsconfig.cjs.json",
-    "lint": "eslint .",
-    "validate:specs": "ts-node ts/bin.ts validate-specs"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
-    "ajv": "^7.2.1",
-    "clibuilder": "^7.0.5",
-    "eslint": "^7.20.0",
-    "eslint-plugin-harmony": "^5.0.2",
-    "husky": "^5.1.1",
-    "jsonc": "^2.0.0",
-    "npm-check-updates": "^11.1.9",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
-  }
+	"name": "just-func-schema",
+	"version": "1.0.0",
+	"description": "just-func schema and spec validator",
+	"repository": "https://github.com/justland/just-func.git",
+	"license": "MIT",
+	"author": "unional <homawong@gmail.com>",
+	"bin": "cjs/bin.js",
+	"main": "cjs/index.js",
+	"types": "cjs/index.d.ts",
+	"files": [
+		"cjs",
+		"schema"
+	],
+	"scripts": {
+		"build": "tsdown",
+		"check": "biome check",
+		"check:fix": "biome check --fix",
+		"clean": "rimraf cjs coverage .ts",
+		"coverage": "vitest run --coverage",
+		"depcheck": "depcheck",
+		"lint": "biome lint .",
+		"prepare": "husky",
+		"test": "vitest run",
+		"typecheck": "tsc",
+		"validate:specs": "node cjs/bin.js validate-specs",
+		"verify": "run-p check typecheck verify:pkg",
+		"verify:pkg": "run-s build coverage validate:specs depcheck"
+	},
+	"dependencies": {
+		"ajv": "^8.20.0",
+		"clibuilder": "^10.1.0",
+		"jsonc": "^2.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.11",
+		"@commitlint/cli": "^21.2.2",
+		"@commitlint/config-conventional": "^21.2.2",
+		"@repobuddy/biome": "^2.3.1",
+		"@types/node": "^26.4.0",
+		"@vitest/coverage-v8": "^4.1.11",
+		"depcheck": "^1.4.7",
+		"husky": "^9.1.7",
+		"npm-run-all2": "^9.0.3",
+		"rimraf": "^6.0.1",
+		"tsdown": "^0.22.14",
+		"typescript": "^7.0.2",
+		"vitest": "^4.1.11"
+	},
+	"packageManager": "pnpm@11.20.0"
 }
