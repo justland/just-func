@@ -48,3 +48,6 @@ lib*
 cjs*
 esm*
 books/*/book
+
+# composer
+/composer.lock
