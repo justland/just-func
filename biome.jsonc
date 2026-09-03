@@ -16,6 +16,15 @@
 			"!pnpm-lock.yaml"
 		]
 	},
+	"linter": {
+		"rules": {
+			"style": {
+				// biome ships this rule at `info`, which does not fail `biome check`.
+				// Pin it to `error` so bare `fs`/`path` imports actually break the build.
+				"useNodejsImportProtocol": "error"
+			}
+		}
+	},
 	"javascript": {
 		"formatter": {
 			"trailingCommas": "none"

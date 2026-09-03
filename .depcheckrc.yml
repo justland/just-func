@@ -1,5 +1,5 @@
 ignores:
-  # biome config is resolved by name from biome.json's `extends`
+  # biome config is resolved by name from biome.jsonc's `extends`
   - '@repobuddy/biome'
   # commit hooks, invoked by husky, not imported
   - '@commitlint/cli'
