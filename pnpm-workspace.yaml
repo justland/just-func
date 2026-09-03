@@ -1,0 +1,4 @@
+# `minimumreleaseage` in `.npmrc` only makes pnpm silently *exclude* versions
+# that are too young. Configured here it is a hard gate instead.
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
