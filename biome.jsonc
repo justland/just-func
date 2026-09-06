@@ -3,7 +3,7 @@
 	"extends": ["@repobuddy/biome/recommended"],
 	"files": {
 		"includes": [
-			"!**/cjs",
+			"!**/esm",
 			"!**/coverage",
 			"!**/node_modules",
 			"!books",
