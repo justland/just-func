@@ -53,5 +53,8 @@
 		"typescript": "^7.0.2",
 		"vitest": "^4.1.11"
 	},
-	"packageManager": "pnpm@11.20.0"
+	"packageManager": "pnpm@11.20.0",
+	"engines": {
+		"node": "^20.19.0 || ^22.13.0 || >=24"
+	}
 }
