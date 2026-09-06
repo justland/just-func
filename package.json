@@ -5,25 +5,31 @@
 	"repository": "https://github.com/justland/just-func.git",
 	"license": "MIT",
 	"author": "unional <homawong@gmail.com>",
-	"bin": "cjs/bin.js",
-	"main": "cjs/index.js",
-	"types": "cjs/index.d.ts",
+	"type": "module",
+	"bin": "esm/bin.js",
+	"exports": {
+		".": {
+			"types": "./esm/index.d.ts",
+			"default": "./esm/index.js"
+		},
+		"./package.json": "./package.json"
+	},
 	"files": [
-		"cjs",
+		"esm",
 		"schema"
 	],
 	"scripts": {
 		"build": "tsdown",
 		"check": "biome check",
 		"check:fix": "biome check --fix",
-		"clean": "rimraf cjs coverage .ts",
+		"clean": "rimraf esm coverage .ts",
 		"coverage": "vitest run --coverage",
 		"depcheck": "depcheck",
 		"lint": "biome lint .",
 		"prepare": "husky",
 		"test": "vitest run",
 		"typecheck": "tsc",
-		"validate:specs": "node cjs/bin.js validate-specs",
+		"validate:specs": "node esm/bin.js validate-specs",
 		"verify": "run-p check typecheck verify:pkg",
 		"verify:pkg": "run-s build coverage validate:specs depcheck"
 	},
