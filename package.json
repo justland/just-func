@@ -44,14 +44,14 @@
 		"@commitlint/config-conventional": "^21.2.2",
 		"@repobuddy/biome": "^2.3.1",
 		"@types/node": "^26.4.0",
-		"@vitest/coverage-v8": "^4.1.11",
+		"@vitest/coverage-v8": "^5.0.0",
 		"depcheck": "^1.4.7",
 		"husky": "^9.1.7",
 		"npm-run-all2": "^9.0.3",
 		"rimraf": "^6.0.1",
 		"tsdown": "^0.23.0",
 		"typescript": "^7.0.2",
-		"vitest": "^4.1.11"
+		"vitest": "^5.0.0"
 	},
 	"packageManager": "pnpm@12.9.1",
 	"engines": {
